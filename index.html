@@ -1,1 +1,89 @@
-Es un HTML sencillo con un titulo,una breve descripcion y un enlace para pedir por whasapp
+<section id="productos">
+  <h2>🍬 Nuestros productos</h2>
+
+  <div class="productos">
+
+    <div class="producto">
+      <h3>Gomitas B4X</h3>
+      <p>Deliciosas gomitas enchiladas.</p>
+      <strong>$10.000</strong>
+      <br><br>
+      <a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20pedir%20Gomitas%20B4X"
+         target="_blank">
+        🛒 Pedir por WhatsApp
+      </a>
+    </div>
+
+    <div class="producto">
+      <h3>Gomitas Picantes</h3>
+      <p>Gomitas con un toque extra de picante.</p>
+      <strong>$12.000</strong>
+      <br><br>
+      <a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20pedir%20Gomitas%20Picantes"
+         target="_blank">
+        🛒 Pedir por WhatsApp
+      </a>
+    </div>
+
+    <div class="producto">
+      <h3>Mix B4X</h3>
+      <p>Una mezcla de nuestras mejores gomitas.</p>
+      <strong>$15.000</strong>
+      <br><br>
+      <a href="https://wa.me/TUNUMERO?text=Hola,%20quiero%20pedir%20el%20Mix%20B4X"
+         target="_blank">
+        🛒 Pedir por WhatsApp
+      </a>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  #productos {
+    padding: 40px 20px;
+    text-align: center;
+  }
+
+  #productos h2 {
+    font-size: 32px;
+    margin-bottom: 30px;
+  }
+
+  .productos {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .producto {
+    width: 280px;
+    padding: 25px;
+    border-radius: 15px;
+    background: #f5f5f5;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .producto h3 {
+    font-size: 22px;
+  }
+
+  .producto strong {
+    font-size: 20px;
+  }
+
+  .producto a {
+    display: inline-block;
+    padding: 12px 18px;
+    border-radius: 10px;
+    background: #25D366;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .producto a:hover {
+    opacity: 0.85;
+  }
+</style>
