@@ -1,89 +1,599 @@
-<section id="productos">
-  <h2>🍬 Nuestros productos</h2>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <div class="productos">
+  <title>B4X | Gomitas Premium</title>
 
-    <div class="producto">
-      <h3>Gomitas B4X</h3>
-      <p>Deliciosas gomitas enchiladas.</p>
-      <strong>$10.000</strong>
-      <br><br>
-      <a href="https://wa.me/573237647194?text=Hola,%20quiero%20pedir%20Gomitas%20B4X"
-         target="_blank">
-        🛒 Pedir por WhatsApp
+  <meta name="description" content="B4X - Gomitas y snacks premium.">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    /* ---------- ENCABEZADO ---------- */
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 11, 11, 0.95);
+      border-bottom: 1px solid #2a2a2a;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    /* ---------- PORTADA ---------- */
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+
+      background:
+        radial-gradient(circle at center, #292929 0%, #0b0b0b 55%);
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero small {
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #cfcfcf;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 12vw, 120px);
+      letter-spacing: 15px;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      color: #c8c8c8;
+      font-size: 18px;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 28px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .boton:hover {
+      transform: translateY(-3px);
+      opacity: 0.85;
+    }
+
+    /* ---------- SECCIONES ---------- */
+
+    section {
+      padding: 80px 7%;
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .titulo h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .titulo p {
+      color: #aaa;
+    }
+
+    /* ---------- CATEGORÍAS ---------- */
+
+    .categorias {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .categoria {
+      min-height: 180px;
+      border: 1px solid #292929;
+      border-radius: 18px;
+      padding: 30px;
+      display: flex;
+      align-items: end;
+      background: linear-gradient(145deg, #1b1b1b, #0d0d0d);
+      transition: 0.3s;
+    }
+
+    .categoria:hover {
+      transform: translateY(-5px);
+      border-color: #555;
+    }
+
+    .categoria h3 {
+      font-size: 22px;
+    }
+
+    /* ---------- PRODUCTOS ---------- */
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+
+    .producto {
+      background: #111111;
+      border: 1px solid #292929;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .producto:hover {
+      transform: translateY(-6px);
+    }
+
+    /* AQUÍ IRÁ LA IMAGEN DE CADA PRODUCTO */
+
+    .producto-imagen {
+      width: 100%;
+      height: 260px;
+      background: #202020;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #777;
+      font-size: 14px;
+    }
+
+    .producto-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .producto-info {
+      padding: 24px;
+    }
+
+    .producto h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .producto p {
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .precio {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .whatsapp {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      padding: 12px;
+      background: #25D366;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    /* ---------- SOBRE NOSOTROS ---------- */
+
+    .sobre {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .sobre p {
+      color: #bdbdbd;
+      font-size: 17px;
+    }
+
+    /* ---------- CONTACTO ---------- */
+
+    .contacto {
+      text-align: center;
+      background: #101010;
+    }
+
+    .contacto p {
+      color: #aaa;
+      margin: 8px;
+    }
+
+    /* ---------- PIE ---------- */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #292929;
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* ---------- CELULAR ---------- */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 15px 20px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: 8px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       ENCABEZADO
+  ========================== -->
+
+  <header>
+
+    <!-- CAMBIA B4X AQUÍ SI CAMBIAS EL NOMBRE -->
+
+    <div class="logo">B4X</div>
+
+    <nav>
+      <a href="#inicio">Inicio</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#productos">Productos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       PORTADA
+  ========================== -->
+
+  <section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+      <small>Gomitas & Snacks Premium</small>
+
+      <h1>B4X</h1>
+
+      <p>
+        Una experiencia diferente en cada bocado.
+        Descubre nuestra selección de gomitas y snacks.
+      </p>
+
+      <!-- PON TU NÚMERO DE WHATSAPP AQUÍ -->
+
+      <a
+        class="boton"
+        href="https://wa.me/573237647194"
+        target="_blank">
+        Comprar por WhatsApp
       </a>
+
     </div>
 
-    <div class="producto">
-      <h3>Gomitas Picantes</h3>
-      <p>Gomitas con un toque extra de picante.</p>
-      <strong>$12.000</strong>
-      <br><br>
-      <a href="https://wa.me/573237647194?text=Hola,%20quiero%20pedir%20Gomitas%20Picantes"
-         target="_blank">
-        🛒 Pedir por WhatsApp
-      </a>
+  </section>
+
+
+  <!-- =========================
+       CATEGORÍAS
+  ========================== -->
+
+  <section id="categorias">
+
+    <div class="titulo">
+
+      <h2>Categorías</h2>
+
+      <p>Descubre nuestra selección.</p>
+
     </div>
 
-    <div class="producto">
-      <h3>Mix B4X</h3>
-      <p>Una mezcla de nuestras mejores gomitas.</p>
-      <strong>$15.000</strong>
-      <br><br>
-      <a href="https://wa.me/573237647194?text=Hola,%20quiero%20pedir%20el%20Mix%20B4X"
-         target="_blank">
-        🛒 Pedir por WhatsApp
-      </a>
+
+    <div class="categorias">
+
+      <div class="categoria">
+        <h3>🍬 Gomitas</h3>
+      </div>
+
+      <div class="categoria">
+        <h3>🌶️ Gomitas Picantes</h3>
+      </div>
+
+      <div class="categoria">
+        <h3>✨ Combos</h3>
+      </div>
+
+      <div class="categoria">
+        <h3>🔥 Especiales</h3>
+      </div>
+
     </div>
 
-  </div>
-</section>
+  </section>
 
-<style>
-  #productos {
-    padding: 40px 20px;
-    text-align: center;
-  }
 
-  #productos h2 {
-    font-size: 32px;
-    margin-bottom: 30px;
-  }
+  <!-- =========================
+       PRODUCTOS
+  ========================== -->
 
-  .productos {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 20px;
-  }
+  <section id="productos">
 
-  .producto {
-    width: 280px;
-    padding: 25px;
-    border-radius: 15px;
-    background: #f5f5f5;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  }
+    <div class="titulo">
 
-  .producto h3 {
-    font-size: 22px;
-  }
+      <h2>Nuestros productos</h2>
 
-  .producto strong {
-    font-size: 20px;
-  }
+      <p>Elige tu favorito.</p>
 
-  .producto a {
-    display: inline-block;
-    padding: 12px 18px;
-    border-radius: 10px;
-    background: #25D366;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
+    </div>
 
-  .producto a:hover {
-    opacity: 0.85;
-  }
-</style>
+
+    <div class="productos">
+
+
+      <!-- PRODUCTO 1 -->
+
+      <div class="producto">
+
+        <div class="producto-imagen">
+
+          <!--
+          CUANDO TENGAS LA FOTO,
+          AQUÍ PONDREMOS:
+
+          <img src="imagenes/gomitas-b4x.jpg"
+               alt="Gomitas B4X">
+          -->
+
+          Imagen del producto
+
+        </div>
+
+
+        <div class="producto-info">
+
+          <h3>Gomitas B4X</h3>
+
+          <p>
+            Deliciosas gomitas con el sabor característico de B4X.
+          </p>
+
+          <!-- CAMBIA EL PRECIO AQUÍ -->
+
+          <div class="precio">$10.000</div>
+
+
+          <a
+            class="whatsapp"
+            href="https://wa.me/573237647194?text=Hola,%20quiero%20pedir%20Gomitas%20B4X"
+            target="_blank">
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- PRODUCTO 2 -->
+
+      <div class="producto">
+
+        <div class="producto-imagen">
+
+          Imagen del producto
+
+        </div>
+
+
+        <div class="producto-info">
+
+          <h3>Gomitas Picantes</h3>
+
+          <p>
+            Para quienes disfrutan un toque extra de picante.
+          </p>
+
+          <div class="precio">$12.000</div>
+
+
+          <a
+            class="whatsapp"
+            href="https://wa.me/573237647194?text=Hola,%20quiero%20pedir%20Gomitas%20Picantes"
+            target="_blank">
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+
+      <!-- PRODUCTO 3 -->
+
+      <div class="producto">
+
+        <div class="producto-imagen">
+
+          Imagen del producto
+
+        </div>
+
+
+        <div class="producto-info">
+
+          <h3>Mix B4X</h3>
+
+          <p>
+            Una combinación especial de nuestras mejores gomitas.
+          </p>
+
+          <div class="precio">$15.000</div>
+
+
+          <a
+            class="whatsapp"
+            href="https://wa.me/573237647194?text=Hola,%20quiero%20pedir%20el%20Mix%20B4X"
+            target="_blank">
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+
+      </div>
+
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       SOBRE NOSOTROS
+  ========================== -->
+
+  <section>
+
+    <div class="sobre">
+
+      <div class="titulo">
+
+        <h2>Sobre B4X</h2>
+
+      </div>
+
+      <p>
+        En B4X buscamos convertir cada compra en una experiencia.
+        Seleccionamos nuestros productos pensando en sabor,
+        calidad y presentación.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACTO
+  ========================== -->
+
+  <section class="contacto" id="contacto">
+
+    <div class="titulo">
+
+      <h2>Contacto</h2>
+
+      <p>¿Quieres hacer un pedido?</p>
+
+    </div>
+
+
+    <p>📲 WhatsApp: 323 764 7194</p>
+
+    <!-- AQUÍ DESPUÉS PONEMOS TU DIRECCIÓN -->
+
+    <p>📍 Dirección: Próximamente</p>
+
+    <!-- AQUÍ DESPUÉS PONEMOS TU INSTAGRAM -->
+
+    <p>📸 Instagram: Próximamente</p>
+
+
+    <a
+      class="boton"
+      href="https://wa.me/573237647194"
+      target="_blank">
+
+      Hablar por WhatsApp
+
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       PIE DE PÁGINA
+  ========================== -->
+
+  <footer>
+
+    © 2026 B4X. Todos los derechos reservados.
+
+  </footer>
+
+</body>
+</html>
