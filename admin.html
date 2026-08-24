@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Panel de Administración | B4X</title>
+
+  <title>Admin | B4X</title>
 
   <style>
     * {
@@ -16,21 +17,21 @@
       font-family: Arial, sans-serif;
       background: #0b0b0b;
       color: white;
-      padding: 30px;
+      padding: 25px;
     }
 
     .contenedor {
-      max-width: 900px;
+      max-width: 700px;
       margin: auto;
     }
 
     h1 {
-      margin-bottom: 10px;
+      margin-bottom: 8px;
     }
 
     .subtitulo {
       color: #999;
-      margin-bottom: 30px;
+      margin-bottom: 25px;
     }
 
     .panel {
@@ -38,12 +39,11 @@
       border: 1px solid #292929;
       border-radius: 16px;
       padding: 25px;
-      margin-bottom: 25px;
     }
 
     label {
       display: block;
-      margin: 15px 0 7px;
+      margin: 18px 0 7px;
       color: #ccc;
     }
 
@@ -65,78 +65,182 @@
     }
 
     button {
-      margin-top: 20px;
-      padding: 13px 22px;
+      width: 100%;
+      margin-top: 25px;
+      padding: 14px;
       border: none;
       border-radius: 8px;
       background: white;
       color: black;
       font-weight: bold;
-      cursor: pointer;
+      font-size: 16px;
     }
 
-    button:hover {
-      opacity: 0.85;
+    #mensaje {
+      margin-top: 18px;
+      text-align: center;
+      font-weight: bold;
     }
 
     .volver {
-      display: inline-block;
-      margin-top: 10px;
+      display: block;
+      margin-top: 20px;
+      text-align: center;
       color: #aaa;
       text-decoration: none;
-    }
-
-    .volver:hover {
-      color: white;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="contenedor">
+<div class="contenedor">
 
-    <h1>Panel de Administración B4X</h1>
+  <h1>Panel de Administración B4X</h1>
 
-    <p class="subtitulo">
-      Administra tus productos desde aquí.
-    </p>
+  <p class="subtitulo">
+    Agrega nuevos productos a tu tienda.
+  </p>
 
-    <div class="panel">
+  <div class="panel">
 
-      <h2>Agregar producto</h2>
+    <label>Nombre del producto</label>
+    <input id="nombre" type="text" placeholder="Ej: Gomitas B4X">
 
-      <label>Nombre del producto</label>
-      <input type="text" placeholder="Ej: Gomitas B4X">
+    <label>Descripción</label>
+    <textarea id="descripcion"
+      placeholder="Descripción del producto"></textarea>
 
-      <label>Descripción</label>
-      <textarea placeholder="Describe el producto"></textarea>
+    <label>Precio</label>
+    <input id="precio" type="number" placeholder="2000">
 
-      <label>Precio</label>
-      <input type="number" placeholder="2000">
+    <label>Categoría</label>
+    <select id="categoria">
+      <option value="Gomitas">Gomitas</option>
+      <option value="Gomitas Picantes">Gomitas Picantes</option>
+      <option value="Combos">Combos</option>
+      <option value="Especiales">Especiales</option>
+    </select>
 
-      <label>Categoría</label>
-      <select>
-        <option>Gomitas</option>
-        <option>Gomitas Picantes</option>
-        <option>Combos</option>
-        <option>Especiales</option>
-      </select>
+    <label>Imagen</label>
+    <input id="imagen" type="text"
+      placeholder="Enlace de la imagen">
 
-      <label>Imagen del producto</label>
-      <input type="file" accept="image/*">
+    <button onclick="guardarProducto()">
+      Guardar producto
+    </button>
 
-      <button type="button">
-        Guardar producto
-      </button>
-
-    </div>
-
-    <a class="volver" href="index.html">
-      ← Volver a la tienda
-    </a>
+    <div id="mensaje"></div>
 
   </div>
+
+  <a class="volver" href="index.html">
+    ← Volver a la tienda
+  </a>
+
+</div>
+
+<script>
+
+const SUPABASE_URL =
+"https://ltdqlcthnfbkvpsnfgcg.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
+
+
+async function guardarProducto() {
+
+  const nombre =
+    document.getElementById("nombre").value.trim();
+
+  const descripcion =
+    document.getElementById("descripcion").value.trim();
+
+  const precio =
+    document.getElementById("precio").value;
+
+  const categoria =
+    document.getElementById("categoria").value;
+
+  const imagen =
+    document.getElementById("imagen").value.trim();
+
+  const mensaje =
+    document.getElementById("mensaje");
+
+
+  if (!nombre || !precio) {
+
+    mensaje.textContent =
+      "Completa el nombre y el precio.";
+
+    return;
+  }
+
+
+  mensaje.textContent =
+    "Guardando producto...";
+
+
+  try {
+
+    const respuesta = await fetch(
+      SUPABASE_URL + "/rest/v1/PRODUCTOS",
+      {
+        method: "POST",
+
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization":
+            "Bearer " + SUPABASE_KEY,
+          "Content-Type":
+            "application/json",
+          "Prefer":
+            "return=minimal"
+        },
+
+        body: JSON.stringify({
+          nombre: nombre,
+          descripcion: descripcion,
+          precio: Number(precio),
+          categoria: categoria,
+          imagen: imagen
+        })
+      }
+    );
+
+
+    if (!respuesta.ok) {
+
+      const error =
+        await respuesta.text();
+
+      throw new Error(error);
+    }
+
+
+    mensaje.textContent =
+      "✅ Producto guardado correctamente.";
+
+    document.getElementById("nombre").value = "";
+    document.getElementById("descripcion").value = "";
+    document.getElementById("precio").value = "";
+    document.getElementById("imagen").value = "";
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    mensaje.textContent =
+      "❌ No se pudo guardar el producto.";
+  }
+
+}
+
+</script>
 
 </body>
 </html>
