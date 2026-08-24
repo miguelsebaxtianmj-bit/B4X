@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Administración | B4X</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background: #0b0b0b;
+      color: white;
+      padding: 30px;
+    }
+
+    .contenedor {
+      max-width: 900px;
+      margin: auto;
+    }
+
+    h1 {
+      margin-bottom: 10px;
+    }
+
+    .subtitulo {
+      color: #999;
+      margin-bottom: 30px;
+    }
+
+    .panel {
+      background: #151515;
+      border: 1px solid #292929;
+      border-radius: 16px;
+      padding: 25px;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin: 15px 0 7px;
+      color: #ccc;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #0b0b0b;
+      color: white;
+      font-size: 15px;
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 13px 22px;
+      border: none;
+      border-radius: 8px;
+      background: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      opacity: 0.85;
+    }
+
+    .volver {
+      display: inline-block;
+      margin-top: 10px;
+      color: #aaa;
+      text-decoration: none;
+    }
+
+    .volver:hover {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="contenedor">
+
+    <h1>Panel de Administración B4X</h1>
+
+    <p class="subtitulo">
+      Administra tus productos desde aquí.
+    </p>
+
+    <div class="panel">
+
+      <h2>Agregar producto</h2>
+
+      <label>Nombre del producto</label>
+      <input type="text" placeholder="Ej: Gomitas B4X">
+
+      <label>Descripción</label>
+      <textarea placeholder="Describe el producto"></textarea>
+
+      <label>Precio</label>
+      <input type="number" placeholder="2000">
+
+      <label>Categoría</label>
+      <select>
+        <option>Gomitas</option>
+        <option>Gomitas Picantes</option>
+        <option>Combos</option>
+        <option>Especiales</option>
+      </select>
+
+      <label>Imagen del producto</label>
+      <input type="file" accept="image/*">
+
+      <button type="button">
+        Guardar producto
+      </button>
+
+    </div>
+
+    <a class="volver" href="index.html">
+      ← Volver a la tienda
+    </a>
+
+  </div>
+
+</body>
+</html>
