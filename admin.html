@@ -163,8 +163,8 @@ async function guardarProducto() {
   const categoria =
     document.getElementById("categoria").value;
 
-  const imagen =
-    document.getElementById("imagen").value.trim();
+const archivoImagen =
+  document.getElementById("imagen").files[0];
 
   const mensaje =
     document.getElementById("mensaje");
@@ -181,7 +181,48 @@ async function guardarProducto() {
 
   mensaje.textContent =
     "Guardando producto...";
+if (!archivoImagen) {
+  mensaje.textContent =
+    "⚠️ Selecciona una imagen.";
+  return;
+}
 
+const nombreArchivo =
+  Date.now() + "_" + archivoImagen.name;
+
+const rutaImagen =
+  "imagenes/" + nombreArchivo;
+
+const subida = await fetch(
+  SUPABASE_URL +
+  "/storage/v1/object/productos/" +
+  rutaImagen,
+  {
+    method: "POST",
+
+    headers: {
+      "apikey": SUPABASE_KEY,
+      "Authorization": "Bearer " + SUPABASE_KEY,
+      "Content-Type": archivoImagen.type
+    },
+
+    body: archivoImagen
+  }
+);
+
+if (!subida.ok) {
+  const error =
+    await subida.text();
+
+  throw new Error(
+    "No se pudo subir la imagen: " + error
+  );
+}
+
+const imagen =
+  SUPABASE_URL +
+  "/storage/v1/object/public/productos/" +
+  rutaImagen;
 
   try {
 
