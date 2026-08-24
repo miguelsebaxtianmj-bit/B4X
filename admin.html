@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Admin | B4X</title>
+  <title>Administrador | B4X</title>
 
   <style>
     * {
@@ -74,6 +74,7 @@
       color: black;
       font-weight: bold;
       font-size: 16px;
+      cursor: pointer;
     }
 
     #mensaje {
@@ -99,23 +100,23 @@
   <h1>Panel de Administración B4X</h1>
 
   <p class="subtitulo">
-    Agrega nuevos productos a tu tienda.
+    Agrega productos a tu tienda.
   </p>
 
   <div class="panel">
 
     <label>Nombre del producto</label>
-    <input id="Nombre" type="text" placeholder="Ej: Gomitas B4X">
+    <input id="nombre" type="text" placeholder="Ej: Gomitas B4X">
 
     <label>Descripción</label>
     <textarea id="descripcion"
       placeholder="Descripción del producto"></textarea>
 
     <label>Precio</label>
-    <input id="Precio" type="number" placeholder="2000">
+    <input id="precio" type="number" placeholder="2000">
 
     <label>Categoría</label>
-    <select id="Categoria">
+    <select id="categoria">
       <option value="Gomitas">Gomitas</option>
       <option value="Gomitas Picantes">Gomitas Picantes</option>
       <option value="Combos">Combos</option>
@@ -123,10 +124,10 @@
     </select>
 
     <label>Imagen</label>
-    <input id="Imagen" type="text"
+    <input id="imagen" type="text"
       placeholder="Enlace de la imagen">
 
-    <button onclick="guardarProducto()">
+    <button type="button" onclick="guardarProducto()">
       Guardar producto
     </button>
 
@@ -173,7 +174,7 @@ async function guardarProducto() {
   if (!nombre || !precio) {
 
     mensaje.textContent =
-      "Completa el nombre y el precio.";
+      "⚠️ Completa el nombre y el precio.";
 
     return;
   }
@@ -192,20 +193,23 @@ async function guardarProducto() {
 
         headers: {
           "apikey": SUPABASE_KEY,
-          "Authorization":
-            "Bearer " + SUPABASE_KEY,
-          "Content-Type":
-            "application/json",
-          "Prefer":
-            "return=minimal"
+          "Authorization": "Bearer " + SUPABASE_KEY,
+          "Content-Type": "application/json",
+          "Prefer": "return=minimal"
         },
 
         body: JSON.stringify({
-          nombre: nombre,
-          descripcion: descripcion,
-          precio: Number(precio),
-          categoria: categoria,
-          imagen: imagen
+
+          Nombre: nombre,
+
+          Descripcion: descripcion,
+
+          Precio: Number(precio),
+
+          Categoria: categoria,
+
+          Imagen: imagen
+
         })
       }
     );
@@ -230,12 +234,14 @@ async function guardarProducto() {
 
   }
 
+
   catch (error) {
 
-  console.error(error);
+    console.error(error);
 
-  mensaje.textContent =
-    "❌ Error: " + error.message;
+    mensaje.textContent =
+      "❌ Error: " + error.message;
+
   }
 
 }
