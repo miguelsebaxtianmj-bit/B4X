@@ -474,6 +474,99 @@
     © 2026 B4X. Todos los derechos reservados.
 
   </footer>
+<script>
 
+const SUPABASE_URL =
+"https://ltdqlcthnfbkvpsnfgcg.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
+
+async function cargarProductos() {
+
+  const contenedor =
+    document.querySelector(".productos");
+
+  try {
+
+    const respuesta = await fetch(
+      SUPABASE_URL + "/rest/v1/PRODUCTOS?select=*",
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
+        }
+      }
+    );
+
+    if (!respuesta.ok) {
+      throw new Error(await respuesta.text());
+    }
+
+    const productos = await respuesta.json();
+
+    contenedor.innerHTML = "";
+
+    productos.forEach(producto => {
+
+      const tarjeta = document.createElement("div");
+
+      tarjeta.className = "producto";
+
+      tarjeta.innerHTML = `
+
+        <div class="producto-imagen">
+
+          ${
+            producto.Imagen
+              ? `<img src="${producto.Imagen}"
+                   alt="${producto.Nombre}">`
+              : "Imagen del producto"
+          }
+
+        </div>
+
+        <div class="producto-info">
+
+          <h3>${producto.Nombre}</h3>
+
+          <p>${producto.Descripcion || ""}</p>
+
+          <div class="precio">
+            $${Number(producto.Precio).toLocaleString("es-CO")}
+          </div>
+
+          <a
+            class="whatsapp"
+            href="https://wa.me/573237647194?text=${encodeURIComponent(
+              "Hola, quiero pedir " + producto.Nombre
+            )}"
+            target="_blank">
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+      `;
+
+      contenedor.appendChild(tarjeta);
+
+    });
+
+  } catch (error) {
+
+    console.error(error);
+
+    contenedor.innerHTML =
+      "<p>No se pudieron cargar los productos.</p>";
+
+  }
+
+}
+
+cargarProductos();
+
+</script>
 </body>
 </html>
