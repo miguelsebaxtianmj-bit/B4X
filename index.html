@@ -1,12 +1,21 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>B4X | Gomitas Premium</title>
 
-  <meta name="description" content="B4X - Gomitas y snacks premium.">
+  <meta
+    name="description"
+    content="B4X - Gomitas y snacks premium."
+  >
 
   <style>
 
@@ -23,13 +32,24 @@
       line-height: 1.6;
     }
 
+
+    /* =========================
+       ENCABEZADO
+    ========================= */
+
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
+
       background: rgba(11,11,11,.96);
+
+      backdrop-filter: blur(12px);
+
       border-bottom: 1px solid #292929;
+
       padding: 18px 7%;
+
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -44,20 +64,32 @@
     nav a {
       color: white;
       text-decoration: none;
+
       margin-left: 25px;
+
       font-size: 14px;
+
+      transition: .3s;
     }
 
     nav a:hover {
       opacity: .6;
     }
 
+
+    /* =========================
+       HERO
+    ========================= */
+
     .hero {
       min-height: 85vh;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
       text-align: center;
+
       padding: 80px 20px;
 
       background:
@@ -80,33 +112,52 @@
 
     .hero h1 {
       font-size: clamp(55px, 12vw, 120px);
+
       letter-spacing: 15px;
+
       margin: 15px 0;
     }
 
     .hero p {
       max-width: 600px;
+
       margin: auto;
+
       color: #c8c8c8;
+
       font-size: 18px;
     }
 
     .boton {
       display: inline-block;
+
       margin-top: 30px;
+
       padding: 14px 28px;
+
       background: white;
+
       color: black;
+
       text-decoration: none;
+
       border-radius: 30px;
+
       font-weight: bold;
+
       transition: .3s;
     }
 
     .boton:hover {
       transform: translateY(-3px);
+
       opacity: .85;
     }
+
+
+    /* =========================
+       SECCIONES
+    ========================= */
 
     section {
       padding: 80px 7%;
@@ -114,11 +165,13 @@
 
     .titulo {
       text-align: center;
+
       margin-bottom: 45px;
     }
 
     .titulo h2 {
       font-size: 38px;
+
       margin-bottom: 10px;
     }
 
@@ -126,128 +179,317 @@
       color: #aaa;
     }
 
-    /* CATEGORÍAS */
+
+    /* =========================
+       CATEGORÍAS PREMIUM
+    ========================= */
 
     .categorias {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(260px, 1fr)
+        );
+
+      gap: 28px;
+
+      max-width: 1200px;
+
+      margin: auto;
     }
 
     .categoria {
-      min-height: 220px;
-      border: 1px solid #292929;
-      border-radius: 18px;
-      overflow: hidden;
+      position: relative;
+
+      min-height: 300px;
+
       padding: 0;
-      display: flex;
-      align-items: flex-end;
-      background: #151515;
-      transition: .3s;
+
+      border: 1px solid #303030;
+
+      border-radius: 22px;
+
+      overflow: hidden;
+
+      background: #111;
+
       cursor: pointer;
+
       color: white;
+
       text-align: left;
+
       font-family: inherit;
+
+      transition:
+        transform .4s ease,
+        border-color .4s ease,
+        box-shadow .4s ease;
     }
 
     .categoria:hover {
-      transform: translateY(-5px);
+      transform: translateY(-8px);
+
       border-color: #777;
+
+      box-shadow:
+        0 18px 45px rgba(0,0,0,.55);
     }
 
     .categoria.activa {
       border-color: white;
-      transform: translateY(-5px);
+
+      transform: translateY(-6px);
+
+      box-shadow:
+        0 15px 40px rgba(255,255,255,.08);
     }
+
+
+    /* IMAGEN DE CATEGORÍA */
 
     .categoria-imagen {
       position: relative;
+
       width: 100%;
-      height: 220px;
+
+      height: 300px;
+
       overflow: hidden;
     }
 
     .categoria-imagen img {
       width: 100%;
+
       height: 100%;
+
       object-fit: cover;
+
       display: block;
+
+      transition:
+        transform .7s ease,
+        filter .7s ease;
     }
+
+    .categoria:hover
+    .categoria-imagen img {
+      transform: scale(1.08);
+
+      filter: brightness(.8);
+    }
+
+
+    /* DEGRADADO SOBRE IMAGEN */
+
+    .categoria-imagen::after {
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,.95) 0%,
+          rgba(0,0,0,.60) 35%,
+          rgba(0,0,0,.12) 75%,
+          rgba(0,0,0,.10) 100%
+        );
+
+      pointer-events: none;
+    }
+
+
+    /* SIN IMAGEN */
 
     .categoria-sin-imagen {
       width: 100%;
+
       height: 100%;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
-      background: linear-gradient(145deg,#1b1b1b,#0d0d0d);
-      color: #777;
-      font-size: 40px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #292929,
+          #0d0d0d
+        );
+
+      color: #aaa;
+
+      font-size: 55px;
     }
+
+
+    /* TEXTO DE CATEGORÍA */
 
     .categoria-contenido {
       position: absolute;
-      bottom: 0;
+
+      z-index: 2;
+
       left: 0;
+
+      bottom: 0;
+
       width: 100%;
-      padding: 45px 22px 20px;
-      background: linear-gradient(
-        transparent,
-        rgba(0,0,0,.9)
-      );
+
+      padding: 35px 24px 24px;
+
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,.25)
+        );
     }
 
     .categoria h3 {
-      font-size: 22px;
+      font-size: 23px;
+
+      font-weight: 700;
+
+      letter-spacing: .3px;
+
+      text-shadow:
+        0 2px 8px rgba(0,0,0,.8);
     }
+
+    .categoria-contenido h3::after {
+      content: "  →";
+
+      opacity: .65;
+
+      transition:
+        opacity .3s ease,
+        transform .3s ease;
+    }
+
+    .categoria:hover
+    .categoria-contenido h3::after {
+      opacity: 1;
+    }
+
+
+    /* TODOS LOS PRODUCTOS */
 
     .categoria-todos {
       grid-column: 1 / -1;
-      min-height: auto;
-      padding: 15px;
-      justify-content: center;
+
+      min-height: 65px;
+
+      padding: 0 20px;
+
+      display: flex;
+
       align-items: center;
-      text-align: center;
+
+      justify-content: center;
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #1d1d1d,
+          #0d0d0d
+        );
     }
 
-    /* PRODUCTOS */
+    .categoria-todos:hover {
+      transform: translateY(-3px);
+    }
+
+    .categoria-todos h3 {
+      font-size: 17px;
+    }
+
+    .categoria-todos h3::after {
+      content: "";
+    }
+
+
+    /* =========================
+       PRODUCTOS
+    ========================= */
 
     .productos {
       display: grid;
-      grid-template-columns: repeat(
-        auto-fit,
-        minmax(240px,1fr)
-      );
+
+      grid-template-columns:
+        repeat(
+          auto-fit,
+          minmax(240px,1fr)
+        );
+
       gap: 30px;
     }
 
     .producto {
       background: #111;
+
       border: 1px solid #292929;
+
       border-radius: 18px;
+
       overflow: hidden;
-      transition: .3s;
+
+      transition:
+        transform .3s ease,
+        border-color .3s ease,
+        box-shadow .3s ease;
     }
 
     .producto:hover {
       transform: translateY(-6px);
+
+      border-color: #555;
+
+      box-shadow:
+        0 15px 35px rgba(0,0,0,.4);
     }
 
     .producto-imagen {
       width: 100%;
+
       height: 260px;
+
       background: #202020;
+
       display: flex;
+
       align-items: center;
+
       justify-content: center;
+
       color: #777;
+
       font-size: 14px;
+
+      overflow: hidden;
     }
 
     .producto-imagen img {
       width: 100%;
+
       height: 100%;
+
       object-fit: cover;
+
+      transition: transform .5s ease;
+    }
+
+    .producto:hover
+    .producto-imagen img {
+      transform: scale(1.04);
     }
 
     .producto-info {
@@ -256,73 +498,121 @@
 
     .producto h3 {
       font-size: 22px;
+
       margin-bottom: 8px;
     }
 
     .producto p {
       color: #aaa;
+
       font-size: 14px;
+
       margin-bottom: 15px;
     }
 
     .precio {
       font-size: 22px;
+
       font-weight: bold;
     }
 
     .whatsapp {
       display: block;
+
       text-align: center;
+
       margin-top: 18px;
+
       padding: 12px;
+
       background: #25D366;
+
       color: white;
+
       text-decoration: none;
+
       border-radius: 8px;
+
       font-weight: bold;
+
+      transition: .3s;
+    }
+
+    .whatsapp:hover {
+      opacity: .85;
+
+      transform: translateY(-2px);
     }
 
     .sin-productos {
       grid-column: 1 / -1;
+
       text-align: center;
+
       color: #888;
+
       padding: 40px;
     }
 
-    /* SOBRE */
+
+    /* =========================
+       SOBRE
+    ========================= */
 
     .sobre {
       max-width: 800px;
+
       margin: auto;
+
       text-align: center;
     }
 
     .sobre p {
       color: #bdbdbd;
+
       font-size: 17px;
     }
 
-    /* CONTACTO */
+
+    /* =========================
+       CONTACTO
+    ========================= */
 
     .contacto {
       text-align: center;
+
       background: #101010;
     }
 
     .contacto p {
       color: #aaa;
+
       margin: 8px;
     }
 
+
+    /* =========================
+       FOOTER
+    ========================= */
+
     footer {
       text-align: center;
+
       padding: 30px;
+
       border-top: 1px solid #292929;
+
       color: #777;
+
       font-size: 13px;
     }
 
-    @media (max-width:700px) {
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 700px) {
 
       header {
         padding: 15px 20px;
@@ -344,12 +634,37 @@
         font-size: 16px;
       }
 
+      .categorias {
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+      }
+
+      .categoria {
+        min-height: 240px;
+      }
+
+      .categoria-imagen {
+        height: 240px;
+      }
+
+      .categoria h3 {
+        font-size: 21px;
+      }
+
     }
 
   </style>
+
 </head>
 
+
 <body>
+
+
+<!-- =========================
+     ENCABEZADO
+========================= -->
 
 <header>
 
@@ -358,16 +673,36 @@
   </div>
 
   <nav>
-    <a href="#inicio">Inicio</a>
-    <a href="#categorias">Categorías</a>
-    <a href="#productos">Productos</a>
-    <a href="#contacto">Contacto</a>
+
+    <a href="#inicio">
+      Inicio
+    </a>
+
+    <a href="#categorias">
+      Categorías
+    </a>
+
+    <a href="#productos">
+      Productos
+    </a>
+
+    <a href="#contacto">
+      Contacto
+    </a>
+
   </nav>
 
 </header>
 
 
-<section class="hero" id="inicio">
+<!-- =========================
+     HERO
+========================= -->
+
+<section
+  class="hero"
+  id="inicio"
+>
 
   <div class="hero-content">
 
@@ -375,7 +710,9 @@
       Gomitas & Snacks Premium
     </small>
 
-    <h1>B4X</h1>
+    <h1>
+      B4X
+    </h1>
 
     <p>
       Una experiencia diferente en cada bocado.
@@ -395,11 +732,17 @@
 </section>
 
 
+<!-- =========================
+     CATEGORÍAS
+========================= -->
+
 <section id="categorias">
 
   <div class="titulo">
 
-    <h2>Categorías</h2>
+    <h2>
+      Categorías
+    </h2>
 
     <p>
       Selecciona una categoría para ver sus productos.
@@ -415,11 +758,17 @@
 </section>
 
 
+<!-- =========================
+     PRODUCTOS
+========================= -->
+
 <section id="productos">
 
   <div class="titulo">
 
-    <h2>Nuetros productos</h2>
+    <h2>
+      Nuestros productos
+    </h2>
 
     <p id="textoCategoria">
       Mostrando todos los productos.
@@ -432,20 +781,30 @@
 </section>
 
 
+<!-- =========================
+     SOBRE NOSOTROS
+========================= -->
+
 <section>
 
   <div class="sobre">
 
     <div class="titulo">
-      <h2>Sobre B4X</h2>
+
+      <h2>
+        Sobre B4X
+      </h2>
+
     </div>
 
     <p>
+
       En B4X buscamos convertir cada compra
       en una experiencia.
 
       Seleccionamos nuestros productos pensando
       en sabor, calidad y presentación.
+
     </p>
 
   </div>
@@ -453,11 +812,20 @@
 </section>
 
 
-<section class="contacto" id="contacto">
+<!-- =========================
+     CONTACTO
+========================= -->
+
+<section
+  class="contacto"
+  id="contacto"
+>
 
   <div class="titulo">
 
-    <h2>Contacto</h2>
+    <h2>
+      Contacto
+    </h2>
 
     <p>
       ¿Quieres hacer un pedido?
@@ -465,9 +833,17 @@
 
   </div>
 
-  <p>📲 WhatsApp: 323 764 7194</p>
-  <p>📍 Dirección: Próximamente</p>
-  <p>📸 Instagram: Próximamente</p>
+  <p>
+    📲 WhatsApp: 323 764 7194
+  </p>
+
+  <p>
+    📍 Dirección: Próximamente
+  </p>
+
+  <p>
+    📸 Instagram: Próximamente
+  </p>
 
   <a
     class="boton"
@@ -480,12 +856,24 @@
 </section>
 
 
+<!-- =========================
+     FOOTER
+========================= -->
+
 <footer>
-  © 2026 B4X. Todos los derechos reservados.
+
+  © 2026 B4X.
+  Todos los derechos reservados.
+
 </footer>
 
 
 <script>
+
+
+/* =========================
+   SUPABASE
+========================= */
 
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
@@ -493,146 +881,231 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
 
+
 let todosLosProductos = [];
 
 
 /* =========================
-   CATEGORÍAS
+   CARGAR CATEGORÍAS
 ========================= */
 
 async function cargarCategorias() {
 
   const contenedor =
-    document.getElementById("listaCategorias");
+    document.getElementById(
+      "listaCategorias"
+    );
+
 
   try {
 
-    const respuesta = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS" +
-      "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
-      "&order=IDENTIFICACI%C3%93N.asc",
-      {
-        method: "GET",
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+    const respuesta =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS" +
+        "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
+        "&order=IDENTIFICACI%C3%93N.asc",
+
+        {
+          method: "GET",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
+
         }
-      }
-    );
+
+      );
+
 
     if (!respuesta.ok) {
-      throw new Error(await respuesta.text());
+
+      throw new Error(
+        await respuesta.text()
+      );
+
     }
+
 
     const categorias =
       await respuesta.json();
 
+
     contenedor.innerHTML = "";
 
 
-    const botonTodos =
-      document.createElement("button");
+    /* =========================
+       TODOS LOS PRODUCTOS
+    ========================= */
 
-    botonTodos.type = "button";
+    const botonTodos =
+      document.createElement(
+        "button"
+      );
+
+
+    botonTodos.type =
+      "button";
+
 
     botonTodos.className =
       "categoria categoria-todos activa";
 
+
     botonTodos.innerHTML =
       "<h3>✨ Todos los productos</h3>";
 
-    botonTodos.onclick = function() {
-      filtrarCategoria(
-        "TODOS",
-        botonTodos
-      );
-    };
+
+    botonTodos.onclick =
+      function() {
+
+        filtrarCategoria(
+          "TODOS",
+          botonTodos
+        );
+
+      };
+
 
     contenedor.appendChild(
       botonTodos
     );
 
 
-    categorias.forEach(categoria => {
+    /* =========================
+       CATEGORÍAS
+    ========================= */
 
-      const boton =
-        document.createElement("button");
+    categorias.forEach(
+      categoria => {
 
-      boton.type = "button";
-      boton.className = "categoria";
-
-
-      const emoji =
-        categoria.Emoji &&
-        String(categoria.Emoji).trim()
-          ? String(categoria.Emoji).trim()
-          : "🍬";
+        const boton =
+          document.createElement(
+            "button"
+          );
 
 
-      let contenidoImagen = "";
+        boton.type =
+          "button";
 
 
-      if (
-        categoria.Imagen &&
-        String(categoria.Imagen).trim()
-      ) {
-
-        contenidoImagen = `
-          <img
-            src="${categoria.Imagen}"
-            alt="${categoria.Nombre}"
-          >
-        `;
-
-      } else {
-
-        contenidoImagen = `
-          <div class="categoria-sin-imagen">
-            ${emoji}
-          </div>
-        `;
-
-      }
+        boton.className =
+          "categoria";
 
 
-      boton.innerHTML = `
+        const emoji =
+          categoria.Emoji &&
+          String(categoria.Emoji).trim()
 
-        <div class="categoria-imagen">
+            ? String(
+                categoria.Emoji
+              ).trim()
 
-          ${contenidoImagen}
+            : "🍬";
 
-          <div class="categoria-contenido">
 
-            <h3>
+        let contenidoImagen =
+          "";
+
+
+        /* =========================
+           IMAGEN
+        ========================= */
+
+        if (
+          categoria.Imagen &&
+          String(
+            categoria.Imagen
+          ).trim()
+        ) {
+
+          contenidoImagen = `
+
+            <img
+              src="${categoria.Imagen}"
+              alt="${categoria.Nombre}"
+              loading="lazy"
+            >
+
+          `;
+
+        }
+
+        else {
+
+          contenidoImagen = `
+
+            <div
+              class="categoria-sin-imagen"
+            >
               ${emoji}
-              ${categoria.Nombre}
-            </h3>
+            </div>
+
+          `;
+
+        }
+
+
+        /* =========================
+           TARJETA
+        ========================= */
+
+        boton.innerHTML = `
+
+          <div
+            class="categoria-imagen"
+          >
+
+            ${contenidoImagen}
+
+
+            <div
+              class="categoria-contenido"
+            >
+
+              <h3>
+
+                ${emoji}
+
+                ${categoria.Nombre}
+
+              </h3>
+
+            </div>
 
           </div>
 
-        </div>
-
-      `;
+        `;
 
 
-      boton.onclick = function() {
+        boton.onclick =
+          function() {
 
-        filtrarCategoria(
-          categoria.Nombre,
+            filtrarCategoria(
+              categoria.Nombre,
+              boton
+            );
+
+          };
+
+
+        contenedor.appendChild(
           boton
         );
 
-      };
-
-
-      contenedor.appendChild(
-        boton
-      );
-
-    });
+      }
+    );
 
   }
+
 
   catch (error) {
 
@@ -641,10 +1114,18 @@ async function cargarCategorias() {
       error
     );
 
+
     contenedor.innerHTML = `
-      <p class="sin-productos">
-        ❌ No se pudieron cargar las categorías.
+
+      <p
+        class="sin-productos"
+      >
+
+        ❌ No se pudieron cargar
+        las categorías.
+
       </p>
+
     `;
 
   }
@@ -653,34 +1134,56 @@ async function cargarCategorias() {
 
 
 /* =========================
-   PRODUCTOS
+   CARGAR PRODUCTOS
 ========================= */
 
 async function cargarProductos() {
 
   const contenedor =
-    document.querySelector(".productos");
+    document.querySelector(
+      ".productos"
+    );
+
 
   try {
 
-    const respuesta = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/PRODUCTOS?select=*",
-      {
-        method: "GET",
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+    const respuesta =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/PRODUCTOS?select=*",
+
+        {
+          method: "GET",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
+
         }
-      }
-    );
+
+      );
+
 
     if (!respuesta.ok) {
-      throw new Error(await respuesta.text());
+
+      throw new Error(
+        await respuesta.text()
+      );
+
     }
+
 
     todosLosProductos =
       await respuesta.json();
+
 
     mostrarProductos(
       todosLosProductos
@@ -688,13 +1191,22 @@ async function cargarProductos() {
 
   }
 
+
   catch (error) {
 
-    console.error(error);
+    console.error(
+      "Error cargando productos:",
+      error
+    );
+
 
     contenedor.innerHTML =
+
       "<p class='sin-productos'>" +
-      "No se pudieron cargar los productos." +
+
+      "No se pudieron cargar " +
+      "los productos." +
+
       "</p>";
 
   }
@@ -706,10 +1218,15 @@ async function cargarProductos() {
    MOSTRAR PRODUCTOS
 ========================= */
 
-function mostrarProductos(productos) {
+function mostrarProductos(
+  productos
+) {
 
   const contenedor =
-    document.querySelector(".productos");
+    document.querySelector(
+      ".productos"
+    );
+
 
   contenedor.innerHTML = "";
 
@@ -720,8 +1237,11 @@ function mostrarProductos(productos) {
   ) {
 
     contenedor.innerHTML =
+
       "<p class='sin-productos'>" +
+
       "No hay productos en esta categoría." +
+
       "</p>";
 
     return;
@@ -729,76 +1249,106 @@ function mostrarProductos(productos) {
   }
 
 
-  productos.forEach(producto => {
+  productos.forEach(
+    producto => {
 
-    const tarjeta =
-      document.createElement("div");
-
-    tarjeta.className =
-      "producto";
-
-
-    tarjeta.innerHTML = `
-
-      <div class="producto-imagen">
-
-        ${
-          producto.Imagen
-            ? `
-              <img
-                src="${producto.Imagen}"
-                alt="${producto.Nombre}"
-              >
-            `
-            : "Imagen del producto"
-        }
-
-      </div>
+      const tarjeta =
+        document.createElement(
+          "div"
+        );
 
 
-      <div class="producto-info">
+      tarjeta.className =
+        "producto";
 
-        <h3>
-          ${producto.Nombre}
-        </h3>
 
-        <p>
-          ${producto.Descripcion || ""}
-        </p>
+      tarjeta.innerHTML = `
 
-        <div class="precio">
-          $${Number(
-            producto.Precio
-          ).toLocaleString("es-CO")}
+        <div
+          class="producto-imagen"
+        >
+
+          ${
+            producto.Imagen
+
+              ? `
+
+                <img
+                  src="${producto.Imagen}"
+                  alt="${producto.Nombre}"
+                  loading="lazy"
+                >
+
+              `
+
+              : "Imagen del producto"
+
+          }
+
         </div>
 
-        <a
-          class="whatsapp"
-          href="https://wa.me/573237647194?text=${encodeURIComponent(
-            "Hola, quiero pedir " +
-            producto.Nombre
-          )}"
-          target="_blank"
+
+        <div
+          class="producto-info"
         >
-          Pedir por WhatsApp
-        </a>
 
-      </div>
-
-    `;
+          <h3>
+            ${producto.Nombre}
+          </h3>
 
 
-    contenedor.appendChild(
-      tarjeta
-    );
+          <p>
+            ${producto.Descripcion || ""}
+          </p>
 
-  });
+
+          <div
+            class="precio"
+          >
+
+            $${Number(
+              producto.Precio
+            ).toLocaleString(
+              "es-CO"
+            )}
+
+          </div>
+
+
+          <a
+            class="whatsapp"
+
+            href="https://wa.me/573237647194?text=${encodeURIComponent(
+
+              "Hola, quiero pedir " +
+              producto.Nombre
+
+            )}"
+
+            target="_blank"
+          >
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+
+      `;
+
+
+      contenedor.appendChild(
+        tarjeta
+      );
+
+    }
+  );
 
 }
 
 
 /* =========================
-   FILTRAR
+   FILTRAR CATEGORÍA
 ========================= */
 
 function filtrarCategoria(
@@ -807,14 +1357,18 @@ function filtrarCategoria(
 ) {
 
   document
-    .querySelectorAll(".categoria")
-    .forEach(elemento => {
+    .querySelectorAll(
+      ".categoria"
+    )
+    .forEach(
+      elemento => {
 
-      elemento.classList.remove(
-        "activa"
-      );
+        elemento.classList.remove(
+          "activa"
+        );
 
-    });
+      }
+    );
 
 
   boton.classList.add(
@@ -828,23 +1382,31 @@ function filtrarCategoria(
     );
 
 
-  if (categoria === "TODOS") {
+  if (
+    categoria === "TODOS"
+  ) {
 
     mostrarProductos(
       todosLosProductos
     );
+
 
     texto.textContent =
       "Mostrando todos los productos.";
 
   }
 
+
   else {
 
     const productosFiltrados =
       todosLosProductos.filter(
+
         producto =>
-          producto.Categoria === categoria
+
+          producto.Categoria ===
+          categoria
+
       );
 
 
@@ -861,9 +1423,13 @@ function filtrarCategoria(
 
 
   document
-    .getElementById("productos")
+    .getElementById(
+      "productos"
+    )
     .scrollIntoView({
+
       behavior: "smooth"
+
     });
 
 }
@@ -874,9 +1440,12 @@ function filtrarCategoria(
 ========================= */
 
 cargarCategorias();
+
 cargarProductos();
 
 </script>
 
+
 </body>
+
 </html>
