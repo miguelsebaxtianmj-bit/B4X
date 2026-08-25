@@ -1,95 +1,735 @@
+```html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>B4X | Gomitas Premium</title>
+
+  <meta name="description" content="B4X - Gomitas y snacks premium.">
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0b0b0b;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 11, 11, 0.95);
+      border-bottom: 1px solid #2a2a2a;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 25px;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      opacity: 0.6;
+    }
+
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+
+      background:
+        radial-gradient(
+          circle at center,
+          #292929 0%,
+          #0b0b0b 55%
+        );
+    }
+
+    .hero-content {
+      max-width: 800px;
+    }
+
+    .hero small {
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #cfcfcf;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 12vw, 120px);
+      letter-spacing: 15px;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      color: #c8c8c8;
+      font-size: 18px;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 28px;
+      background: white;
+      color: black;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+
+    .boton:hover {
+      transform: translateY(-3px);
+      opacity: 0.85;
+    }
+
+    section {
+      padding: 80px 7%;
+    }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .titulo h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .titulo p {
+      color: #aaa;
+    }
+
+    /* =========================
+       CATEGORÍAS
+    ========================= */
+
+    .categorias {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .categoria {
+      min-height: 180px;
+      border: 1px solid #292929;
+      border-radius: 18px;
+      padding: 30px;
+
+      display: flex;
+      align-items: end;
+
+      background:
+        linear-gradient(
+          145deg,
+          #1b1b1b,
+          #0d0d0d
+        );
+
+      transition: 0.3s;
+      cursor: pointer;
+
+      color: white;
+      text-align: left;
+      font-family: inherit;
+    }
+
+    .categoria:hover {
+      transform: translateY(-5px);
+      border-color: #777;
+    }
+
+    .categoria.activa {
+      border-color: white;
+      transform: translateY(-5px);
+    }
+
+    .categoria h3 {
+      font-size: 22px;
+    }
+
+    .categoria-todos {
+      grid-column: 1 / -1;
+      min-height: auto;
+      padding: 15px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* =========================
+       PRODUCTOS
+    ========================= */
+
+    .productos {
+      display: grid;
+      grid-template-columns:
+        repeat(auto-fit, minmax(240px, 1fr));
+      gap: 30px;
+    }
+
+    .producto {
+      background: #111111;
+      border: 1px solid #292929;
+      border-radius: 18px;
+      overflow: hidden;
+      transition: 0.3s;
+    }
+
+    .producto:hover {
+      transform: translateY(-6px);
+    }
+
+    .producto-imagen {
+      width: 100%;
+      height: 260px;
+      background: #202020;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #777;
+      font-size: 14px;
+    }
+
+    .producto-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .producto-info {
+      padding: 24px;
+    }
+
+    .producto h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .producto p {
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .precio {
+      font-size: 22px;
+      font-weight: bold;
+    }
+
+    .whatsapp {
+      display: block;
+      text-align: center;
+      margin-top: 18px;
+      padding: 12px;
+
+      background: #25D366;
+      color: white;
+
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .sin-productos {
+      grid-column: 1 / -1;
+      text-align: center;
+      color: #888;
+      padding: 40px;
+    }
+
+    /* =========================
+       SOBRE
+    ========================= */
+
+    .sobre {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .sobre p {
+      color: #bdbdbd;
+      font-size: 17px;
+    }
+
+    /* =========================
+       CONTACTO
+    ========================= */
+
+    .contacto {
+      text-align: center;
+      background: #101010;
+    }
+
+    .contacto p {
+      color: #aaa;
+      margin: 8px;
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      border-top: 1px solid #292929;
+      color: #777;
+      font-size: 13px;
+    }
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 15px 20px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: 8px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       ENCABEZADO
+  ========================= -->
+
+  <header>
+
+    <div class="logo">
+      B4X
+    </div>
+
+    <nav>
+
+      <a href="#inicio">Inicio</a>
+
+      <a href="#categorias">Categorías</a>
+
+      <a href="#productos">Productos</a>
+
+      <a href="#contacto">Contacto</a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       PORTADA
+  ========================= -->
+
+  <section class="hero" id="inicio">
+
+    <div class="hero-content">
+
+      <small>
+        Gomitas & Snacks Premium
+      </small>
+
+      <h1>
+        B4X
+      </h1>
+
+      <p>
+        Una experiencia diferente en cada bocado.
+        Descubre nuestra selección de gomitas y snacks.
+      </p>
+
+      <a
+        class="boton"
+        href="https://wa.me/573237647194"
+        target="_blank">
+
+        Comprar por WhatsApp
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CATEGORÍAS
+  ========================= -->
+
+  <section id="categorias">
+
+    <div class="titulo">
+
+      <h2>
+        Categorías
+      </h2>
+
+      <p>
+        Selecciona una categoría
+        para ver sus productos.
+      </p>
+
+    </div>
+
+    <div
+      class="categorias"
+      id="listaCategorias">
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       PRODUCTOS
+  ========================= -->
+
+  <section id="productos">
+
+    <div class="titulo">
+
+      <h2>
+        Nuestros productos
+      </h2>
+
+      <p id="textoCategoria">
+        Mostrando todos los productos.
+      </p>
+
+    </div>
+
+    <div class="productos"></div>
+
+  </section>
+
+
+  <!-- =========================
+       SOBRE NOSOTROS
+  ========================= -->
+
+  <section>
+
+    <div class="sobre">
+
+      <div class="titulo">
+
+        <h2>
+          Sobre B4X
+        </h2>
+
+      </div>
+
+      <p>
+
+        En B4X buscamos convertir cada compra
+        en una experiencia.
+
+        Seleccionamos nuestros productos pensando
+        en sabor, calidad y presentación.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACTO
+  ========================= -->
+
+  <section
+    class="contacto"
+    id="contacto">
+
+    <div class="titulo">
+
+      <h2>
+        Contacto
+      </h2>
+
+      <p>
+        ¿Quieres hacer un pedido?
+      </p>
+
+    </div>
+
+    <p>
+      📲 WhatsApp: 323 764 7194
+    </p>
+
+    <p>
+      📍 Dirección: Próximamente
+    </p>
+
+    <p>
+      📸 Instagram: Próximamente
+    </p>
+
+    <a
+      class="boton"
+      href="https://wa.me/573237647194"
+      target="_blank">
+
+      Hablar por WhatsApp
+
+    </a>
+
+  </section>
+
+
+  <!-- =========================
+       PIE
+  ========================= -->
+
+  <footer>
+
+    © 2026 B4X.
+    Todos los derechos reservados.
+
+  </footer>
+
+
+<script>
+
+/* =========================
+   SUPABASE
+========================= */
+
+const SUPABASE_URL =
+"https://ltdqlcthnfbkvpsnfgcg.supabase.co";
+
+const SUPABASE_KEY =
+"sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
+
+
+/* =========================
+   VARIABLES
+========================= */
+
+let todosLosProductos = [];
+
+
+/* =========================
+   CARGAR CATEGORÍAS
+========================= */
+
 async function cargarCategorias() {
 
   const contenedor =
-    document.getElementById("listaCategorias");
+    document.getElementById(
+      "listaCategorias"
+    );
 
   try {
 
-    const respuesta = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
-      {
-        method: "GET",
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+    const respuesta =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
+
+        {
+
+          method: "GET",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
+
         }
-      }
-    );
+
+      );
+
 
     if (!respuesta.ok) {
-      throw new Error(await respuesta.text());
+
+      throw new Error(
+        await respuesta.text()
+      );
+
     }
 
-    const categorias = await respuesta.json();
 
-    console.log("Categorías recibidas:", categorias);
+    const categorias =
+      await respuesta.json();
+
+
+    console.log(
+      "Categorías recibidas:",
+      categorias
+    );
+
 
     contenedor.innerHTML = "";
 
-    /* TODOS LOS PRODUCTOS */
+
+    /* =========================
+       TODOS LOS PRODUCTOS
+    ========================= */
 
     const botonTodos =
-      document.createElement("button");
+      document.createElement(
+        "button"
+      );
 
-    botonTodos.type = "button";
+
+    botonTodos.type =
+      "button";
+
 
     botonTodos.className =
       "categoria categoria-todos activa";
 
+
     botonTodos.innerHTML =
       "<h3>✨ Todos los productos</h3>";
 
-    botonTodos.onclick = function() {
 
-      filtrarCategoria(
-        "TODOS",
-        botonTodos
-      );
-
-    };
-
-    contenedor.appendChild(botonTodos);
-
-
-    /* CATEGORÍAS */
-
-    categorias.forEach(categoria => {
-
-      const boton =
-        document.createElement("button");
-
-      boton.type = "button";
-
-      boton.className = "categoria";
-
-
-      /* EMOJI DE SUPABASE */
-
-      const emoji =
-        categoria.Emoji &&
-        String(categoria.Emoji).trim()
-          ? String(categoria.Emoji).trim()
-          : "🍬";
-
-
-      boton.innerHTML =
-        `<h3>${emoji} ${categoria.Nombre}</h3>`;
-
-
-      boton.onclick = function() {
+    botonTodos.onclick =
+      function() {
 
         filtrarCategoria(
-          categoria.Nombre,
-          boton
+          "TODOS",
+          botonTodos
         );
 
       };
 
 
-      contenedor.appendChild(boton);
+    contenedor.appendChild(
+      botonTodos
+    );
 
-    });
+
+    /* =========================
+       CATEGORÍAS DE SUPABASE
+    ========================= */
+
+    categorias.forEach(
+      categoria => {
+
+        const boton =
+          document.createElement(
+            "button"
+          );
+
+
+        boton.type =
+          "button";
+
+
+        boton.className =
+          "categoria";
+
+
+        /*
+          EL EMOJI SE TOMA
+          DIRECTAMENTE DE SUPABASE.
+
+          Si Emoji tiene 🌶️:
+
+          🌶️ Gomitas
+
+          Si Emoji tiene 👟:
+
+          👟 Zapatos
+
+          Si está vacío:
+
+          🍬 Gomitas
+        */
+
+        const emoji =
+          categoria.Emoji &&
+          String(
+            categoria.Emoji
+          ).trim()
+            ? String(
+                categoria.Emoji
+              ).trim()
+            : "🍬";
+
+
+        boton.innerHTML =
+          `<h3>${emoji} ${categoria.Nombre}</h3>`;
+
+
+        boton.onclick =
+          function() {
+
+            filtrarCategoria(
+              categoria.Nombre,
+              boton
+            );
+
+          };
+
+
+        contenedor.appendChild(
+          boton
+        );
+
+      }
+    );
+
 
   }
 
@@ -99,6 +739,7 @@ async function cargarCategorias() {
       "ERROR CARGANDO CATEGORÍAS:",
       error
     );
+
 
     contenedor.innerHTML = `
 
@@ -114,3 +755,306 @@ async function cargarCategorias() {
   }
 
 }
+
+
+/* =========================
+   CARGAR PRODUCTOS
+========================= */
+
+async function cargarProductos() {
+
+  const contenedor =
+    document.querySelector(
+      ".productos"
+    );
+
+
+  try {
+
+    const respuesta =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/PRODUCTOS?select=*",
+
+        {
+
+          method: "GET",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
+
+        }
+
+      );
+
+
+    if (!respuesta.ok) {
+
+      throw new Error(
+        await respuesta.text()
+      );
+
+    }
+
+
+    todosLosProductos =
+      await respuesta.json();
+
+
+    mostrarProductos(
+      todosLosProductos
+    );
+
+
+  }
+
+  catch (error) {
+
+    console.error(
+      "ERROR CARGANDO PRODUCTOS:",
+      error
+    );
+
+
+    contenedor.innerHTML =
+
+      "<p class='sin-productos'>" +
+      "No se pudieron cargar los productos." +
+      "</p>";
+
+  }
+
+}
+
+
+/* =========================
+   MOSTRAR PRODUCTOS
+========================= */
+
+function mostrarProductos(
+  productos
+) {
+
+  const contenedor =
+    document.querySelector(
+      ".productos"
+    );
+
+
+  contenedor.innerHTML = "";
+
+
+  if (
+    !productos ||
+    productos.length === 0
+  ) {
+
+    contenedor.innerHTML =
+
+      "<p class='sin-productos'>" +
+      "No hay productos en esta categoría." +
+      "</p>";
+
+    return;
+
+  }
+
+
+  productos.forEach(
+    producto => {
+
+      const tarjeta =
+        document.createElement(
+          "div"
+        );
+
+
+      tarjeta.className =
+        "producto";
+
+
+      tarjeta.innerHTML = `
+
+        <div class="producto-imagen">
+
+          ${
+            producto.Imagen
+
+              ? `
+
+                <img
+                  src="${producto.Imagen}"
+                  alt="${producto.Nombre}">
+
+                `
+
+              : "Imagen del producto"
+
+          }
+
+        </div>
+
+
+        <div class="producto-info">
+
+          <h3>
+            ${producto.Nombre}
+          </h3>
+
+
+          <p>
+            ${producto.Descripcion || ""}
+          </p>
+
+
+          <div class="precio">
+
+            $${Number(
+              producto.Precio
+            ).toLocaleString(
+              "es-CO"
+            )}
+
+          </div>
+
+
+          <a
+            class="whatsapp"
+
+            href="https://wa.me/573237647194?text=${encodeURIComponent(
+
+              "Hola, quiero pedir " +
+              producto.Nombre
+
+            )}"
+
+            target="_blank">
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+
+      `;
+
+
+      contenedor.appendChild(
+        tarjeta
+      );
+
+    }
+  );
+
+}
+
+
+/* =========================
+   FILTRAR CATEGORÍA
+========================= */
+
+function filtrarCategoria(
+  categoria,
+  boton
+) {
+
+  document
+    .querySelectorAll(
+      ".categoria"
+    )
+    .forEach(
+      elemento => {
+
+        elemento.classList.remove(
+          "activa"
+        );
+
+      }
+    );
+
+
+  boton.classList.add(
+    "activa"
+  );
+
+
+  const texto =
+    document.getElementById(
+      "textoCategoria"
+    );
+
+
+  if (
+    categoria === "TODOS"
+  ) {
+
+    mostrarProductos(
+      todosLosProductos
+    );
+
+
+    texto.textContent =
+      "Mostrando todos los productos.";
+
+  }
+
+  else {
+
+    const productosFiltrados =
+      todosLosProductos.filter(
+
+        producto =>
+
+          producto.Categoria ===
+          categoria
+
+      );
+
+
+    mostrarProductos(
+      productosFiltrados
+    );
+
+
+    texto.textContent =
+      "Categoría: " +
+      categoria;
+
+  }
+
+
+  document
+    .getElementById(
+      "productos"
+    )
+    .scrollIntoView({
+
+      behavior: "smooth"
+
+    });
+
+}
+
+
+/* =========================
+   INICIAR
+========================= */
+
+cargarCategorias();
+
+cargarProductos();
+
+</script>
+
+</body>
+</html>
+```
