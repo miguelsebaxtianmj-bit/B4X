@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -104,6 +105,16 @@
       opacity: .85;
     }
 
+    .boton-editar {
+      background: #333;
+      color: white;
+    }
+
+    .boton-cancelar {
+      background: #555;
+      color: white;
+    }
+
     .boton-eliminar {
       background: #b00020;
       color: white;
@@ -203,7 +214,9 @@
   </p>
 
 
-  <!-- CATEGORÍAS -->
+  <!-- =========================
+       CATEGORÍAS
+  ========================= -->
 
   <div class="panel">
 
@@ -278,7 +291,9 @@
   </div>
 
 
-  <!-- PRODUCTOS -->
+  <!-- =========================
+       PRODUCTOS
+  ========================= -->
 
   <div class="panel">
 
@@ -287,7 +302,7 @@
     </h2>
 
     <p class="descripcion-panel">
-      Agrega productos y asígnalos a una categoría.
+      Agrega y administra los productos de tu tienda.
     </p>
 
 
@@ -350,9 +365,21 @@
 
     <button
       type="button"
+      id="botonGuardarProducto"
       onclick="guardarProducto()"
     >
       ➕ Guardar producto
+    </button>
+
+
+    <button
+      type="button"
+      id="botonCancelarEdicion"
+      class="boton-cancelar"
+      onclick="cancelarEdicion()"
+      style="display:none;"
+    >
+      ❌ Cancelar edición
     </button>
 
 
@@ -389,11 +416,22 @@
 
 <script>
 
+/* =========================
+   SUPABASE
+========================= */
+
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
 
 const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
+
+
+/* =========================
+   VARIABLE DE EDICIÓN
+========================= */
+
+let productoEditandoID = null;
 
 
 /* =========================
@@ -424,9 +462,11 @@ async function cargarCategorias() {
 
 
     if (!respuesta.ok) {
+
       throw new Error(
         await respuesta.text()
       );
+
     }
 
 
@@ -444,13 +484,16 @@ async function cargarCategorias() {
         const opcion =
           document.createElement("option");
 
+
         opcion.value =
           categoria.Nombre;
+
 
         opcion.textContent =
           (categoria.Emoji || "📦") +
           " " +
           categoria.Nombre;
+
 
         select.appendChild(
           opcion
@@ -491,6 +534,7 @@ function mostrarCategorias(
       "listaCategorias"
     );
 
+
   contenedor.innerHTML = "";
 
 
@@ -501,6 +545,7 @@ function mostrarCategorias(
         document.createElement(
           "div"
         );
+
 
       elemento.className =
         "elemento";
@@ -583,15 +628,18 @@ async function agregarCategoria() {
       "nuevaCategoria"
     ).value.trim();
 
+
   const emoji =
     document.getElementById(
       "emojiCategoria"
     ).value.trim();
 
+
   const archivo =
     document.getElementById(
       "imagenCategoria"
     ).files[0];
+
 
   const mensaje =
     document.getElementById(
@@ -651,6 +699,7 @@ async function agregarCategoria() {
           ruta,
           {
             method: "POST",
+
             headers: {
               "apikey": SUPABASE_KEY,
               "Authorization":
@@ -658,6 +707,7 @@ async function agregarCategoria() {
               "Content-Type":
                 archivo.type
             },
+
             body: archivo
           }
         );
@@ -686,6 +736,7 @@ async function agregarCategoria() {
         "/rest/v1/CATEGOR%C3%8DAS",
         {
           method: "POST",
+
           headers: {
             "apikey": SUPABASE_KEY,
             "Authorization":
@@ -695,6 +746,7 @@ async function agregarCategoria() {
             "Prefer":
               "return=minimal"
           },
+
           body: JSON.stringify({
             Nombre: nombre,
             Emoji: emoji,
@@ -721,9 +773,11 @@ async function agregarCategoria() {
       "nuevaCategoria"
     ).value = "";
 
+
     document.getElementById(
       "emojiCategoria"
     ).value = "";
+
 
     document.getElementById(
       "imagenCategoria"
@@ -763,7 +817,9 @@ async function eliminarCategoria(
       "?"
     )
   ) {
+
     return;
+
   }
 
 
@@ -832,6 +888,7 @@ async function eliminarCategoria(
         ),
         {
           method: "DELETE",
+
           headers: {
             "apikey": SUPABASE_KEY,
             "Authorization":
@@ -877,30 +934,46 @@ async function eliminarCategoria(
 
 async function guardarProducto() {
 
+  if (
+    productoEditandoID !== null
+  ) {
+
+    await actualizarProducto();
+
+    return;
+
+  }
+
+
   const nombre =
     document.getElementById(
       "nombre"
     ).value.trim();
+
 
   const descripcion =
     document.getElementById(
       "descripcion"
     ).value.trim();
 
+
   const precio =
     document.getElementById(
       "precio"
     ).value;
+
 
   const categoria =
     document.getElementById(
       "categoria"
     ).value;
 
+
   const archivo =
     document.getElementById(
       "imagen"
     ).files[0];
+
 
   const mensaje =
     document.getElementById(
@@ -959,6 +1032,7 @@ async function guardarProducto() {
         ruta,
         {
           method: "POST",
+
           headers: {
             "apikey": SUPABASE_KEY,
             "Authorization":
@@ -966,6 +1040,7 @@ async function guardarProducto() {
             "Content-Type":
               archivo.type
           },
+
           body: archivo
         }
       );
@@ -992,6 +1067,7 @@ async function guardarProducto() {
         "/rest/v1/PRODUCTOS",
         {
           method: "POST",
+
           headers: {
             "apikey": SUPABASE_KEY,
             "Authorization":
@@ -1001,6 +1077,7 @@ async function guardarProducto() {
             "Prefer":
               "return=minimal"
           },
+
           body: JSON.stringify({
             Nombre: nombre,
             Descripcion: descripcion,
@@ -1029,13 +1106,16 @@ async function guardarProducto() {
       "nombre"
     ).value = "";
 
+
     document.getElementById(
       "descripcion"
     ).value = "";
 
+
     document.getElementById(
       "precio"
     ).value = "";
+
 
     document.getElementById(
       "imagen"
@@ -1135,7 +1215,23 @@ function mostrarProductos(
       "listaProductos"
     );
 
+
   contenedor.innerHTML = "";
+
+
+  if (
+    !productos ||
+    productos.length === 0
+  ) {
+
+    contenedor.innerHTML =
+      "<p style='color:#777'>" +
+      "No hay productos." +
+      "</p>";
+
+    return;
+
+  }
 
 
   productos.forEach(
@@ -1145,6 +1241,7 @@ function mostrarProductos(
         document.createElement(
           "div"
         );
+
 
       elemento.className =
         "elemento";
@@ -1205,6 +1302,17 @@ function mostrarProductos(
 
         <button
           type="button"
+          class="boton-editar"
+          onclick="editarProducto(
+            '${String(producto.ID).replace(/'/g, "\\'")}'
+          )"
+        >
+          ✏️ Editar producto
+        </button>
+
+
+        <button
+          type="button"
           class="boton-eliminar"
           onclick="eliminarProducto(
             '${String(producto.ID).replace(/'/g, "\\'")}',
@@ -1228,6 +1336,396 @@ function mostrarProductos(
 
 
 /* =========================
+   EDITAR PRODUCTO
+========================= */
+
+async function editarProducto(
+  id
+) {
+
+  const mensaje =
+    document.getElementById(
+      "mensaje"
+    );
+
+
+  try {
+
+    mensaje.textContent =
+      "Cargando producto...";
+
+
+    const respuesta =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/PRODUCTOS" +
+        "?select=ID,Nombre,Descripcion,Precio,Categoria,Imagen" +
+        "&ID=eq." +
+        encodeURIComponent(id),
+        {
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY
+          }
+        }
+      );
+
+
+    if (!respuesta.ok) {
+
+      throw new Error(
+        await respuesta.text()
+      );
+
+    }
+
+
+    const productos =
+      await respuesta.json();
+
+
+    if (!productos.length) {
+
+      throw new Error(
+        "No se encontró el producto."
+      );
+
+    }
+
+
+    const producto =
+      productos[0];
+
+
+    productoEditandoID =
+      producto.ID;
+
+
+    document.getElementById(
+      "nombre"
+    ).value =
+      producto.Nombre || "";
+
+
+    document.getElementById(
+      "descripcion"
+    ).value =
+      producto.Descripcion || "";
+
+
+    document.getElementById(
+      "precio"
+    ).value =
+      producto.Precio || "";
+
+
+    document.getElementById(
+      "categoria"
+    ).value =
+      producto.Categoria || "";
+
+
+    document.getElementById(
+      "imagen"
+    ).value = "";
+
+
+    document.getElementById(
+      "botonGuardarProducto"
+    ).textContent =
+      "💾 Actualizar producto";
+
+
+    document.getElementById(
+      "botonCancelarEdicion"
+    ).style.display =
+      "block";
+
+
+    mensaje.textContent =
+      "✏️ Editando: " +
+      producto.Nombre;
+
+
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    mensaje.textContent =
+      "❌ Error: " +
+      error.message;
+
+  }
+
+}
+
+
+/* =========================
+   CANCELAR EDICIÓN
+========================= */
+
+function cancelarEdicion() {
+
+  productoEditandoID =
+    null;
+
+
+  document.getElementById(
+    "nombre"
+  ).value = "";
+
+
+  document.getElementById(
+    "descripcion"
+  ).value = "";
+
+
+  document.getElementById(
+    "precio"
+  ).value = "";
+
+
+  document.getElementById(
+    "categoria"
+  ).value = "";
+
+
+  document.getElementById(
+    "imagen"
+  ).value = "";
+
+
+  document.getElementById(
+    "botonGuardarProducto"
+  ).textContent =
+    "➕ Guardar producto";
+
+
+  document.getElementById(
+    "botonCancelarEdicion"
+  ).style.display =
+    "none";
+
+
+  document.getElementById(
+    "mensaje"
+  ).textContent = "";
+
+}
+
+
+/* =========================
+   ACTUALIZAR PRODUCTO
+========================= */
+
+async function actualizarProducto() {
+
+  const nombre =
+    document.getElementById(
+      "nombre"
+    ).value.trim();
+
+
+  const descripcion =
+    document.getElementById(
+      "descripcion"
+    ).value.trim();
+
+
+  const precio =
+    document.getElementById(
+      "precio"
+    ).value;
+
+
+  const categoria =
+    document.getElementById(
+      "categoria"
+    ).value;
+
+
+  const archivo =
+    document.getElementById(
+      "imagen"
+    ).files[0];
+
+
+  const mensaje =
+    document.getElementById(
+      "mensaje"
+    );
+
+
+  if (
+    !nombre ||
+    !precio ||
+    !categoria
+  ) {
+
+    mensaje.textContent =
+      "⚠️ Completa nombre, precio y categoría.";
+
+    return;
+
+  }
+
+
+  mensaje.textContent =
+    "Actualizando producto...";
+
+
+  try {
+
+    const datos = {
+
+      Nombre:
+        nombre,
+
+      Descripcion:
+        descripcion,
+
+      Precio:
+        Number(precio),
+
+      Categoria:
+        categoria
+
+    };
+
+
+    /* =========================
+       NUEVA IMAGEN OPCIONAL
+    ========================= */
+
+    if (archivo) {
+
+      const nombreArchivo =
+        Date.now() +
+        "_" +
+        archivo.name.replace(
+          /[^a-zA-Z0-9._-]/g,
+          "_"
+        );
+
+
+      const ruta =
+        "imagenes/" +
+        nombreArchivo;
+
+
+      const subida =
+        await fetch(
+          SUPABASE_URL +
+          "/storage/v1/object/productos/" +
+          ruta,
+          {
+            method: "POST",
+
+            headers: {
+              "apikey": SUPABASE_KEY,
+              "Authorization":
+                "Bearer " + SUPABASE_KEY,
+              "Content-Type":
+                archivo.type
+            },
+
+            body: archivo
+          }
+        );
+
+
+      if (!subida.ok) {
+
+        throw new Error(
+          await subida.text()
+        );
+
+      }
+
+
+      datos.Imagen =
+        SUPABASE_URL +
+        "/storage/v1/object/public/productos/" +
+        ruta;
+
+    }
+
+
+    /* =========================
+       ACTUALIZAR SUPABASE
+    ========================= */
+
+    const respuesta =
+      await fetch(
+        SUPABASE_URL +
+        "/rest/v1/PRODUCTOS" +
+        "?ID=eq." +
+        encodeURIComponent(
+          productoEditandoID
+        ),
+        {
+          method: "PATCH",
+
+          headers: {
+            "apikey": SUPABASE_KEY,
+            "Authorization":
+              "Bearer " + SUPABASE_KEY,
+            "Content-Type":
+              "application/json",
+            "Prefer":
+              "return=minimal"
+          },
+
+          body:
+            JSON.stringify(
+              datos
+            )
+        }
+      );
+
+
+    if (!respuesta.ok) {
+
+      throw new Error(
+        await respuesta.text()
+      );
+
+    }
+
+
+    mensaje.textContent =
+      "✅ Producto actualizado correctamente.";
+
+
+    cancelarEdicion();
+
+
+    await cargarProductos();
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+    mensaje.textContent =
+      "❌ Error: " +
+      error.message;
+
+  }
+
+}
+
+
+/* =========================
    ELIMINAR PRODUCTO
 ========================= */
 
@@ -1243,7 +1741,9 @@ async function eliminarProducto(
       "?"
     )
   ) {
+
     return;
+
   }
 
 
@@ -1323,3 +1823,4 @@ cargarProductos();
 
 </body>
 </html>
+```
