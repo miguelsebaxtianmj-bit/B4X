@@ -38,6 +38,7 @@
       overflow-x: hidden;
     }
 
+
     /* =========================
        HEADER
     ========================= */
@@ -55,7 +56,7 @@
       align-items: center;
       justify-content: space-between;
 
-      background: rgba(8, 8, 8, 0.88);
+      background: rgba(8, 8, 8, .88);
 
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
@@ -78,17 +79,20 @@
     nav a {
       position: relative;
 
-      color: #ffffff;
+      color: #fff;
       text-decoration: none;
 
       font-size: 13px;
       font-weight: 600;
 
       letter-spacing: 1px;
-
       text-transform: uppercase;
 
       transition: .3s;
+    }
+
+    nav a:hover {
+      opacity: .6;
     }
 
     nav a::after {
@@ -102,13 +106,9 @@
       width: 0;
       height: 1px;
 
-      background: #ffffff;
+      background: #fff;
 
       transition: .3s;
-    }
-
-    nav a:hover {
-      opacity: .65;
     }
 
     nav a:hover::after {
@@ -157,15 +157,18 @@
       left: 50%;
       top: 50%;
 
-      transform: translate(-50%, -50%);
+      transform:
+        translate(-50%, -50%);
 
-      font-size: clamp(180px, 30vw, 450px);
+      font-size:
+        clamp(180px, 30vw, 450px);
 
       font-weight: 900;
 
       letter-spacing: 20px;
 
-      color: rgba(255,255,255,.025);
+      color:
+        rgba(255,255,255,.025);
 
       pointer-events: none;
 
@@ -174,6 +177,7 @@
 
     .hero-content {
       position: relative;
+
       z-index: 2;
 
       max-width: 900px;
@@ -194,7 +198,8 @@
     }
 
     .hero h1 {
-      font-size: clamp(80px, 17vw, 190px);
+      font-size:
+        clamp(80px, 17vw, 190px);
 
       line-height: .9;
 
@@ -213,7 +218,8 @@
 
       color: #d2d2d2;
 
-      font-size: clamp(20px, 3vw, 30px);
+      font-size:
+        clamp(20px, 3vw, 30px);
 
       font-weight: 300;
 
@@ -242,7 +248,8 @@
 
       padding: 16px 28px;
 
-      background: #ffffff;
+      background: #fff;
+
       color: #080808;
 
       border-radius: 999px;
@@ -250,6 +257,7 @@
       text-decoration: none;
 
       font-size: 13px;
+
       font-weight: 800;
 
       letter-spacing: 1px;
@@ -265,7 +273,8 @@
       transform: translateY(-4px);
 
       box-shadow:
-        0 15px 40px rgba(255,255,255,.12);
+        0 15px 40px
+        rgba(255,255,255,.12);
     }
 
     .boton-principal:hover span {
@@ -300,7 +309,8 @@
     }
 
     .titulo h2 {
-      font-size: clamp(38px, 6vw, 70px);
+      font-size:
+        clamp(38px, 6vw, 70px);
 
       line-height: 1;
 
@@ -345,7 +355,8 @@
 
       padding: 0;
 
-      border: 1px solid rgba(255,255,255,.09);
+      border: 1px solid
+        rgba(255,255,255,.09);
 
       border-radius: 20px;
 
@@ -362,18 +373,21 @@
       font-family: inherit;
 
       transition:
-        transform .5s cubic-bezier(.2,.8,.2,1),
+        transform .5s
+        cubic-bezier(.2,.8,.2,1),
         border-color .4s;
     }
 
     .categoria:hover {
       transform: translateY(-8px);
 
-      border-color: rgba(255,255,255,.35);
+      border-color:
+        rgba(255,255,255,.35);
     }
 
     .categoria.activa {
-      border-color: rgba(255,255,255,.75);
+      border-color:
+        rgba(255,255,255,.75);
     }
 
     .categoria-imagen {
@@ -393,11 +407,13 @@
       display: block;
 
       transition:
-        transform .8s cubic-bezier(.2,.8,.2,1),
+        transform .8s
+        cubic-bezier(.2,.8,.2,1),
         filter .6s;
     }
 
-    .categoria:hover .categoria-imagen img {
+    .categoria:hover
+    .categoria-imagen img {
       transform: scale(1.08);
 
       filter:
@@ -484,7 +500,8 @@
       align-items: center;
       justify-content: center;
 
-      border: 1px solid rgba(255,255,255,.25);
+      border: 1px solid
+        rgba(255,255,255,.25);
 
       border-radius: 50%;
 
@@ -495,55 +512,81 @@
       transition: .35s;
     }
 
-    .categoria:hover .categoria-flecha {
+    .categoria:hover
+    .categoria-flecha {
       opacity: 1;
 
-      background: white;
-      color: black;
+      background: #fff;
+
+      color: #000;
 
       transform: translateX(4px);
     }
 
-    .categoria-todos {
-      min-height: 80px;
 
+    /* =========================
+       BOTÓN TODOS
+    ========================= */
+
+    .categoria-todos {
       grid-column: 1 / -1;
+
+      width: fit-content;
+
+      min-height: auto;
+
+      margin: 5px auto 0;
+
+      padding: 11px 22px;
 
       display: flex;
 
       align-items: center;
       justify-content: center;
 
-      padding: 20px;
-
       background: #111;
 
-      border: 1px solid rgba(255,255,255,.1);
+      border: 1px solid
+        rgba(255,255,255,.14);
 
-      border-radius: 16px;
+      border-radius: 999px;
 
-      font-size: 13px;
+      font-size: 12px;
 
       font-weight: 800;
 
-      letter-spacing: 2px;
+      letter-spacing: 1.5px;
 
       text-transform: uppercase;
 
-      transition: .35s;
+      transition:
+        background .3s,
+        color .3s,
+        transform .3s,
+        border-color .3s;
     }
 
     .categoria-todos:hover {
-      background: #ffffff;
+      background: #fff;
 
-      color: #000000;
+      color: #000;
+
+      border-color: #fff;
 
       transform: translateY(-3px);
     }
 
+    .categoria-todos.activa {
+      background: #fff;
+
+      color: #000;
+
+      border-color: #fff;
+    }
+
 
     /* =========================
-       SEPARADOR B4X
+       SEPARADOR
     ========================= */
 
     .marca-separador {
@@ -553,15 +596,18 @@
 
       white-space: nowrap;
 
-      border-top: 1px solid rgba(255,255,255,.06);
+      border-top: 1px solid
+        rgba(255,255,255,.06);
 
-      border-bottom: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid
+        rgba(255,255,255,.06);
 
       background: #080808;
     }
 
     .marca-separador p {
-      font-size: clamp(60px, 13vw, 170px);
+      font-size:
+        clamp(60px, 13vw, 170px);
 
       line-height: .8;
 
@@ -569,7 +615,8 @@
 
       letter-spacing: 15px;
 
-      color: rgba(255,255,255,.035);
+      color:
+        rgba(255,255,255,.035);
 
       text-align: center;
     }
@@ -598,7 +645,8 @@
     .producto {
       background: #101010;
 
-      border: 1px solid rgba(255,255,255,.08);
+      border: 1px solid
+        rgba(255,255,255,.08);
 
       border-radius: 18px;
 
@@ -612,11 +660,13 @@
     .producto:hover {
       transform: translateY(-7px);
 
-      border-color: rgba(255,255,255,.25);
+      border-color:
+        rgba(255,255,255,.25);
     }
 
     .producto-imagen {
       width: 100%;
+
       height: 330px;
 
       background:
@@ -646,10 +696,12 @@
 
       display: block;
 
-      transition: transform .6s;
+      transition:
+        transform .6s;
     }
 
-    .producto:hover .producto-imagen img {
+    .producto:hover
+    .producto-imagen img {
       transform: scale(1.04);
     }
 
@@ -696,8 +748,9 @@
 
       padding: 11px 15px;
 
-      background: #ffffff;
-      color: #000000;
+      background: #fff;
+
+      color: #000;
 
       border-radius: 999px;
 
@@ -760,11 +813,13 @@
       transform:
         translate(-50%, -50%);
 
-      font-size: clamp(150px, 30vw, 400px);
+      font-size:
+        clamp(150px, 30vw, 400px);
 
       font-weight: 900;
 
-      color: rgba(255,255,255,.025);
+      color:
+        rgba(255,255,255,.025);
 
       pointer-events: none;
     }
@@ -780,7 +835,8 @@
     }
 
     .sobre h2 {
-      font-size: clamp(42px, 7vw, 75px);
+      font-size:
+        clamp(42px, 7vw, 75px);
 
       margin-bottom: 30px;
     }
@@ -803,7 +859,8 @@
 
       background: #111;
 
-      border-top: 1px solid rgba(255,255,255,.06);
+      border-top: 1px solid
+        rgba(255,255,255,.06);
     }
 
     .contacto-datos {
@@ -816,7 +873,8 @@
       margin: 10px;
     }
 
-    .contacto .boton-principal {
+    .contacto
+    .boton-principal {
       margin-top: 10px;
     }
 
@@ -830,7 +888,8 @@
 
       text-align: center;
 
-      border-top: 1px solid rgba(255,255,255,.07);
+      border-top: 1px solid
+        rgba(255,255,255,.07);
 
       background: #060606;
     }
@@ -881,13 +940,15 @@
       }
 
       .hero {
-        min-height: calc(100vh - 70px);
+        min-height:
+          calc(100vh - 70px);
 
         padding: 70px 20px;
       }
 
       .hero h1 {
-        font-size: clamp(70px, 22vw, 130px);
+        font-size:
+          clamp(70px, 22vw, 130px);
 
         letter-spacing: 9px;
 
@@ -1202,6 +1263,10 @@
 <script>
 
 
+/* =========================
+   SUPABASE
+========================= */
+
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
 
@@ -1214,7 +1279,7 @@ let todosLosProductos = [];
 
 
 /* =========================
-   CATEGORÍAS
+   CARGAR CATEGORÍAS
 ========================= */
 
 async function cargarCategorias() {
@@ -1264,7 +1329,9 @@ async function cargarCategorias() {
     contenedor.innerHTML = "";
 
 
-    /* BOTÓN TODOS */
+    /* =====================
+       TODOS
+    ===================== */
 
     const botonTodos =
       document.createElement(
@@ -1300,7 +1367,9 @@ async function cargarCategorias() {
     );
 
 
-    /* CATEGORÍAS */
+    /* =====================
+       CATEGORÍAS
+    ===================== */
 
     categorias.forEach(
       (categoria, indice) => {
@@ -1459,7 +1528,7 @@ async function cargarCategorias() {
 
 
 /* =========================
-   PRODUCTOS
+   CARGAR PRODUCTOS
 ========================= */
 
 async function cargarProductos() {
@@ -1519,12 +1588,13 @@ async function cargarProductos() {
     );
 
 
-    contenedor.innerHTML =
-      `
-        <p class="sin-productos">
-          ❌ No se pudieron cargar los productos.
-        </p>
-      `;
+    contenedor.innerHTML = `
+
+      <p class="sin-productos">
+        ❌ No se pudieron cargar los productos.
+      </p>
+
+    `;
 
   }
 
@@ -1554,12 +1624,13 @@ function mostrarProductos(
     productos.length === 0
   ) {
 
-    contenedor.innerHTML =
-      `
-        <p class="sin-productos">
-          No hay productos en esta categoría.
-        </p>
-      `;
+    contenedor.innerHTML = `
+
+      <p class="sin-productos">
+        No hay productos en esta categoría.
+      </p>
+
+    `;
 
     return;
 
