@@ -7,7 +7,6 @@
   <title>Administrador | B4X</title>
 
   <style>
-
     * {
       box-sizing: border-box;
       margin: 0;
@@ -94,10 +93,6 @@
       opacity: 0.85;
     }
 
-    .boton-categoria {
-      background: #ffffff;
-    }
-
     #mensajeCategoria,
     #mensaje {
       margin-top: 15px;
@@ -112,16 +107,12 @@
       color: #aaa;
       text-decoration: none;
     }
-
   </style>
 </head>
 
-
 <body>
 
-
 <div class="contenedor">
-
 
   <h1>Panel de Administración B4X</h1>
 
@@ -142,32 +133,36 @@
       Crea una nueva categoría para tus productos.
     </p>
 
-
     <label>
       Nombre de la categoría
     </label>
-
 
     <input
       id="nuevaCategoria"
       type="text"
       placeholder="Ej: Vapers">
 
+    <label>
+      Emoji de la categoría
+    </label>
+
+    <input
+      id="emojiCategoria"
+      type="text"
+      placeholder="Ej: 💨"
+      maxlength="10">
 
     <button
       type="button"
-      class="boton-categoria"
       onclick="agregarCategoria()">
 
       ➕ Agregar categoría
 
     </button>
 
-
     <div id="mensajeCategoria"></div>
 
   </div>
-
 
 
   <!-- =========================
@@ -182,43 +177,35 @@
       Agrega un nuevo producto a tu tienda.
     </p>
 
-
     <label>
       Nombre del producto
     </label>
-
 
     <input
       id="nombre"
       type="text"
       placeholder="Ej: Gomitas B4X">
 
-
     <label>
       Descripción
     </label>
-
 
     <textarea
       id="descripcion"
       placeholder="Descripción del producto"></textarea>
 
-
     <label>
       Precio
     </label>
-
 
     <input
       id="precio"
       type="number"
       placeholder="2000">
 
-
     <label>
       Categoría
     </label>
-
 
     <select id="categoria">
 
@@ -228,17 +215,14 @@
 
     </select>
 
-
     <label>
       Imagen
     </label>
-
 
     <input
       id="imagen"
       type="file"
       accept="image/*">
-
 
     <button
       type="button"
@@ -248,119 +232,88 @@
 
     </button>
 
-
     <div id="mensaje"></div>
 
   </div>
-
 
 
   <a class="volver" href="index.html">
     ← Volver a la tienda
   </a>
 
-
 </div>
 
 
-
 <script>
-
 
 /* =========================
    SUPABASE
 ========================= */
 
-
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
 
-
 const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
-
 
 
 /* =========================
    CARGAR CATEGORÍAS
 ========================= */
 
-
 async function cargarCategorias() {
 
   const select =
     document.getElementById("categoria");
 
-
   try {
 
-    const respuesta =
-      await fetch(
+    const respuesta = await fetch(
 
-        SUPABASE_URL +
-        "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
+      SUPABASE_URL +
+      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
 
-        {
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY
-
-          }
-
+      {
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
         }
+      }
 
-      );
-
+    );
 
     if (!respuesta.ok) {
-
-      throw new Error(
-        await respuesta.text()
-      );
-
+      throw new Error(await respuesta.text());
     }
-
 
     const categorias =
       await respuesta.json();
 
-
     select.innerHTML =
       '<option value="">Selecciona una categoría</option>';
-
 
     categorias.forEach(categoria => {
 
       const opcion =
         document.createElement("option");
 
-
       opcion.value =
         categoria.Nombre;
 
-
       opcion.textContent =
+        (categoria.Emoji || "📦") +
+        " " +
         categoria.Nombre;
-
 
       select.appendChild(opcion);
 
     });
 
-
   }
-
 
   catch (error) {
 
     console.error(error);
-
 
     select.innerHTML =
       '<option value="">Error al cargar categorías</option>';
@@ -370,24 +323,26 @@ async function cargarCategorias() {
 }
 
 
-
 /* =========================
    AGREGAR CATEGORÍA
 ========================= */
-
 
 async function agregarCategoria() {
 
   const input =
     document.getElementById("nuevaCategoria");
 
+  const inputEmoji =
+    document.getElementById("emojiCategoria");
 
   const mensaje =
     document.getElementById("mensajeCategoria");
 
-
   const nombre =
     input.value.trim();
+
+  const emoji =
+    inputEmoji.value.trim();
 
 
   if (!nombre) {
@@ -400,12 +355,21 @@ async function agregarCategoria() {
   }
 
 
+  if (!emoji) {
+
+    mensaje.textContent =
+      "⚠️ Escribe un emoji para la categoría.";
+
+    return;
+
+  }
+
+
   mensaje.textContent =
     "Creando categoría...";
 
 
   try {
-
 
     const respuesta =
       await fetch(
@@ -414,34 +378,21 @@ async function agregarCategoria() {
         "/rest/v1/CATEGOR%C3%8DAS",
 
         {
-
           method: "POST",
 
           headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
           },
 
-          body:
-            JSON.stringify({
+          body: JSON.stringify({
 
-              Nombre:
-                nombre
+            Nombre: nombre,
+            Emoji: emoji
 
-            })
-
+          })
         }
 
       );
@@ -451,7 +402,6 @@ async function agregarCategoria() {
 
       const error =
         await respuesta.text();
-
 
       throw new Error(error);
 
@@ -463,12 +413,10 @@ async function agregarCategoria() {
 
 
     input.value = "";
+    inputEmoji.value = "";
 
-
-    /* Actualizar selector */
 
     await cargarCategorias();
-
 
   }
 
@@ -476,7 +424,6 @@ async function agregarCategoria() {
   catch (error) {
 
     console.error(error);
-
 
     mensaje.textContent =
       "❌ Error: " +
@@ -487,50 +434,29 @@ async function agregarCategoria() {
 }
 
 
-
 /* =========================
    GUARDAR PRODUCTO
 ========================= */
 
-
 async function guardarProducto() {
 
-
   const nombre =
-    document
-      .getElementById("nombre")
-      .value
-      .trim();
-
+    document.getElementById("nombre").value.trim();
 
   const descripcion =
-    document
-      .getElementById("descripcion")
-      .value
-      .trim();
-
+    document.getElementById("descripcion").value.trim();
 
   const precio =
-    document
-      .getElementById("precio")
-      .value;
-
+    document.getElementById("precio").value;
 
   const categoria =
-    document
-      .getElementById("categoria")
-      .value;
-
+    document.getElementById("categoria").value;
 
   const archivoImagen =
-    document
-      .getElementById("imagen")
-      .files[0];
-
+    document.getElementById("imagen").files[0];
 
   const mensaje =
     document.getElementById("mensaje");
-
 
 
   if (!nombre || !precio || !categoria) {
@@ -543,7 +469,6 @@ async function guardarProducto() {
   }
 
 
-
   if (!archivoImagen) {
 
     mensaje.textContent =
@@ -554,25 +479,16 @@ async function guardarProducto() {
   }
 
 
-
   mensaje.textContent =
     "Guardando producto...";
 
 
-
   try {
-
-
-    /* =========================
-       SUBIR IMAGEN
-    ========================= */
-
 
     const nombreArchivo =
       Date.now() +
       "_" +
       archivoImagen.name;
-
 
     const rutaImagen =
       "imagenes/" +
@@ -587,26 +503,15 @@ async function guardarProducto() {
         rutaImagen,
 
         {
-
           method: "POST",
 
           headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              archivoImagen.type
-
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": archivoImagen.type
           },
 
-          body:
-            archivoImagen
-
+          body: archivoImagen
         }
 
       );
@@ -617,36 +522,18 @@ async function guardarProducto() {
       const error =
         await subida.text();
 
-
       throw new Error(
-
         "No se pudo subir la imagen: " +
         error
-
       );
 
     }
 
 
-
-    /* =========================
-       URL IMAGEN
-    ========================== */
-
-
     const imagen =
-
       SUPABASE_URL +
-
       "/storage/v1/object/public/productos/" +
-
       rutaImagen;
-
-
-
-    /* =========================
-       GUARDAR PRODUCTO
-    ========================= */
 
 
     const respuesta =
@@ -656,51 +543,31 @@ async function guardarProducto() {
         "/rest/v1/PRODUCTOS",
 
         {
-
           method: "POST",
 
           headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-
+            "apikey": SUPABASE_KEY,
+            "Authorization": "Bearer " + SUPABASE_KEY,
+            "Content-Type": "application/json",
+            "Prefer": "return=minimal"
           },
 
+          body: JSON.stringify({
 
-          body:
-            JSON.stringify({
+            Nombre: nombre,
 
-              Nombre:
-                nombre,
+            Descripcion: descripcion,
 
-              Descripcion:
-                descripcion,
+            Precio: Number(precio),
 
-              Precio:
-                Number(precio),
+            Categoria: categoria,
 
-              Categoria:
-                categoria,
+            Imagen: imagen
 
-              Imagen:
-                imagen
-
-            })
-
+          })
         }
 
       );
-
 
 
     if (!respuesta.ok) {
@@ -708,40 +575,19 @@ async function guardarProducto() {
       const error =
         await respuesta.text();
 
-
       throw new Error(error);
 
     }
-
 
 
     mensaje.textContent =
       "✅ Producto guardado correctamente.";
 
 
-
-    /* Limpiar formulario */
-
-
-    document
-      .getElementById("nombre")
-      .value = "";
-
-
-    document
-      .getElementById("descripcion")
-      .value = "";
-
-
-    document
-      .getElementById("precio")
-      .value = "";
-
-
-    document
-      .getElementById("imagen")
-      .value = "";
-
+    document.getElementById("nombre").value = "";
+    document.getElementById("descripcion").value = "";
+    document.getElementById("precio").value = "";
+    document.getElementById("imagen").value = "";
 
   }
 
@@ -749,7 +595,6 @@ async function guardarProducto() {
   catch (error) {
 
     console.error(error);
-
 
     mensaje.textContent =
       "❌ Error: " +
@@ -760,17 +605,13 @@ async function guardarProducto() {
 }
 
 
-
 /* =========================
    INICIAR
 ========================= */
 
-
 cargarCategorias();
 
-
 </script>
-
 
 </body>
 </html>
