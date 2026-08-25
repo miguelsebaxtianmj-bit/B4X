@@ -5,9 +5,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Administrador | B4X</title>
+  <title>B4X | Gomitas Premium</title>
+
+  <meta name="description" content="B4X - Gomitas y snacks premium.">
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -15,275 +18,580 @@
     }
 
     body {
-      font-family: Arial, sans-serif;
+      font-family: Arial, Helvetica, sans-serif;
       background: #0b0b0b;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(11, 11, 11, 0.95);
+      border-bottom: 1px solid #2a2a2a;
+      padding: 18px 7%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      font-size: 28px;
+      font-weight: 900;
+      letter-spacing: 4px;
+    }
+
+    nav a {
       color: white;
-      padding: 25px;
-    }
-
-    .contenedor {
-      max-width: 700px;
-      margin: auto;
-    }
-
-    h1 {
-      margin-bottom: 8px;
-    }
-
-    .subtitulo {
-      color: #999;
-      margin-bottom: 25px;
-    }
-
-    .panel {
-      background: #151515;
-      border: 1px solid #292929;
-      border-radius: 16px;
-      padding: 25px;
-      margin-bottom: 20px;
-    }
-
-    h2 {
-      margin-bottom: 8px;
-      font-size: 22px;
-    }
-
-    .descripcion-panel {
-      color: #999;
-      margin-bottom: 20px;
+      text-decoration: none;
+      margin-left: 25px;
       font-size: 14px;
     }
 
-    label {
-      display: block;
-      margin: 18px 0 7px;
-      color: #ccc;
+    nav a:hover {
+      opacity: 0.6;
     }
 
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 13px;
-      border-radius: 8px;
-      border: 1px solid #333;
-      background: #0b0b0b;
-      color: white;
-      font-size: 15px;
+    .hero {
+      min-height: 85vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 20px;
+
+      background:
+        radial-gradient(circle at center, #292929 0%, #0b0b0b 55%);
     }
 
-    textarea {
-      min-height: 100px;
-      resize: vertical;
+    .hero-content {
+      max-width: 800px;
     }
 
-    button {
-      width: 100%;
-      margin-top: 20px;
-      padding: 14px;
-      border: none;
-      border-radius: 8px;
+    .hero small {
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #cfcfcf;
+    }
+
+    .hero h1 {
+      font-size: clamp(55px, 12vw, 120px);
+      letter-spacing: 15px;
+      margin: 15px 0;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: auto;
+      color: #c8c8c8;
+      font-size: 18px;
+    }
+
+    .boton {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 14px 28px;
       background: white;
       color: black;
+      text-decoration: none;
+      border-radius: 30px;
       font-weight: bold;
-      font-size: 16px;
-      cursor: pointer;
+      transition: 0.3s;
     }
 
-    button:hover {
+    .boton:hover {
+      transform: translateY(-3px);
       opacity: 0.85;
     }
 
-    #mensajeCategoria,
-    #mensaje {
-      margin-top: 15px;
+    section {
+      padding: 80px 7%;
+    }
+
+    .titulo {
       text-align: center;
+      margin-bottom: 45px;
+    }
+
+    .titulo h2 {
+      font-size: 38px;
+      margin-bottom: 10px;
+    }
+
+    .titulo p {
+      color: #aaa;
+    }
+
+
+    /* =========================
+       CATEGORÍAS
+    ========================= */
+
+    .categorias {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .categoria {
+      min-height: 180px;
+
+      border: 1px solid #292929;
+      border-radius: 18px;
+
+      padding: 30px;
+
+      display: flex;
+      align-items: end;
+
+      background:
+        linear-gradient(
+          145deg,
+          #1b1b1b,
+          #0d0d0d
+        );
+
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+
+      transition: 0.3s;
+      cursor: pointer;
+
+      color: white;
+      text-align: left;
+      font-family: inherit;
+
+      overflow: hidden;
+
+      position: relative;
+    }
+
+    .categoria:hover {
+      transform: translateY(-5px);
+      border-color: #777;
+    }
+
+    .categoria.activa {
+      border-color: white;
+      transform: translateY(-5px);
+    }
+
+    .categoria h3 {
+      font-size: 22px;
+
+      text-shadow:
+        0 2px 8px rgba(0,0,0,0.9);
+    }
+
+    .categoria-todos {
+      grid-column: 1 / -1;
+
+      min-height: auto;
+
+      padding: 15px;
+
+      justify-content: center;
+      align-items: center;
+
+      text-align: center;
+    }
+
+
+    /* =========================
+       PRODUCTOS
+    ========================= */
+
+    .productos {
+      display: grid;
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(240px, 1fr)
+      );
+      gap: 30px;
+    }
+
+    .producto {
+      background: #111111;
+
+      border: 1px solid #292929;
+
+      border-radius: 18px;
+
+      overflow: hidden;
+
+      transition: 0.3s;
+    }
+
+    .producto:hover {
+      transform: translateY(-6px);
+    }
+
+    .producto-imagen {
+      width: 100%;
+      height: 260px;
+
+      background: #202020;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #777;
+      font-size: 14px;
+    }
+
+    .producto-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .producto-info {
+      padding: 24px;
+    }
+
+    .producto h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .producto p {
+      color: #aaa;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .precio {
+      font-size: 22px;
       font-weight: bold;
     }
 
-    .volver {
+    .whatsapp {
       display: block;
-      margin-top: 20px;
+
       text-align: center;
-      color: #aaa;
+
+      margin-top: 18px;
+
+      padding: 12px;
+
+      background: #25D366;
+
+      color: white;
+
       text-decoration: none;
+
+      border-radius: 8px;
+
+      font-weight: bold;
     }
 
-    .vista-previa {
-      width: 100%;
-      height: 180px;
-      margin-top: 15px;
-      border-radius: 12px;
-      object-fit: cover;
-      display: none;
-      border: 1px solid #333;
+    .sin-productos {
+      grid-column: 1 / -1;
+
+      text-align: center;
+
+      color: #888;
+
+      padding: 40px;
     }
+
+
+    /* =========================
+       SOBRE
+    ========================= */
+
+    .sobre {
+      max-width: 800px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .sobre p {
+      color: #bdbdbd;
+      font-size: 17px;
+    }
+
+
+    /* =========================
+       CONTACTO
+    ========================= */
+
+    .contacto {
+      text-align: center;
+      background: #101010;
+    }
+
+    .contacto p {
+      color: #aaa;
+      margin: 8px;
+    }
+
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+      text-align: center;
+
+      padding: 30px;
+
+      border-top: 1px solid #292929;
+
+      color: #777;
+
+      font-size: 13px;
+    }
+
+
+    /* =========================
+       CELULAR
+    ========================= */
+
+    @media (max-width: 700px) {
+
+      header {
+        padding: 15px 20px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      section {
+        padding: 60px 20px;
+      }
+
+      .hero h1 {
+        letter-spacing: 8px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+    }
+
   </style>
 </head>
 
+
 <body>
 
-<div class="contenedor">
 
-  <h1>Panel de Administración B4X</h1>
+  <!-- =========================
+       ENCABEZADO
+  ========================= -->
 
-  <p class="subtitulo">
-    Administra los productos y categorías de tu tienda.
-  </p>
+  <header>
+
+    <div class="logo">
+      B4X
+    </div>
+
+    <nav>
+
+      <a href="#inicio">
+        Inicio
+      </a>
+
+      <a href="#categorias">
+        Categorías
+      </a>
+
+      <a href="#productos">
+        Productos
+      </a>
+
+      <a href="#contacto">
+        Contacto
+      </a>
+
+    </nav>
+
+  </header>
+
+
+  <!-- =========================
+       PORTADA
+  ========================= -->
+
+  <section
+    class="hero"
+    id="inicio">
+
+    <div class="hero-content">
+
+      <small>
+        Gomitas & Snacks Premium
+      </small>
+
+      <h1>
+        B4X
+      </h1>
+
+      <p>
+        Una experiencia diferente en cada bocado.
+        Descubre nuestra selección de gomitas y snacks.
+      </p>
+
+      <a
+        class="boton"
+        href="https://wa.me/573237647194"
+        target="_blank">
+
+        Comprar por WhatsApp
+
+      </a>
+
+    </div>
+
+  </section>
 
 
   <!-- =========================
        CATEGORÍAS
-  ========================== -->
+  ========================= -->
 
-  <div class="panel">
+  <section id="categorias">
 
-    <h2>📂 Agregar categoría</h2>
+    <div class="titulo">
 
-    <p class="descripcion-panel">
-      Crea una nueva categoría para tus productos.
-    </p>
+      <h2>
+        Categorías
+      </h2>
 
+      <p>
+        Selecciona una categoría para ver sus productos.
+      </p>
 
-    <label>
-      Nombre de la categoría
-    </label>
-
-    <input
-      id="nuevaCategoria"
-      type="text"
-      placeholder="Ej: Combos">
+    </div>
 
 
-    <label>
-      Emoji de la categoría
-    </label>
+    <div
+      class="categorias"
+      id="listaCategorias">
 
-    <input
-      id="emojiCategoria"
-      type="text"
-      placeholder="Ej: 🎁"
-      maxlength="10">
+    </div>
 
-
-    <label>
-      Imagen de la categoría
-    </label>
-
-    <input
-      id="imagenCategoria"
-      type="file"
-      accept="image/*"
-      onchange="previsualizarCategoria()">
-
-
-    <img
-      id="vistaPreviaCategoria"
-      class="vista-previa"
-      alt="Vista previa">
-
-
-    <button
-      type="button"
-      onclick="agregarCategoria()">
-
-      ➕ Agregar categoría
-
-    </button>
-
-
-    <div id="mensajeCategoria"></div>
-
-  </div>
+  </section>
 
 
   <!-- =========================
        PRODUCTOS
-  ========================== -->
+  ========================= -->
 
-  <div class="panel">
+  <section id="productos">
 
-    <h2>🛍️ Agregar producto</h2>
+    <div class="titulo">
 
-    <p class="descripcion-panel">
-      Agrega un nuevo producto a tu tienda.
+      <h2>
+        Nuestros productos
+      </h2>
+
+      <p id="textoCategoria">
+        Mostrando todos los productos.
+      </p>
+
+    </div>
+
+
+    <div class="productos"></div>
+
+  </section>
+
+
+  <!-- =========================
+       SOBRE NOSOTROS
+  ========================= -->
+
+  <section>
+
+    <div class="sobre">
+
+      <div class="titulo">
+
+        <h2>
+          Sobre B4X
+        </h2>
+
+      </div>
+
+      <p>
+
+        En B4X buscamos convertir cada compra
+        en una experiencia.
+
+        Seleccionamos nuestros productos pensando
+        en sabor, calidad y presentación.
+
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =========================
+       CONTACTO
+  ========================= -->
+
+  <section
+    class="contacto"
+    id="contacto">
+
+    <div class="titulo">
+
+      <h2>
+        Contacto
+      </h2>
+
+      <p>
+        ¿Quieres hacer un pedido?
+      </p>
+
+    </div>
+
+    <p>
+      📲 WhatsApp: 323 764 7194
     </p>
 
+    <p>
+      📍 Dirección: Próximamente
+    </p>
 
-    <label>
-      Nombre del producto
-    </label>
+    <p>
+      📸 Instagram: Próximamente
+    </p>
 
-    <input
-      id="nombre"
-      type="text"
-      placeholder="Ej: Gomitas B4X">
+    <a
+      class="boton"
+      href="https://wa.me/573237647194"
+      target="_blank">
 
+      Hablar por WhatsApp
 
-    <label>
-      Descripción
-    </label>
+    </a>
 
-    <textarea
-      id="descripcion"
-      placeholder="Descripción del producto"></textarea>
-
-
-    <label>
-      Precio
-    </label>
-
-    <input
-      id="precio"
-      type="number"
-      placeholder="2000">
+  </section>
 
 
-    <label>
-      Categoría
-    </label>
+  <!-- =========================
+       FOOTER
+  ========================= -->
 
-    <select id="categoria">
+  <footer>
 
-      <option value="">
-        Cargando categorías...
-      </option>
+    © 2026 B4X. Todos los derechos reservados.
 
-    </select>
-
-
-    <label>
-      Imagen
-    </label>
-
-    <input
-      id="imagen"
-      type="file"
-      accept="image/*">
-
-
-    <button
-      type="button"
-      onclick="guardarProducto()">
-
-      Guardar producto
-
-    </button>
-
-
-    <div id="mensaje"></div>
-
-  </div>
-
-
-  <a class="volver" href="index.html">
-    ← Volver a la tienda
-  </a>
-
-</div>
+  </footer>
 
 
 <script>
+
 
 /* =========================
    SUPABASE
@@ -296,41 +604,7 @@ const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
 
 
-/* =========================
-   PREVISUALIZAR IMAGEN
-========================= */
-
-function previsualizarCategoria() {
-
-  const archivo =
-    document
-      .getElementById("imagenCategoria")
-      .files[0];
-
-  const vista =
-    document.getElementById(
-      "vistaPreviaCategoria"
-    );
-
-
-  if (!archivo) {
-
-    vista.style.display = "none";
-
-    return;
-
-  }
-
-
-  const url =
-    URL.createObjectURL(archivo);
-
-
-  vista.src = url;
-
-  vista.style.display = "block";
-
-}
+let todosLosProductos = [];
 
 
 /* =========================
@@ -339,8 +613,10 @@ function previsualizarCategoria() {
 
 async function cargarCategorias() {
 
-  const select =
-    document.getElementById("categoria");
+  const contenedor =
+    document.getElementById(
+      "listaCategorias"
+    );
 
 
   try {
@@ -382,29 +658,107 @@ async function cargarCategorias() {
       await respuesta.json();
 
 
-    select.innerHTML =
-      '<option value="">Selecciona una categoría</option>';
+    contenedor.innerHTML = "";
 
+
+    /* =========================
+       TODOS LOS PRODUCTOS
+    ========================= */
+
+    const botonTodos =
+      document.createElement(
+        "button"
+      );
+
+
+    botonTodos.className =
+      "categoria categoria-todos activa";
+
+
+    botonTodos.innerHTML =
+      "<h3>✨ Todos los productos</h3>";
+
+
+    botonTodos.onclick =
+      function() {
+
+        filtrarCategoria(
+          "TODOS",
+          botonTodos
+        );
+
+      };
+
+
+    contenedor.appendChild(
+      botonTodos
+    );
+
+
+    /* =========================
+       CATEGORÍAS
+    ========================= */
 
     categorias.forEach(
       categoria => {
 
-        const opcion =
-          document.createElement("option");
+        const boton =
+          document.createElement(
+            "button"
+          );
 
 
-        opcion.value =
-          categoria.Nombre;
+        boton.className =
+          "categoria";
 
 
-        opcion.textContent =
-          (categoria["IDENTIFICACIÓN"] || "📦") +
-          " " +
-          categoria.Nombre;
+        /* =========================
+           EMOJI
+        ========================= */
+
+        const emoji =
+          categoria.identificacion ||
+          "🍬";
 
 
-        select.appendChild(
-          opcion
+        /* =========================
+           IMAGEN
+        ========================= */
+
+        if (categoria.Imagen) {
+
+          boton.style.backgroundImage =
+
+            `linear-gradient(
+              rgba(0,0,0,0.35),
+              rgba(0,0,0,0.75)
+            ),
+            url("${categoria.Imagen}")`;
+
+        }
+
+
+        boton.innerHTML =
+
+          `<h3>
+            ${emoji}
+            ${categoria.Nombre}
+          </h3>`;
+
+
+        boton.onclick =
+          function() {
+
+            filtrarCategoria(
+              categoria.Nombre,
+              boton
+            );
+
+          };
+
+
+        contenedor.appendChild(
+          boton
         );
 
       }
@@ -418,8 +772,16 @@ async function cargarCategorias() {
     console.error(error);
 
 
-    select.innerHTML =
-      '<option value="">Error al cargar categorías</option>';
+    contenedor.innerHTML = `
+
+      <p class="sin-productos">
+
+        No se pudieron cargar
+        las categorías.
+
+      </p>
+
+    `;
 
   }
 
@@ -427,169 +789,26 @@ async function cargarCategorias() {
 
 
 /* =========================
-   AGREGAR CATEGORÍA
+   CARGAR PRODUCTOS
 ========================= */
 
-async function agregarCategoria() {
+async function cargarProductos() {
 
-  const input =
-    document.getElementById(
-      "nuevaCategoria"
+  const contenedor =
+    document.querySelector(
+      ".productos"
     );
-
-
-  const inputEmoji =
-    document.getElementById(
-      "emojiCategoria"
-    );
-
-
-  const archivoImagen =
-    document.getElementById(
-      "imagenCategoria"
-    ).files[0];
-
-
-  const mensaje =
-    document.getElementById(
-      "mensajeCategoria"
-    );
-
-
-  const nombre =
-    input.value.trim();
-
-
-  const emoji =
-    inputEmoji.value.trim();
-
-
-  if (!nombre) {
-
-    mensaje.textContent =
-      "⚠️ Escribe el nombre de la categoría.";
-
-    return;
-
-  }
-
-
-  if (!emoji) {
-
-    mensaje.textContent =
-      "⚠️ Escribe un emoji para la categoría.";
-
-    return;
-
-  }
-
-
-  if (!archivoImagen) {
-
-    mensaje.textContent =
-      "⚠️ Selecciona una imagen para la categoría.";
-
-    return;
-
-  }
-
-
-  mensaje.textContent =
-    "Subiendo imagen...";
 
 
   try {
-
-    /* =========================
-       SUBIR IMAGEN
-    ========================= */
-
-    const nombreArchivo =
-      "categoria_" +
-      Date.now() +
-      "_" +
-      archivoImagen.name;
-
-
-    const rutaImagen =
-      "categorias/" +
-      nombreArchivo;
-
-
-    const subida =
-      await fetch(
-
-        SUPABASE_URL +
-        "/storage/v1/object/productos/" +
-        rutaImagen,
-
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              archivoImagen.type
-
-          },
-
-          body:
-            archivoImagen
-
-        }
-
-      );
-
-
-    if (!subida.ok) {
-
-      const error =
-        await subida.text();
-
-
-      throw new Error(
-        "No se pudo subir la imagen: " +
-        error
-      );
-
-    }
-
-
-    /* =========================
-       URL DE LA IMAGEN
-    ========================= */
-
-    const imagen =
-      SUPABASE_URL +
-      "/storage/v1/object/public/productos/" +
-      rutaImagen;
-
-
-    mensaje.textContent =
-      "Guardando categoría...";
-
-
-    /* =========================
-       GUARDAR CATEGORÍA
-    ========================= */
 
     const respuesta =
       await fetch(
 
         SUPABASE_URL +
-        "/rest/v1/CATEGOR%C3%8DAS",
+        "/rest/v1/PRODUCTOS?select=*",
 
         {
-
-          method: "POST",
 
           headers: {
 
@@ -598,30 +817,9 @@ async function agregarCategoria() {
 
             "Authorization":
               "Bearer " +
-              SUPABASE_KEY,
+              SUPABASE_KEY
 
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-
-          },
-
-
-          body:
-            JSON.stringify({
-
-              Nombre:
-                nombre,
-
-              "IDENTIFICACIÓN":
-                emoji,
-
-              Imagen:
-                imagen
-
-            })
+          }
 
         }
 
@@ -630,50 +828,34 @@ async function agregarCategoria() {
 
     if (!respuesta.ok) {
 
-      const error =
-        await respuesta.text();
-
-
-      throw new Error(error);
+      throw new Error(
+        await respuesta.text()
+      );
 
     }
 
 
-    mensaje.textContent =
-      "✅ Categoría agregada correctamente.";
+    todosLosProductos =
+      await respuesta.json();
 
 
-    input.value = "";
+    mostrarProductos(
+      todosLosProductos
+    );
 
-    inputEmoji.value = "";
-
-    document
-      .getElementById(
-        "imagenCategoria"
-      )
-      .value = "";
-
-
-    document
-      .getElementById(
-        "vistaPreviaCategoria"
-      )
-      .style.display = "none";
-
-
-    await cargarCategorias();
 
   }
-
 
   catch (error) {
 
     console.error(error);
 
 
-    mensaje.textContent =
-      "❌ Error: " +
-      error.message;
+    contenedor.innerHTML =
+
+      "<p class='sin-productos'>" +
+      "No se pudieron cargar los productos." +
+      "</p>";
 
   }
 
@@ -681,239 +863,204 @@ async function agregarCategoria() {
 
 
 /* =========================
-   GUARDAR PRODUCTO
+   MOSTRAR PRODUCTOS
 ========================= */
 
-async function guardarProducto() {
+function mostrarProductos(
+  productos
+) {
 
-  const nombre =
-    document
-      .getElementById("nombre")
-      .value
-      .trim();
-
-
-  const descripcion =
-    document
-      .getElementById("descripcion")
-      .value
-      .trim();
-
-
-  const precio =
-    document
-      .getElementById("precio")
-      .value;
-
-
-  const categoria =
-    document
-      .getElementById("categoria")
-      .value;
-
-
-  const archivoImagen =
-    document
-      .getElementById("imagen")
-      .files[0];
-
-
-  const mensaje =
-    document.getElementById(
-      "mensaje"
+  const contenedor =
+    document.querySelector(
+      ".productos"
     );
 
 
-  if (!nombre || !precio || !categoria) {
-
-    mensaje.textContent =
-      "⚠️ Completa nombre, precio y categoría.";
-
-    return;
-
-  }
+  contenedor.innerHTML = "";
 
 
-  if (!archivoImagen) {
+  if (productos.length === 0) {
 
-    mensaje.textContent =
-      "⚠️ Selecciona una imagen.";
+    contenedor.innerHTML =
+
+      "<p class='sin-productos'>" +
+      "No hay productos en esta categoría." +
+      "</p>";
 
     return;
 
   }
 
 
-  mensaje.textContent =
-    "Guardando producto...";
+  productos.forEach(
+    producto => {
+
+      const tarjeta =
+        document.createElement(
+          "div"
+        );
 
 
-  try {
-
-    const nombreArchivo =
-      Date.now() +
-      "_" +
-      archivoImagen.name;
+      tarjeta.className =
+        "producto";
 
 
-    const rutaImagen =
-      "imagenes/" +
-      nombreArchivo;
+      tarjeta.innerHTML = `
+
+        <div class="producto-imagen">
+
+          ${
+            producto.Imagen
+
+              ? `
+
+                <img
+                  src="${producto.Imagen}"
+                  alt="${producto.Nombre}">
+
+                `
+
+              : "Imagen del producto"
+
+          }
+
+        </div>
 
 
-    const subida =
-      await fetch(
+        <div class="producto-info">
 
-        SUPABASE_URL +
-        "/storage/v1/object/productos/" +
-        rutaImagen,
-
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              archivoImagen.type
-
-          },
-
-          body:
-            archivoImagen
-
-        }
-
-      );
+          <h3>
+            ${producto.Nombre}
+          </h3>
 
 
-    if (!subida.ok) {
+          <p>
+            ${producto.Descripcion || ""}
+          </p>
 
-      const error =
-        await subida.text();
+
+          <div class="precio">
+
+            $${Number(
+              producto.Precio
+            ).toLocaleString("es-CO")}
+
+          </div>
 
 
-      throw new Error(
-        "No se pudo subir la imagen: " +
-        error
+          <a
+            class="whatsapp"
+
+            href="https://wa.me/573237647194?text=${encodeURIComponent(
+
+              "Hola, quiero pedir " +
+              producto.Nombre
+
+            )}"
+
+            target="_blank">
+
+            Pedir por WhatsApp
+
+          </a>
+
+        </div>
+
+      `;
+
+
+      contenedor.appendChild(
+        tarjeta
       );
 
     }
+  );
+
+}
 
 
-    const imagen =
-      SUPABASE_URL +
-      "/storage/v1/object/public/productos/" +
-      rutaImagen;
+/* =========================
+   FILTRAR CATEGORÍA
+========================= */
+
+function filtrarCategoria(
+  categoria,
+  boton
+) {
 
 
-    const respuesta =
-      await fetch(
+  document
+    .querySelectorAll(
+      ".categoria"
+    )
+    .forEach(
+      elemento => {
 
-        SUPABASE_URL +
-        "/rest/v1/PRODUCTOS",
+        elemento.classList.remove(
+          "activa"
+        );
 
-        {
-
-          method: "POST",
-
-          headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json",
-
-            "Prefer":
-              "return=minimal"
-
-          },
+      }
+    );
 
 
-          body:
-            JSON.stringify({
+  boton.classList.add(
+    "activa"
+  );
 
-              Nombre:
-                nombre,
 
-              Descripcion:
-                descripcion,
+  const texto =
+    document.getElementById(
+      "textoCategoria"
+    );
 
-              Precio:
-                Number(precio),
 
-              Categoria:
-                categoria,
+  if (categoria === "TODOS") {
 
-              Imagen:
-                imagen
+    mostrarProductos(
+      todosLosProductos
+    );
 
-            })
 
-        }
+    texto.textContent =
+      "Mostrando todos los productos.";
+
+  }
+
+  else {
+
+    const productosFiltrados =
+      todosLosProductos.filter(
+
+        producto =>
+
+          producto.Categoria ===
+          categoria
 
       );
 
 
-    if (!respuesta.ok) {
-
-      const error =
-        await respuesta.text();
-
-
-      throw new Error(error);
-
-    }
+    mostrarProductos(
+      productosFiltrados
+    );
 
 
-    mensaje.textContent =
-      "✅ Producto guardado correctamente.";
-
-
-    document
-      .getElementById("nombre")
-      .value = "";
-
-
-    document
-      .getElementById("descripcion")
-      .value = "";
-
-
-    document
-      .getElementById("precio")
-      .value = "";
-
-
-    document
-      .getElementById("imagen")
-      .value = "";
+    texto.textContent =
+      "Categoría: " +
+      categoria;
 
   }
 
 
-  catch (error) {
+  document
+    .getElementById(
+      "productos"
+    )
+    .scrollIntoView({
 
-    console.error(error);
+      behavior: "smooth"
 
-
-    mensaje.textContent =
-      "❌ Error: " +
-      error.message;
-
-  }
+    });
 
 }
 
@@ -923,6 +1070,8 @@ async function guardarProducto() {
 ========================= */
 
 cargarCategorias();
+
+cargarProductos();
 
 </script>
 
