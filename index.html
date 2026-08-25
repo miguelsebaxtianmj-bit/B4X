@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -134,39 +135,27 @@
       display: grid;
       grid-template-columns:
         repeat(auto-fit, minmax(220px, 1fr));
-
       gap: 20px;
     }
 
     .categoria {
-      min-height: 180px;
+      position: relative;
+      min-height: 230px;
 
       border: 1px solid #292929;
       border-radius: 18px;
 
-      padding: 30px;
+      padding: 0;
+      overflow: hidden;
 
-      display: flex;
-      align-items: end;
-
-      background:
-        linear-gradient(
-          145deg,
-          #1b1b1b,
-          #0d0d0d
-        );
+      background: #151515;
 
       transition: 0.3s;
-
       cursor: pointer;
 
       color: white;
-
       text-align: left;
-
       font-family: inherit;
-
-      border-style: solid;
     }
 
     .categoria:hover {
@@ -179,21 +168,98 @@
       transform: translateY(-5px);
     }
 
+    /* IMAGEN DE CATEGORÍA */
+
+    .categoria-imagen {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      opacity: 0.72;
+
+      transition: 0.3s;
+    }
+
+    .categoria:hover .categoria-imagen {
+      transform: scale(1.05);
+      opacity: 0.85;
+    }
+
+    /* OSCURECER IMAGEN */
+
+    .categoria-overlay {
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          to top,
+          rgba(0,0,0,0.9),
+          rgba(0,0,0,0.15)
+        );
+    }
+
+    /* INFORMACIÓN */
+
+    .categoria-contenido {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 20px;
+
+      z-index: 2;
+    }
+
+    .categoria-emoji {
+      font-size: 32px;
+      margin-bottom: 5px;
+      display: block;
+    }
+
     .categoria h3 {
       font-size: 22px;
+      text-shadow: 0 2px 8px black;
     }
+
+    /* CATEGORÍA SIN IMAGEN */
+
+    .categoria.sin-imagen {
+      background:
+        linear-gradient(
+          145deg,
+          #1b1b1b,
+          #0d0d0d
+        );
+    }
+
+    /* TODOS */
 
     .categoria-todos {
       grid-column: 1 / -1;
 
       min-height: auto;
+      padding: 16px;
 
-      padding: 15px;
-
+      display: flex;
       justify-content: center;
       align-items: center;
 
       text-align: center;
+
+      background:
+        linear-gradient(
+          145deg,
+          #1b1b1b,
+          #0d0d0d
+        );
+    }
+
+    .categoria-todos h3 {
+      text-shadow: none;
     }
 
     /* =========================
@@ -227,27 +293,21 @@
 
     .producto-imagen {
       width: 100%;
-
       height: 260px;
 
       background: #202020;
 
       display: flex;
-
       align-items: center;
-
       justify-content: center;
 
       color: #777;
-
       font-size: 14px;
     }
 
     .producto-imagen img {
       width: 100%;
-
       height: 100%;
-
       object-fit: cover;
     }
 
@@ -257,39 +317,31 @@
 
     .producto h3 {
       font-size: 22px;
-
       margin-bottom: 8px;
     }
 
     .producto p {
       color: #aaa;
-
       font-size: 14px;
-
       margin-bottom: 15px;
     }
 
     .precio {
       font-size: 22px;
-
       font-weight: bold;
     }
 
     .whatsapp {
       display: block;
-
       text-align: center;
 
       margin-top: 18px;
-
       padding: 12px;
 
       background: #25D366;
-
       color: white;
 
       text-decoration: none;
-
       border-radius: 8px;
 
       font-weight: bold;
@@ -311,15 +363,12 @@
 
     .sobre {
       max-width: 800px;
-
       margin: auto;
-
       text-align: center;
     }
 
     .sobre p {
       color: #bdbdbd;
-
       font-size: 17px;
     }
 
@@ -329,13 +378,11 @@
 
     .contacto {
       text-align: center;
-
       background: #101010;
     }
 
     .contacto p {
       color: #aaa;
-
       margin: 8px;
     }
 
@@ -345,13 +392,11 @@
 
     footer {
       text-align: center;
-
       padding: 30px;
 
       border-top: 1px solid #292929;
 
       color: #777;
-
       font-size: 13px;
     }
 
@@ -381,12 +426,17 @@
         font-size: 16px;
       }
 
+      .categoria {
+        min-height: 210px;
+      }
+
     }
 
   </style>
 </head>
 
 <body>
+
 
   <!-- =========================
        ENCABEZADO
@@ -400,21 +450,10 @@
 
     <nav>
 
-      <a href="#inicio">
-        Inicio
-      </a>
-
-      <a href="#categorias">
-        Categorías
-      </a>
-
-      <a href="#productos">
-        Productos
-      </a>
-
-      <a href="#contacto">
-        Contacto
-      </a>
+      <a href="#inicio">Inicio</a>
+      <a href="#categorias">Categorías</a>
+      <a href="#productos">Productos</a>
+      <a href="#contacto">Contacto</a>
 
     </nav>
 
@@ -526,13 +565,11 @@
       </div>
 
       <p>
-
         En B4X buscamos convertir cada compra
         en una experiencia.
 
         Seleccionamos nuestros productos pensando
         en sabor, calidad y presentación.
-
       </p>
 
     </div>
@@ -617,6 +654,32 @@ let todosLosProductos = [];
 
 
 /* =========================
+   OBTENER IMAGEN DE CATEGORÍA
+========================= */
+
+function obtenerImagenCategoria(categoria) {
+
+  /*
+    Intentamos encontrar la URL de la imagen
+    aunque la columna tenga uno de estos nombres.
+  */
+
+  return (
+    categoria.Imagen ||
+    categoria.imagen ||
+    categoria["IDENTIFICACIÓN"] ||
+    categoria["Identificacion"] ||
+    categoria.identificacion ||
+    categoria.image ||
+    categoria.image_url ||
+    categoria.imagen_url ||
+    ""
+  );
+
+}
+
+
+/* =========================
    CARGAR CATEGORÍAS
 ========================= */
 
@@ -630,17 +693,15 @@ async function cargarCategorias() {
   try {
 
     /*
-      IMPORTANTE:
-
-      Aquí pedimos explícitamente
-      Nombre y Emoji desde Supabase.
+      Usamos select=* para recibir
+      todas las columnas de CATEGORÍAS.
     */
 
     const respuesta =
       await fetch(
 
         SUPABASE_URL +
-        "/rest/v1/CATEGOR%C3%8DAS?select=id,Nombre,Emoji&order=id.asc",
+        "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
 
         {
 
@@ -746,37 +807,87 @@ async function cargarCategorias() {
           "categoria";
 
 
-        /*
-          AQUÍ SE TOMA EL EMOJI
-          DIRECTAMENTE DE SUPABASE.
-
-          Si en Supabase tienes:
-
-          🌶️
-
-          aparecerá:
-
-          🌶️ Gomitas Picantes
-
-          Si tienes:
-
-          👟
-
-          aparecerá:
-
-          👟 Zapatos
-        */
+        /* =========================
+           EMOJI
+        ========================= */
 
         const emoji =
           categoria.Emoji &&
-          categoria.Emoji.trim()
-            ? categoria.Emoji.trim()
+          String(categoria.Emoji).trim()
+            ? String(categoria.Emoji).trim()
             : "🍬";
 
 
-        boton.innerHTML =
-          `<h3>${emoji} ${categoria.Nombre}</h3>`;
+        /* =========================
+           IMAGEN
+        ========================= */
 
+        const imagen =
+          obtenerImagenCategoria(
+            categoria
+          );
+
+
+        /* =========================
+           CONTENIDO
+        ========================= */
+
+        if (imagen) {
+
+          boton.innerHTML = `
+
+            <img
+              class="categoria-imagen"
+              src="${imagen}"
+              alt="${categoria.Nombre}">
+
+            <div class="categoria-overlay"></div>
+
+            <div class="categoria-contenido">
+
+              <span class="categoria-emoji">
+                ${emoji}
+              </span>
+
+              <h3>
+                ${categoria.Nombre}
+              </h3>
+
+            </div>
+
+          `;
+
+        }
+
+        else {
+
+          boton.classList.add(
+            "sin-imagen"
+          );
+
+
+          boton.innerHTML = `
+
+            <div class="categoria-contenido">
+
+              <span class="categoria-emoji">
+                ${emoji}
+              </span>
+
+              <h3>
+                ${categoria.Nombre}
+              </h3>
+
+            </div>
+
+          `;
+
+        }
+
+
+        /* =========================
+           FILTRAR
+        ========================= */
 
         boton.onclick =
           function() {
@@ -883,8 +994,8 @@ async function cargarProductos() {
       todosLosProductos
     );
 
-
   }
+
 
   catch (error) {
 
@@ -1126,3 +1237,4 @@ cargarProductos();
 
 </body>
 </html>
+```
