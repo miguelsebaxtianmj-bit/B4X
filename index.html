@@ -18,20 +18,25 @@
     content="B4X — Algo diferente está aquí."
   >
 
+  <!-- TIPOGRAFÍAS -->
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
+  <link rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
+
   <style>
+
+    /* =========================
+       BASE
+    ========================= */
 
     * {
       box-sizing: border-box;
@@ -44,14 +49,15 @@
     }
 
     body {
+
       font-family:
         "DM Sans",
         Arial,
         sans-serif;
 
-      background: #ffffff;
+      background: #080808;
 
-      color: #111111;
+      color: #ffffff;
 
       line-height: 1.6;
 
@@ -81,13 +87,17 @@
 
       justify-content: space-between;
 
-      background: rgba(255,255,255,.92);
+      background:
+        rgba(8,8,8,.88);
 
-      backdrop-filter: blur(18px);
+      backdrop-filter:
+        blur(18px);
 
-      -webkit-backdrop-filter: blur(18px);
+      -webkit-backdrop-filter:
+        blur(18px);
 
-      border-bottom: 1px solid #e5e5e5;
+      border-bottom:
+        1px solid #202020;
     }
 
 
@@ -99,7 +109,7 @@
 
       letter-spacing: 5px;
 
-      color: #111111;
+      color: #ffffff;
     }
 
 
@@ -115,22 +125,25 @@
 
     nav a {
 
-      color: #111111;
+      color: #bdbdbd;
 
       text-decoration: none;
 
-      font-size: 12px;
+      font-size: 11px;
 
       font-weight: 600;
 
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
+
+      text-transform: uppercase;
 
       transition: .3s;
     }
 
 
     nav a:hover {
-      opacity: .45;
+
+      color: #ffffff;
     }
 
 
@@ -153,12 +166,78 @@
 
       padding: 80px 20px;
 
-      background: #ffffff;
+      position: relative;
+
+      overflow: hidden;
+
+      background:
+
+        radial-gradient(
+          circle at 50% 45%,
+          #242424 0%,
+          #111111 28%,
+          #080808 65%
+        );
+    }
+
+
+    .hero::before {
+
+      content: "";
+
+      position: absolute;
+
+      width: 500px;
+
+      height: 500px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      top: 50%;
+
+      left: 50%;
+
+      transform:
+        translate(-50%,-50%);
+    }
+
+
+    .hero::after {
+
+      content: "";
+
+      position: absolute;
+
+      width: 700px;
+
+      height: 700px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid
+        rgba(255,255,255,.035);
+
+      top: 50%;
+
+      left: 50%;
+
+      transform:
+        translate(-50%,-50%);
     }
 
 
     .hero-content {
+
       max-width: 900px;
+
+      position: relative;
+
+      z-index: 2;
     }
 
 
@@ -170,21 +249,25 @@
         serif;
 
       font-size:
-        clamp(90px, 18vw, 200px);
+        clamp(95px,18vw,210px);
 
       font-weight: 500;
 
-      line-height: .85;
+      line-height: .8;
 
-      letter-spacing: -8px;
+      letter-spacing: -9px;
 
-      color: #111111;
+      color: #ffffff;
+
+      text-shadow:
+        0 0 50px
+        rgba(255,255,255,.08);
     }
 
 
     .hero-frase {
 
-      margin-top: 35px;
+      margin-top: 42px;
 
       font-family:
         "Playfair Display",
@@ -192,11 +275,11 @@
         serif;
 
       font-size:
-        clamp(24px, 4vw, 42px);
+        clamp(25px,4vw,43px);
 
       font-style: italic;
 
-      color: #222222;
+      color: #dddddd;
     }
 
 
@@ -206,7 +289,7 @@
 
       margin: 20px auto 0;
 
-      color: #777777;
+      color: #888888;
 
       font-size: 14px;
     }
@@ -218,37 +301,44 @@
 
       align-items: center;
 
-      gap: 12px;
+      gap: 15px;
 
       margin-top: 35px;
 
-      padding: 13px 22px;
+      padding: 14px 24px;
 
-      background: #111111;
+      background: #ffffff;
 
-      color: #ffffff;
+      color: #080808;
 
-      border: none;
-
-      border-radius: 3px;
+      border-radius: 2px;
 
       text-decoration: none;
 
-      font-size: 11px;
+      font-size: 10px;
 
-      font-weight: 600;
+      font-weight: 700;
 
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
 
-      transition: .3s;
+      transition: .35s;
+    }
+
+
+    .hero-boton span {
+
+      font-size: 16px;
+
+      line-height: 0;
     }
 
 
     .hero-boton:hover {
 
-      background: #333333;
+      transform:
+        translateY(-4px);
 
-      transform: translateY(-3px);
+      background: #dddddd;
     }
 
 
@@ -257,7 +347,9 @@
     ========================= */
 
     section {
-      padding: 100px 7%;
+
+      padding:
+        105px 7%;
     }
 
 
@@ -277,23 +369,23 @@
         serif;
 
       font-size:
-        clamp(42px, 6vw, 70px);
+        clamp(42px,6vw,70px);
 
       font-weight: 500;
 
       line-height: 1;
 
-      color: #111111;
+      color: #ffffff;
     }
 
 
     .titulo p {
 
-      margin-top: 15px;
+      margin-top: 16px;
 
       color: #777777;
 
-      font-size: 14px;
+      font-size: 13px;
     }
 
 
@@ -303,7 +395,8 @@
 
     #categorias {
 
-      background: #f2f2f2;
+      background:
+        #0d0d0d;
     }
 
 
@@ -314,7 +407,7 @@
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(270px, 1fr)
+          minmax(270px,1fr)
         );
 
       gap: 22px;
@@ -329,13 +422,14 @@
 
       padding: 0;
 
-      border: none;
+      border:
+        1px solid #262626;
 
-      border-radius: 2px;
+      border-radius: 3px;
 
       overflow: hidden;
 
-      background: #dddddd;
+      background: #151515;
 
       cursor: pointer;
 
@@ -345,21 +439,30 @@
 
       font-family: inherit;
 
-      transition: transform .45s;
+      transition:
+        transform .45s,
+        border-color .45s;
     }
 
 
     .categoria:hover {
 
-      transform: translateY(-7px);
+      transform:
+        translateY(-8px);
+
+      border-color:
+        #555555;
     }
 
 
     .categoria.activa {
 
-      outline: 2px solid #111111;
+      border-color:
+        #ffffff;
 
-      outline-offset: 4px;
+      box-shadow:
+        0 0 0 1px
+        rgba(255,255,255,.15);
     }
 
 
@@ -381,14 +484,25 @@
 
       display: block;
 
-      transition: transform .7s;
+      filter:
+        brightness(.72)
+        saturate(.85);
+
+      transition:
+        transform .7s,
+        filter .7s;
     }
 
 
     .categoria:hover
     .categoria-imagen img {
 
-      transform: scale(1.06);
+      transform:
+        scale(1.07);
+
+      filter:
+        brightness(.82)
+        saturate(1);
     }
 
 
@@ -401,10 +515,12 @@
       inset: 0;
 
       background:
+
         linear-gradient(
           to top,
-          rgba(0,0,0,.72),
-          rgba(0,0,0,.02)
+          rgba(0,0,0,.94) 0%,
+          rgba(0,0,0,.40) 42%,
+          rgba(0,0,0,.05) 100%
         );
     }
 
@@ -421,7 +537,12 @@
 
       justify-content: center;
 
-      background: #dddddd;
+      background:
+        linear-gradient(
+          145deg,
+          #222222,
+          #0b0b0b
+        );
 
       font-size: 55px;
     }
@@ -450,11 +571,13 @@
         Georgia,
         serif;
 
-      font-size: 30px;
+      font-size: 31px;
 
       font-weight: 500;
 
       line-height: 1.1;
+
+      color: #ffffff;
     }
 
 
@@ -466,12 +589,13 @@
 
       bottom: 25px;
 
-      width: 42px;
+      width: 43px;
 
-      height: 42px;
+      height: 43px;
 
-      border: 1px solid
-        rgba(255,255,255,.5);
+      border:
+        1px solid
+        rgba(255,255,255,.35);
 
       border-radius: 50%;
 
@@ -483,6 +607,8 @@
 
       z-index: 3;
 
+      color: #ffffff;
+
       transition: .3s;
     }
 
@@ -492,35 +618,43 @@
 
       background: #ffffff;
 
-      color: #111111;
+      color: #080808;
+
+      border-color: #ffffff;
     }
 
 
     /* =========================
-       TODOS
+       BOTÓN TODOS
     ========================= */
 
     .categoria-todos {
 
-      grid-column: 1 / -1;
+      grid-column:
+        1 / -1;
 
-      width: auto;
+      width: fit-content;
 
       height: auto;
 
       min-height: 0;
 
-      margin: 0 auto;
+      margin:
+        0 auto 5px;
 
-      padding: 7px 14px;
+      padding:
+        7px 14px;
 
-      border: 1px solid #cccccc;
+      border:
+        1px solid #333333;
 
       border-radius: 50px;
 
-      background: #ffffff;
+      background:
+        #151515;
 
-      color: #666666;
+      color:
+        #888888;
 
       font-size: 9px;
 
@@ -528,7 +662,8 @@
 
       letter-spacing: 1.5px;
 
-      text-transform: uppercase;
+      text-transform:
+        uppercase;
 
       transition: .3s;
     }
@@ -536,21 +671,30 @@
 
     .categoria-todos:hover {
 
-      background: #111111;
+      background:
+        #ffffff;
 
-      color: #ffffff;
+      color:
+        #080808;
 
-      transform: translateY(-2px);
+      border-color:
+        #ffffff;
+
+      transform:
+        translateY(-2px);
     }
 
 
     .categoria-todos.activa {
 
-      background: #111111;
+      background:
+        #ffffff;
 
-      color: #ffffff;
+      color:
+        #080808;
 
-      border-color: #111111;
+      border-color:
+        #ffffff;
     }
 
 
@@ -560,7 +704,8 @@
 
     #productos {
 
-      background: #ffffff;
+      background:
+        #080808;
     }
 
 
@@ -571,7 +716,7 @@
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(250px, 1fr)
+          minmax(250px,1fr)
         );
 
       gap: 28px;
@@ -580,25 +725,34 @@
 
     .producto {
 
-      background: #f8f8f8;
+      background:
+        #111111;
 
-      border: 1px solid #e2e2e2;
+      border:
+        1px solid #252525;
+
+      border-radius: 3px;
 
       overflow: hidden;
 
       transition:
         transform .4s,
+        border-color .4s,
         box-shadow .4s;
     }
 
 
     .producto:hover {
 
-      transform: translateY(-6px);
+      transform:
+        translateY(-7px);
+
+      border-color:
+        #444444;
 
       box-shadow:
-        0 20px 45px
-        rgba(0,0,0,.10);
+        0 25px 55px
+        rgba(0,0,0,.45);
     }
 
 
@@ -608,7 +762,8 @@
 
       height: 320px;
 
-      background: #e8e8e8;
+      background:
+        #1b1b1b;
 
       display: flex;
 
@@ -618,7 +773,7 @@
 
       overflow: hidden;
 
-      color: #888888;
+      color: #666666;
 
       font-size: 12px;
     }
@@ -634,14 +789,16 @@
 
       display: block;
 
-      transition: transform .6s;
+      transition:
+        transform .6s;
     }
 
 
     .producto:hover
     .producto-imagen img {
 
-      transform: scale(1.04);
+      transform:
+        scale(1.04);
     }
 
 
@@ -664,9 +821,9 @@
 
       line-height: 1.2;
 
-      margin-bottom: 8px;
+      color: #ffffff;
 
-      color: #111111;
+      margin-bottom: 9px;
     }
 
 
@@ -674,7 +831,7 @@
 
       min-height: 42px;
 
-      color: #777777;
+      color: #858585;
 
       font-size: 13px;
 
@@ -700,25 +857,29 @@
 
       font-weight: 700;
 
-      color: #111111;
+      color: #ffffff;
     }
 
 
     .whatsapp {
 
-      padding: 10px 15px;
+      padding:
+        10px 15px;
 
-      background: #111111;
+      background:
+        #ffffff;
 
-      color: #ffffff;
+      color:
+        #080808;
 
-      text-decoration: none;
+      text-decoration:
+        none;
 
-      font-size: 10px;
+      font-size: 9px;
 
       font-weight: 700;
 
-      letter-spacing: .8px;
+      letter-spacing: 1px;
 
       border-radius: 2px;
 
@@ -728,39 +889,46 @@
 
     .whatsapp:hover {
 
-      background: #333333;
+      background:
+        #dddddd;
     }
 
 
     .sin-productos {
 
-      grid-column: 1 / -1;
+      grid-column:
+        1 / -1;
 
       text-align: center;
 
       padding: 60px;
 
-      color: #777777;
+      color: #666666;
     }
 
 
     /* =========================
-       SOBRE
+       SOBRE B4X
     ========================= */
 
     .sobre {
 
-      background: #111111;
-
-      color: #ffffff;
+      background:
+        #151515;
 
       text-align: center;
+
+      border-top:
+        1px solid #242424;
+
+      border-bottom:
+        1px solid #242424;
     }
 
 
     .sobre-contenido {
 
-      max-width: 750px;
+      max-width: 780px;
 
       margin: auto;
     }
@@ -774,7 +942,7 @@
         serif;
 
       font-size:
-        clamp(45px, 7vw, 80px);
+        clamp(45px,7vw,80px);
 
       font-weight: 500;
 
@@ -786,7 +954,7 @@
 
       margin-top: 30px;
 
-      color: #bbbbbb;
+      color: #a5a5a5;
 
       font-size: 17px;
 
@@ -802,29 +970,35 @@
 
       text-align: center;
 
-      background: #f2f2f2;
+      background:
+        #0d0d0d;
     }
 
 
     .contacto-datos {
 
-      margin: 30px 0;
+      margin:
+        30px 0;
     }
 
 
     .contacto-datos p {
 
-      color: #666666;
+      color:
+        #888888;
 
-      margin: 8px;
+      margin:
+        8px;
 
-      font-size: 14px;
+      font-size:
+        14px;
     }
 
 
     .contacto .hero-boton {
 
-      margin-top: 10px;
+      margin-top:
+        10px;
     }
 
 
@@ -834,15 +1008,20 @@
 
     footer {
 
-      padding: 45px 20px;
+      padding:
+        45px 20px;
 
-      text-align: center;
+      text-align:
+        center;
 
-      background: #ffffff;
+      background:
+        #080808;
 
-      color: #777777;
+      color:
+        #666666;
 
-      border-top: 1px solid #e5e5e5;
+      border-top:
+        1px solid #202020;
     }
 
 
@@ -853,34 +1032,42 @@
         Georgia,
         serif;
 
-      font-size: 30px;
+      font-size:
+        30px;
 
-      color: #111111;
+      color:
+        #ffffff;
     }
 
 
     .footer-frase {
 
-      margin-top: 5px;
+      margin-top:
+        5px;
 
       font-family:
         "Playfair Display",
         Georgia,
         serif;
 
-      font-style: italic;
+      font-style:
+        italic;
 
-      color: #777777;
+      color:
+        #777777;
     }
 
 
     .footer-copy {
 
-      margin-top: 20px;
+      margin-top:
+        20px;
 
-      font-size: 11px;
+      font-size:
+        10px;
 
-      color: #999999;
+      color:
+        #555555;
     }
 
 
@@ -888,13 +1075,15 @@
        MÓVIL
     ========================= */
 
-    @media (max-width: 700px) {
+    @media (max-width:700px) {
 
       header {
 
-        height: 68px;
+        height:
+          68px;
 
-        padding: 0 20px;
+        padding:
+          0 20px;
       }
 
 
@@ -904,7 +1093,9 @@
 
 
       section {
-        padding: 75px 20px;
+
+        padding:
+          75px 20px;
       }
 
 
@@ -917,65 +1108,79 @@
 
       .hero h1 {
 
-        font-size: 105px;
+        font-size:
+          105px;
 
-        letter-spacing: -5px;
+        letter-spacing:
+          -5px;
       }
 
 
       .hero-frase {
 
-        font-size: 27px;
+        font-size:
+          27px;
       }
 
 
       .categorias {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
 
       .categoria {
 
-        height: 390px;
+        height:
+          390px;
       }
 
 
       .productos {
 
-        grid-template-columns: 1fr;
+        grid-template-columns:
+          1fr;
       }
 
 
       .producto-imagen {
 
-        height: 330px;
+        height:
+          330px;
       }
 
 
       .producto-final {
 
-        flex-direction: column;
+        flex-direction:
+          column;
 
-        align-items: stretch;
+        align-items:
+          stretch;
       }
 
 
       .whatsapp {
 
-        text-align: center;
+        text-align:
+          center;
       }
 
 
       .categoria-todos {
 
-        width: fit-content;
+        width:
+          fit-content;
 
-        height: auto;
+        height:
+          auto;
 
-        min-height: 0;
+        min-height:
+          0;
 
-        padding: 7px 13px;
+        padding:
+          7px 13px;
       }
 
     }
@@ -1036,6 +1241,8 @@
 >
 
   <div class="hero-content">
+
+    <!-- SIN B4X PEQUEÑO -->
 
     <h1>
       B4X
@@ -1129,7 +1336,9 @@
   id="sobre"
 >
 
-  <div class="sobre-contenido">
+  <div
+    class="sobre-contenido"
+  >
 
     <h2>
       Sobre B4X
@@ -1715,7 +1924,7 @@ function mostrarProductos(
 
 
 /* =========================
-   FILTRAR
+   FILTRAR CATEGORÍA
 ========================= */
 
 function filtrarCategoria(
