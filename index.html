@@ -322,9 +322,7 @@
 
 <body>
 
-  <!-- =========================
-       ENCABEZADO
-  ========================= -->
+  <!-- ENCABEZADO -->
 
   <header>
 
@@ -342,9 +340,7 @@
   </header>
 
 
-  <!-- =========================
-       PORTADA
-  ========================= -->
+  <!-- PORTADA -->
 
   <section class="hero" id="inicio">
 
@@ -373,9 +369,7 @@
   </section>
 
 
-  <!-- =========================
-       CATEGORÍAS
-  ========================= -->
+  <!-- CATEGORÍAS -->
 
   <section id="categorias">
 
@@ -389,12 +383,6 @@
 
     </div>
 
-
-    <!--
-      AQUÍ SE CARGAN AUTOMÁTICAMENTE
-      LAS CATEGORÍAS DE SUPABASE
-    -->
-
     <div
       class="categorias"
       id="listaCategorias">
@@ -404,9 +392,7 @@
   </section>
 
 
-  <!-- =========================
-       PRODUCTOS
-  ========================= -->
+  <!-- PRODUCTOS -->
 
   <section id="productos">
 
@@ -420,15 +406,12 @@
 
     </div>
 
-
     <div class="productos"></div>
 
   </section>
 
 
-  <!-- =========================
-       SOBRE NOSOTROS
-  ========================= -->
+  <!-- SOBRE NOSOTROS -->
 
   <section>
 
@@ -455,9 +438,7 @@
   </section>
 
 
-  <!-- =========================
-       CONTACTO
-  ========================= -->
+  <!-- CONTACTO -->
 
   <section
     class="contacto"
@@ -473,21 +454,17 @@
 
     </div>
 
-
     <p>
       📲 WhatsApp: 323 764 7194
     </p>
-
 
     <p>
       📍 Dirección: Próximamente
     </p>
 
-
     <p>
       📸 Instagram: Próximamente
     </p>
-
 
     <a
       class="boton"
@@ -501,9 +478,7 @@
   </section>
 
 
-  <!-- =========================
-       PIE
-  ========================= -->
+  <!-- PIE -->
 
   <footer>
 
@@ -514,10 +489,6 @@
 
 <script>
 
-/* =========================
-   SUPABASE
-========================= */
-
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
 
@@ -525,12 +496,7 @@ const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
 
 
-/* =========================
-   VARIABLES
-========================= */
-
 let todosLosProductos = [];
-
 
 
 /* =========================
@@ -584,14 +550,16 @@ async function cargarCategorias() {
 
 
     /* =========================
-       BOTÓN TODOS
+       TODOS LOS PRODUCTOS
     ========================= */
 
     const botonTodos =
       document.createElement("button");
 
+
     botonTodos.className =
       "categoria categoria-todos activa";
+
 
     botonTodos.innerHTML =
       "<h3>✨ Todos los productos</h3>";
@@ -614,7 +582,7 @@ async function cargarCategorias() {
 
 
     /* =========================
-       CATEGORÍAS DE SUPABASE
+       CATEGORÍAS DESDE SUPABASE
     ========================= */
 
     categorias.forEach(
@@ -623,12 +591,25 @@ async function cargarCategorias() {
         const boton =
           document.createElement("button");
 
+
         boton.className =
           "categoria";
 
 
+        /*
+          AQUÍ SE USA EL EMOJI
+          GUARDADO EN SUPABASE.
+
+          Si no tiene emoji,
+          utiliza 🍬 por defecto.
+        */
+
+        const emoji =
+          categoria.emoji || "🍬";
+
+
         boton.innerHTML =
-          `<h3>🍬 ${categoria.Nombre}</h3>`;
+          `<h3>${emoji} ${categoria.Nombre}</h3>`;
 
 
         boton.onclick =
@@ -671,7 +652,6 @@ async function cargarCategorias() {
   }
 
 }
-
 
 
 /* =========================
@@ -744,7 +724,6 @@ async function cargarProductos() {
   }
 
 }
-
 
 
 /* =========================
@@ -828,7 +807,6 @@ function mostrarProductos(productos) {
 
 
           <a
-
             class="whatsapp"
 
             href="https://wa.me/573237647194?text=${encodeURIComponent(
@@ -859,7 +837,6 @@ function mostrarProductos(productos) {
 }
 
 
-
 /* =========================
    FILTRAR CATEGORÍA
 ========================= */
@@ -868,7 +845,6 @@ function filtrarCategoria(
   categoria,
   boton
 ) {
-
 
   document
     .querySelectorAll(".categoria")
@@ -896,7 +872,6 @@ function filtrarCategoria(
 
   if (categoria === "TODOS") {
 
-
     mostrarProductos(
       todosLosProductos
     );
@@ -905,11 +880,9 @@ function filtrarCategoria(
     texto.textContent =
       "Mostrando todos los productos.";
 
-
   }
 
   else {
-
 
     const productosFiltrados =
       todosLosProductos.filter(
@@ -943,7 +916,6 @@ function filtrarCategoria(
     });
 
 }
-
 
 
 /* =========================
