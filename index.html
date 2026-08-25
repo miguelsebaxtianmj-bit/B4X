@@ -9,6 +9,7 @@
   <meta name="description" content="B4X - Gomitas y snacks premium.">
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -21,8 +22,6 @@
       color: #ffffff;
       line-height: 1.6;
     }
-
-    /* ---------- ENCABEZADO ---------- */
 
     header {
       position: sticky;
@@ -52,8 +51,6 @@
     nav a:hover {
       opacity: 0.6;
     }
-
-    /* ---------- PORTADA ---------- */
 
     .hero {
       min-height: 85vh;
@@ -107,8 +104,6 @@
       opacity: 0.85;
     }
 
-    /* ---------- SECCIONES ---------- */
-
     section {
       padding: 80px 7%;
     }
@@ -127,7 +122,9 @@
       color: #aaa;
     }
 
-    /* ---------- CATEGORÍAS ---------- */
+    /* =========================
+       CATEGORÍAS
+    ========================= */
 
     .categorias {
       display: grid;
@@ -173,7 +170,9 @@
       text-align: center;
     }
 
-    /* ---------- PRODUCTOS ---------- */
+    /* =========================
+       PRODUCTOS
+    ========================= */
 
     .productos {
       display: grid;
@@ -249,7 +248,9 @@
       padding: 40px;
     }
 
-    /* ---------- SOBRE ---------- */
+    /* =========================
+       SOBRE
+    ========================= */
 
     .sobre {
       max-width: 800px;
@@ -262,7 +263,9 @@
       font-size: 17px;
     }
 
-    /* ---------- CONTACTO ---------- */
+    /* =========================
+       CONTACTO
+    ========================= */
 
     .contacto {
       text-align: center;
@@ -274,7 +277,9 @@
       margin: 8px;
     }
 
-    /* ---------- PIE ---------- */
+    /* =========================
+       FOOTER
+    ========================= */
 
     footer {
       text-align: center;
@@ -284,7 +289,9 @@
       font-size: 13px;
     }
 
-    /* ---------- CELULAR ---------- */
+    /* =========================
+       CELULAR
+    ========================= */
 
     @media (max-width: 700px) {
 
@@ -307,7 +314,9 @@
       .hero p {
         font-size: 16px;
       }
+
     }
+
   </style>
 </head>
 
@@ -315,17 +324,19 @@
 
   <!-- =========================
        ENCABEZADO
-  ========================== -->
+  ========================= -->
 
   <header>
 
     <div class="logo">B4X</div>
 
     <nav>
+
       <a href="#inicio">Inicio</a>
       <a href="#categorias">Categorías</a>
       <a href="#productos">Productos</a>
       <a href="#contacto">Contacto</a>
+
     </nav>
 
   </header>
@@ -333,7 +344,7 @@
 
   <!-- =========================
        PORTADA
-  ========================== -->
+  ========================= -->
 
   <section class="hero" id="inicio">
 
@@ -364,7 +375,7 @@
 
   <!-- =========================
        CATEGORÍAS
-  ========================== -->
+  ========================= -->
 
   <section id="categorias">
 
@@ -379,19 +390,14 @@
     </div>
 
 
-    <!-- LAS CATEGORÍAS SE CARGAN DESDE SUPABASE -->
+    <!--
+      AQUÍ SE CARGAN AUTOMÁTICAMENTE
+      LAS CATEGORÍAS DE SUPABASE
+    -->
 
     <div
       class="categorias"
-      id="contenedorCategorias">
-
-      <button
-        class="categoria categoria-todos activa"
-        onclick="filtrarCategoria('TODOS', this)">
-
-        <h3>✨ Todos los productos</h3>
-
-      </button>
+      id="listaCategorias">
 
     </div>
 
@@ -400,7 +406,7 @@
 
   <!-- =========================
        PRODUCTOS
-  ========================== -->
+  ========================= -->
 
   <section id="productos">
 
@@ -422,7 +428,7 @@
 
   <!-- =========================
        SOBRE NOSOTROS
-  ========================== -->
+  ========================= -->
 
   <section>
 
@@ -435,9 +441,13 @@
       </div>
 
       <p>
-        En B4X buscamos convertir cada compra en una experiencia.
-        Seleccionamos nuestros productos pensando en sabor,
-        calidad y presentación.
+
+        En B4X buscamos convertir cada compra
+        en una experiencia.
+
+        Seleccionamos nuestros productos pensando
+        en sabor, calidad y presentación.
+
       </p>
 
     </div>
@@ -447,7 +457,7 @@
 
   <!-- =========================
        CONTACTO
-  ========================== -->
+  ========================= -->
 
   <section
     class="contacto"
@@ -457,16 +467,26 @@
 
       <h2>Contacto</h2>
 
-      <p>¿Quieres hacer un pedido?</p>
+      <p>
+        ¿Quieres hacer un pedido?
+      </p>
 
     </div>
 
 
-    <p>📲 WhatsApp: 323 764 7194</p>
+    <p>
+      📲 WhatsApp: 323 764 7194
+    </p>
 
-    <p>📍 Dirección: Próximamente</p>
 
-    <p>📸 Instagram: Próximamente</p>
+    <p>
+      📍 Dirección: Próximamente
+    </p>
+
+
+    <p>
+      📸 Instagram: Próximamente
+    </p>
 
 
     <a
@@ -483,7 +503,7 @@
 
   <!-- =========================
        PIE
-  ========================== -->
+  ========================= -->
 
   <footer>
 
@@ -505,7 +525,12 @@ const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
 
 
+/* =========================
+   VARIABLES
+========================= */
+
 let todosLosProductos = [];
+
 
 
 /* =========================
@@ -515,35 +540,31 @@ let todosLosProductos = [];
 async function cargarCategorias() {
 
   const contenedor =
-    document.getElementById(
-      "contenedorCategorias"
-    );
-
+    document.getElementById("listaCategorias");
 
   try {
 
-    const respuesta =
-      await fetch(
+    const respuesta = await fetch(
 
-        SUPABASE_URL +
-        "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
+      SUPABASE_URL +
+      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
 
-        {
+      {
 
-          headers: {
+        headers: {
 
-            "apikey":
-              SUPABASE_KEY,
+          "apikey":
+            SUPABASE_KEY,
 
-            "Authorization":
-              "Bearer " +
-              SUPABASE_KEY
-
-          }
+          "Authorization":
+            "Bearer " +
+            SUPABASE_KEY
 
         }
 
-      );
+      }
+
+    );
 
 
     if (!respuesta.ok) {
@@ -559,38 +580,55 @@ async function cargarCategorias() {
       await respuesta.json();
 
 
-    /* BOTÓN TODOS */
-
-    contenedor.innerHTML = `
-
-      <button
-        class="categoria categoria-todos activa"
-        onclick="filtrarCategoria('TODOS', this)">
-
-        <h3>✨ Todos los productos</h3>
-
-      </button>
-
-    `;
+    contenedor.innerHTML = "";
 
 
-    /* CREAR CATEGORÍAS */
+    /* =========================
+       BOTÓN TODOS
+    ========================= */
+
+    const botonTodos =
+      document.createElement("button");
+
+    botonTodos.className =
+      "categoria categoria-todos activa";
+
+    botonTodos.innerHTML =
+      "<h3>✨ Todos los productos</h3>";
+
+
+    botonTodos.onclick =
+      function() {
+
+        filtrarCategoria(
+          "TODOS",
+          botonTodos
+        );
+
+      };
+
+
+    contenedor.appendChild(
+      botonTodos
+    );
+
+
+    /* =========================
+       CATEGORÍAS DE SUPABASE
+    ========================= */
 
     categorias.forEach(
       categoria => {
 
         const boton =
-          document.createElement(
-            "button"
-          );
-
+          document.createElement("button");
 
         boton.className =
           "categoria";
 
 
-        boton.type =
-          "button";
+        boton.innerHTML =
+          `<h3>🍬 ${categoria.Nombre}</h3>`;
 
 
         boton.onclick =
@@ -598,19 +636,10 @@ async function cargarCategorias() {
 
             filtrarCategoria(
               categoria.Nombre,
-              this
+              boton
             );
 
           };
-
-
-        boton.innerHTML = `
-
-          <h3>
-            📂 ${categoria.Nombre}
-          </h3>
-
-        `;
 
 
         contenedor.appendChild(
@@ -621,32 +650,19 @@ async function cargarCategorias() {
     );
 
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(error);
 
 
     contenedor.innerHTML = `
 
-      <button
-        class="categoria categoria-todos activa"
-        onclick="filtrarCategoria('TODOS', this)">
+      <p class="sin-productos">
 
-        <h3>
-          ✨ Todos los productos
-        </h3>
-
-      </button>
-
-      <p
-        style="
-          grid-column:1/-1;
-          text-align:center;
-          color:#888;
-          margin-top:20px;
-        ">
-
-        No se pudieron cargar las categorías.
+        No se pudieron cargar
+        las categorías.
 
       </p>
 
@@ -657,6 +673,7 @@ async function cargarCategorias() {
 }
 
 
+
 /* =========================
    CARGAR PRODUCTOS
 ========================= */
@@ -664,9 +681,7 @@ async function cargarCategorias() {
 async function cargarProductos() {
 
   const contenedor =
-    document.querySelector(
-      ".productos"
-    );
+    document.querySelector(".productos");
 
 
   try {
@@ -713,42 +728,45 @@ async function cargarProductos() {
     );
 
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(error);
 
 
     contenedor.innerHTML =
-      "<p class='sin-productos'>No se pudieron cargar los productos.</p>";
+
+      "<p class='sin-productos'>" +
+      "No se pudieron cargar los productos." +
+      "</p>";
 
   }
 
 }
 
 
+
 /* =========================
    MOSTRAR PRODUCTOS
 ========================= */
 
-function mostrarProductos(
-  productos
-) {
+function mostrarProductos(productos) {
 
   const contenedor =
-    document.querySelector(
-      ".productos"
-    );
+    document.querySelector(".productos");
 
 
   contenedor.innerHTML = "";
 
 
-  if (
-    productos.length === 0
-  ) {
+  if (productos.length === 0) {
 
     contenedor.innerHTML =
-      "<p class='sin-productos'>No hay productos en esta categoría.</p>";
+
+      "<p class='sin-productos'>" +
+      "No hay productos en esta categoría." +
+      "</p>";
 
     return;
 
@@ -759,9 +777,7 @@ function mostrarProductos(
     producto => {
 
       const tarjeta =
-        document.createElement(
-          "div"
-        );
+        document.createElement("div");
 
 
       tarjeta.className =
@@ -775,11 +791,16 @@ function mostrarProductos(
           ${
             producto.Imagen
 
-              ? `<img
-                   src="${producto.Imagen}"
-                   alt="${producto.Nombre}">`
+              ? `
+
+                <img
+                  src="${producto.Imagen}"
+                  alt="${producto.Nombre}">
+
+                `
 
               : "Imagen del producto"
+
           }
 
         </div>
@@ -807,11 +828,16 @@ function mostrarProductos(
 
 
           <a
+
             class="whatsapp"
+
             href="https://wa.me/573237647194?text=${encodeURIComponent(
+
               "Hola, quiero pedir " +
               producto.Nombre
+
             )}"
+
             target="_blank">
 
             Pedir por WhatsApp
@@ -833,6 +859,7 @@ function mostrarProductos(
 }
 
 
+
 /* =========================
    FILTRAR CATEGORÍA
 ========================= */
@@ -844,9 +871,7 @@ function filtrarCategoria(
 
 
   document
-    .querySelectorAll(
-      ".categoria"
-    )
+    .querySelectorAll(".categoria")
     .forEach(
       elemento => {
 
@@ -869,9 +894,7 @@ function filtrarCategoria(
     );
 
 
-  if (
-    categoria === "TODOS"
-  ) {
+  if (categoria === "TODOS") {
 
 
     mostrarProductos(
@@ -883,15 +906,19 @@ function filtrarCategoria(
       "Mostrando todos los productos.";
 
 
-  } else {
+  }
+
+  else {
 
 
     const productosFiltrados =
       todosLosProductos.filter(
+
         producto =>
 
           producto.Categoria ===
           categoria
+
       );
 
 
@@ -908,33 +935,24 @@ function filtrarCategoria(
 
 
   document
-    .getElementById(
-      "productos"
-    )
+    .getElementById("productos")
     .scrollIntoView({
 
-      behavior:
-        "smooth"
+      behavior: "smooth"
 
     });
 
 }
 
 
+
 /* =========================
-   INICIAR TIENDA
+   INICIAR
 ========================= */
 
-async function iniciarTienda() {
+cargarCategorias();
 
-  await cargarCategorias();
-
-  await cargarProductos();
-
-}
-
-
-iniciarTienda();
+cargarProductos();
 
 </script>
 
