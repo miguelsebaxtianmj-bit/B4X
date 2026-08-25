@@ -1,4 +1,4 @@
-
+```html
 <!DOCTYPE html>
 <html lang="es">
 
@@ -18,19 +18,18 @@
     content="B4X — Algo diferente está aquí."
   >
 
-  <!-- TIPOGRAFÍAS -->
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
 
-  <link rel="preconnect"
-        href="https://fonts.gstatic.com"
-        crossorigin>
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
 
   <link
     href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
-
 
   <style>
 
@@ -49,7 +48,6 @@
     }
 
     body {
-
       font-family:
         "DM Sans",
         Arial,
@@ -142,7 +140,6 @@
 
 
     nav a:hover {
-
       color: #ffffff;
     }
 
@@ -347,9 +344,7 @@
     ========================= */
 
     section {
-
-      padding:
-        105px 7%;
+      padding: 105px 7%;
     }
 
 
@@ -909,28 +904,35 @@
 
     /* =========================
        SOBRE B4X
+       MINIMALISTA
     ========================= */
 
     .sobre {
 
       background:
-        #151515;
+        #080808;
 
-      text-align: center;
+      text-align:
+        center;
+
+      padding:
+        100px 20px;
 
       border-top:
-        1px solid #242424;
+        1px solid #1d1d1d;
 
       border-bottom:
-        1px solid #242424;
+        1px solid #1d1d1d;
     }
 
 
     .sobre-contenido {
 
-      max-width: 780px;
+      max-width:
+        650px;
 
-      margin: auto;
+      margin:
+        auto;
     }
 
 
@@ -942,23 +944,51 @@
         serif;
 
       font-size:
-        clamp(45px,7vw,80px);
+        42px;
 
-      font-weight: 500;
+      font-weight:
+        500;
 
-      color: #ffffff;
+      color:
+        #ffffff;
+
+      letter-spacing:
+        -1px;
+    }
+
+
+    .sobre-linea {
+
+      width:
+        45px;
+
+      height:
+        1px;
+
+      background:
+        #555555;
+
+      margin:
+        22px auto 28px;
     }
 
 
     .sobre p {
 
-      margin-top: 30px;
+      color:
+        #8a8a8a;
 
-      color: #a5a5a5;
+      font-size:
+        15px;
 
-      font-size: 17px;
+      line-height:
+        1.9;
 
-      line-height: 1.9;
+      max-width:
+        600px;
+
+      margin:
+        auto;
     }
 
 
@@ -968,7 +998,8 @@
 
     .contacto {
 
-      text-align: center;
+      text-align:
+        center;
 
       background:
         #0d0d0d;
@@ -1088,7 +1119,8 @@
 
 
       nav {
-        display: none;
+        display:
+          none;
       }
 
 
@@ -1183,6 +1215,27 @@
           7px 13px;
       }
 
+
+      .sobre {
+
+        padding:
+          75px 20px;
+      }
+
+
+      .sobre h2 {
+
+        font-size:
+          36px;
+      }
+
+
+      .sobre p {
+
+        font-size:
+          14px;
+      }
+
     }
 
   </style>
@@ -1242,8 +1295,6 @@
 
   <div class="hero-content">
 
-    <!-- SIN B4X PEQUEÑO -->
-
     <h1>
       B4X
     </h1>
@@ -1264,7 +1315,11 @@
       href="#categorias"
     >
       EXPLORAR
-      <span>→</span>
+
+      <span>
+        →
+      </span>
+
     </a>
 
   </div>
@@ -1336,20 +1391,22 @@
   id="sobre"
 >
 
-  <div
-    class="sobre-contenido"
-  >
+  <div class="sobre-contenido">
 
     <h2>
       Sobre B4X
     </h2>
 
 
+    <div
+      class="sobre-linea"
+    ></div>
+
+
     <p>
       En B4X buscamos convertir cada compra
-      en una experiencia. Seleccionamos
-      nuestros productos pensando en calidad
-      y presentación.
+      en una experiencia. Seleccionamos nuestros
+      productos pensando en calidad y presentación.
     </p>
 
   </div>
@@ -1402,7 +1459,11 @@
     target="_blank"
   >
     HABLAR POR WHATSAPP
-    <span>→</span>
+
+    <span>
+      →
+    </span>
+
   </a>
 
 </section>
@@ -1473,7 +1534,8 @@ async function cargarCategorias() {
 
         {
 
-          method: "GET",
+          method:
+            "GET",
 
           headers: {
 
@@ -1713,7 +1775,8 @@ async function cargarProductos() {
 
         {
 
-          method: "GET",
+          method:
+            "GET",
 
           headers: {
 
@@ -1924,7 +1987,7 @@ function mostrarProductos(
 
 
 /* =========================
-   FILTRAR CATEGORÍA
+   FILTRAR
 ========================= */
 
 function filtrarCategoria(
