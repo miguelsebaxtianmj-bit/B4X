@@ -1,18 +1,12 @@
 <!DOCTYPE html>
 <html lang="es">
-
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>B4X | Gomitas Premium</title>
 
-  <meta
-    name="description"
-    content="B4X - Gomitas y snacks premium."
-  >
+  <meta name="description" content="B4X - Gomitas y snacks premium.">
 
   <style>
 
@@ -25,7 +19,7 @@
     body {
       font-family: Arial, Helvetica, sans-serif;
       background: #0b0b0b;
-      color: #ffffff;
+      color: #fff;
       line-height: 1.6;
     }
 
@@ -146,15 +140,11 @@
       border-radius: 18px;
       overflow: hidden;
       padding: 0;
-
       display: flex;
       align-items: flex-end;
-
       background: #151515;
-
       transition: .3s;
       cursor: pointer;
-
       color: white;
       text-align: left;
       font-family: inherit;
@@ -190,8 +180,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      background:
-        linear-gradient(145deg, #1b1b1b, #0d0d0d);
+      background: linear-gradient(145deg,#1b1b1b,#0d0d0d);
       color: #777;
       font-size: 40px;
     }
@@ -202,12 +191,10 @@
       left: 0;
       width: 100%;
       padding: 45px 22px 20px;
-
-      background:
-        linear-gradient(
-          transparent,
-          rgba(0,0,0,.9)
-        );
+      background: linear-gradient(
+        transparent,
+        rgba(0,0,0,.9)
+      );
     }
 
     .categoria h3 {
@@ -229,7 +216,7 @@
       display: grid;
       grid-template-columns: repeat(
         auto-fit,
-        minmax(240px, 1fr)
+        minmax(240px,1fr)
       );
       gap: 30px;
     }
@@ -261,7 +248,6 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      display: block;
     }
 
     .producto-info {
@@ -328,8 +314,6 @@
       margin: 8px;
     }
 
-    /* FOOTER */
-
     footer {
       text-align: center;
       padding: 30px;
@@ -338,7 +322,7 @@
       font-size: 13px;
     }
 
-    @media (max-width: 700px) {
+    @media (max-width:700px) {
 
       header {
         padding: 15px 20px;
@@ -363,12 +347,9 @@
     }
 
   </style>
-
 </head>
 
-
 <body>
-
 
 <header>
 
@@ -377,24 +358,16 @@
   </div>
 
   <nav>
-
     <a href="#inicio">Inicio</a>
-
     <a href="#categorias">Categorías</a>
-
     <a href="#productos">Productos</a>
-
     <a href="#contacto">Contacto</a>
-
   </nav>
 
 </header>
 
 
-<section
-  class="hero"
-  id="inicio"
->
+<section class="hero" id="inicio">
 
   <div class="hero-content">
 
@@ -402,9 +375,7 @@
       Gomitas & Snacks Premium
     </small>
 
-    <h1>
-      B4X
-    </h1>
+    <h1>B4X</h1>
 
     <p>
       Una experiencia diferente en cada bocado.
@@ -428,9 +399,7 @@
 
   <div class="titulo">
 
-    <h2>
-      Categorías
-    </h2>
+    <h2>Categorías</h2>
 
     <p>
       Selecciona una categoría para ver sus productos.
@@ -450,9 +419,7 @@
 
   <div class="titulo">
 
-    <h2>
-      Nuestros productos
-    </h2>
+    <h2>Nuetros productos</h2>
 
     <p id="textoCategoria">
       Mostrando todos los productos.
@@ -470,11 +437,7 @@
   <div class="sobre">
 
     <div class="titulo">
-
-      <h2>
-        Sobre B4X
-      </h2>
-
+      <h2>Sobre B4X</h2>
     </div>
 
     <p>
@@ -490,16 +453,11 @@
 </section>
 
 
-<section
-  class="contacto"
-  id="contacto"
->
+<section class="contacto" id="contacto">
 
   <div class="titulo">
 
-    <h2>
-      Contacto
-    </h2>
+    <h2>Contacto</h2>
 
     <p>
       ¿Quieres hacer un pedido?
@@ -507,17 +465,9 @@
 
   </div>
 
-  <p>
-    📲 WhatsApp: 323 764 7194
-  </p>
-
-  <p>
-    📍 Dirección: Próximamente
-  </p>
-
-  <p>
-    📸 Instagram: Próximamente
-  </p>
+  <p>📲 WhatsApp: 323 764 7194</p>
+  <p>📍 Dirección: Próximamente</p>
+  <p>📸 Instagram: Próximamente</p>
 
   <a
     class="boton"
@@ -531,10 +481,7 @@
 
 
 <footer>
-
-  © 2026 B4X.
-  Todos los derechos reservados.
-
+  © 2026 B4X. Todos los derechos reservados.
 </footer>
 
 
@@ -546,7 +493,6 @@ const SUPABASE_URL =
 const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
 
-
 let todosLosProductos = [];
 
 
@@ -557,46 +503,33 @@ let todosLosProductos = [];
 async function cargarCategorias() {
 
   const contenedor =
-    document.getElementById(
-      "listaCategorias"
-    );
+    document.getElementById("listaCategorias");
 
   try {
 
-    const respuesta =
-      await fetch(
-
-        SUPABASE_URL +
-        "/rest/v1/CATEGOR%C3%8DAS" +
-        "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
-        "&order=IDENTIFICACI%C3%93N.asc",
-
-        {
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization":
-              "Bearer " + SUPABASE_KEY
-          }
+    const respuesta = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/CATEGOR%C3%8DAS" +
+      "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
+      "&order=IDENTIFICACI%C3%93N.asc",
+      {
+        method: "GET",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
         }
-
-      );
-
+      }
+    );
 
     if (!respuesta.ok) {
-      throw new Error(
-        await respuesta.text()
-      );
+      throw new Error(await respuesta.text());
     }
-
 
     const categorias =
       await respuesta.json();
 
-
     contenedor.innerHTML = "";
 
-
-    /* TODOS */
 
     const botonTodos =
       document.createElement("button");
@@ -609,104 +542,95 @@ async function cargarCategorias() {
     botonTodos.innerHTML =
       "<h3>✨ Todos los productos</h3>";
 
-    botonTodos.onclick =
-      function() {
-
-        filtrarCategoria(
-          "TODOS",
-          botonTodos
-        );
-
-      };
+    botonTodos.onclick = function() {
+      filtrarCategoria(
+        "TODOS",
+        botonTodos
+      );
+    };
 
     contenedor.appendChild(
       botonTodos
     );
 
 
-    /* CATEGORÍAS */
+    categorias.forEach(categoria => {
 
-    categorias.forEach(
-      categoria => {
+      const boton =
+        document.createElement("button");
 
-        const boton =
-          document.createElement("button");
-
-        boton.type = "button";
-
-        boton.className = "categoria";
+      boton.type = "button";
+      boton.className = "categoria";
 
 
-        const emoji =
-          categoria.Emoji &&
-          String(categoria.Emoji).trim()
-            ? String(categoria.Emoji).trim()
-            : "🍬";
+      const emoji =
+        categoria.Emoji &&
+        String(categoria.Emoji).trim()
+          ? String(categoria.Emoji).trim()
+          : "🍬";
 
 
-        let contenidoImagen = "";
+      let contenidoImagen = "";
 
 
-        if (
-          categoria.Imagen &&
-          String(categoria.Imagen).trim()
-        ) {
+      if (
+        categoria.Imagen &&
+        String(categoria.Imagen).trim()
+      ) {
 
-          contenidoImagen = `
-            <img
-              src="${categoria.Imagen}"
-              alt="${categoria.Nombre}"
-            >
-          `;
+        contenidoImagen = `
+          <img
+            src="${categoria.Imagen}"
+            alt="${categoria.Nombre}"
+          >
+        `;
 
-        } else {
+      } else {
 
-          contenidoImagen = `
-            <div class="categoria-sin-imagen">
+        contenidoImagen = `
+          <div class="categoria-sin-imagen">
+            ${emoji}
+          </div>
+        `;
+
+      }
+
+
+      boton.innerHTML = `
+
+        <div class="categoria-imagen">
+
+          ${contenidoImagen}
+
+          <div class="categoria-contenido">
+
+            <h3>
               ${emoji}
-            </div>
-          `;
-
-        }
-
-
-        boton.innerHTML = `
-
-          <div class="categoria-imagen">
-
-            ${contenidoImagen}
-
-            <div class="categoria-contenido">
-
-              <h3>
-                ${emoji}
-                ${categoria.Nombre}
-              </h3>
-
-            </div>
+              ${categoria.Nombre}
+            </h3>
 
           </div>
 
-        `;
+        </div>
+
+      `;
 
 
-        boton.onclick =
-          function() {
+      boton.onclick = function() {
 
-            filtrarCategoria(
-              categoria.Nombre,
-              boton
-            );
-
-          };
-
-
-        contenedor.appendChild(
+        filtrarCategoria(
+          categoria.Nombre,
           boton
         );
 
-      }
-    );
+      };
+
+
+      contenedor.appendChild(
+        boton
+      );
+
+    });
 
   }
 
@@ -718,11 +642,9 @@ async function cargarCategorias() {
     );
 
     contenedor.innerHTML = `
-
       <p class="sin-productos">
         ❌ No se pudieron cargar las categorías.
       </p>
-
     `;
 
   }
@@ -737,39 +659,28 @@ async function cargarCategorias() {
 async function cargarProductos() {
 
   const contenedor =
-    document.querySelector(
-      ".productos"
-    );
+    document.querySelector(".productos");
 
   try {
 
-    const respuesta =
-      await fetch(
-
-        SUPABASE_URL +
-        "/rest/v1/PRODUCTOS?select=*",
-
-        {
-          headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization":
-              "Bearer " + SUPABASE_KEY
-          }
+    const respuesta = await fetch(
+      SUPABASE_URL +
+      "/rest/v1/PRODUCTOS?select=*",
+      {
+        method: "GET",
+        headers: {
+          "apikey": SUPABASE_KEY,
+          "Authorization": "Bearer " + SUPABASE_KEY
         }
-
-      );
-
+      }
+    );
 
     if (!respuesta.ok) {
-      throw new Error(
-        await respuesta.text()
-      );
+      throw new Error(await respuesta.text());
     }
-
 
     todosLosProductos =
       await respuesta.json();
-
 
     mostrarProductos(
       todosLosProductos
@@ -795,14 +706,10 @@ async function cargarProductos() {
    MOSTRAR PRODUCTOS
 ========================= */
 
-function mostrarProductos(
-  productos
-) {
+function mostrarProductos(productos) {
 
   const contenedor =
-    document.querySelector(
-      ".productos"
-    );
+    document.querySelector(".productos");
 
   contenedor.innerHTML = "";
 
@@ -822,78 +729,70 @@ function mostrarProductos(
   }
 
 
-  productos.forEach(
-    producto => {
+  productos.forEach(producto => {
 
-      const tarjeta =
-        document.createElement("div");
+    const tarjeta =
+      document.createElement("div");
 
-      tarjeta.className =
-        "producto";
+    tarjeta.className =
+      "producto";
 
 
-      tarjeta.innerHTML = `
+    tarjeta.innerHTML = `
 
-        <div class="producto-imagen">
+      <div class="producto-imagen">
 
-          ${
-            producto.Imagen
-
+        ${
+          producto.Imagen
             ? `
-
               <img
                 src="${producto.Imagen}"
                 alt="${producto.Nombre}"
               >
-
             `
-
             : "Imagen del producto"
-          }
+        }
 
+      </div>
+
+
+      <div class="producto-info">
+
+        <h3>
+          ${producto.Nombre}
+        </h3>
+
+        <p>
+          ${producto.Descripcion || ""}
+        </p>
+
+        <div class="precio">
+          $${Number(
+            producto.Precio
+          ).toLocaleString("es-CO")}
         </div>
 
+        <a
+          class="whatsapp"
+          href="https://wa.me/573237647194?text=${encodeURIComponent(
+            "Hola, quiero pedir " +
+            producto.Nombre
+          )}"
+          target="_blank"
+        >
+          Pedir por WhatsApp
+        </a>
 
-        <div class="producto-info">
+      </div>
 
-          <h3>
-            ${producto.Nombre}
-          </h3>
-
-          <p>
-            ${producto.Descripcion || ""}
-          </p>
-
-          <div class="precio">
-
-            $${Number(
-              producto.Precio
-            ).toLocaleString("es-CO")}
-
-          </div>
-
-          <a
-            class="whatsapp"
-            href="https://wa.me/573237647194?text=${encodeURIComponent(
-              "Hola, quiero pedir " +
-              producto.Nombre
-            )}"
-            target="_blank"
-          >
-            Pedir por WhatsApp
-          </a>
-
-        </div>
-
-      `;
+    `;
 
 
-      contenedor.appendChild(
-        tarjeta
-      );
+    contenedor.appendChild(
+      tarjeta
+    );
 
-    }
-  );
+  });
 
 }
 
@@ -909,13 +808,13 @@ function filtrarCategoria(
 
   document
     .querySelectorAll(".categoria")
-    .forEach(
-      elemento => {
-        elemento.classList.remove(
-          "activa"
-        );
-      }
-    );
+    .forEach(elemento => {
+
+      elemento.classList.remove(
+        "activa"
+      );
+
+    });
 
 
   boton.classList.add(
@@ -929,9 +828,7 @@ function filtrarCategoria(
     );
 
 
-  if (
-    categoria === "TODOS"
-  ) {
+  if (categoria === "TODOS") {
 
     mostrarProductos(
       todosLosProductos
@@ -977,12 +874,9 @@ function filtrarCategoria(
 ========================= */
 
 cargarCategorias();
-
 cargarProductos();
 
 </script>
 
-
 </body>
-
 </html>
