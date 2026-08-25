@@ -7,6 +7,7 @@
   <title>Administrador | B4X</title>
 
   <style>
+
     * {
       box-sizing: border-box;
       margin: 0;
@@ -39,6 +40,18 @@
       border: 1px solid #292929;
       border-radius: 16px;
       padding: 25px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin-bottom: 8px;
+      font-size: 22px;
+    }
+
+    .descripcion-panel {
+      color: #999;
+      margin-bottom: 20px;
+      font-size: 14px;
     }
 
     label {
@@ -66,7 +79,7 @@
 
     button {
       width: 100%;
-      margin-top: 25px;
+      margin-top: 20px;
       padding: 14px;
       border: none;
       border-radius: 8px;
@@ -81,8 +94,13 @@
       opacity: 0.85;
     }
 
+    .boton-categoria {
+      background: #ffffff;
+    }
+
+    #mensajeCategoria,
     #mensaje {
-      margin-top: 18px;
+      margin-top: 15px;
       text-align: center;
       font-weight: bold;
     }
@@ -94,22 +112,81 @@
       color: #aaa;
       text-decoration: none;
     }
+
   </style>
 </head>
 
+
 <body>
 
+
 <div class="contenedor">
+
 
   <h1>Panel de Administración B4X</h1>
 
   <p class="subtitulo">
-    Agrega productos a tu tienda.
+    Administra los productos y categorías de tu tienda.
   </p>
+
+
+  <!-- =========================
+       CATEGORÍAS
+  ========================== -->
 
   <div class="panel">
 
-    <label>Nombre del producto</label>
+    <h2>📂 Agregar categoría</h2>
+
+    <p class="descripcion-panel">
+      Crea una nueva categoría para tus productos.
+    </p>
+
+
+    <label>
+      Nombre de la categoría
+    </label>
+
+
+    <input
+      id="nuevaCategoria"
+      type="text"
+      placeholder="Ej: Vapers">
+
+
+    <button
+      type="button"
+      class="boton-categoria"
+      onclick="agregarCategoria()">
+
+      ➕ Agregar categoría
+
+    </button>
+
+
+    <div id="mensajeCategoria"></div>
+
+  </div>
+
+
+
+  <!-- =========================
+       PRODUCTOS
+  ========================== -->
+
+  <div class="panel">
+
+    <h2>🛍️ Agregar producto</h2>
+
+    <p class="descripcion-panel">
+      Agrega un nuevo producto a tu tienda.
+    </p>
+
+
+    <label>
+      Nombre del producto
+    </label>
+
 
     <input
       id="nombre"
@@ -117,14 +194,20 @@
       placeholder="Ej: Gomitas B4X">
 
 
-    <label>Descripción</label>
+    <label>
+      Descripción
+    </label>
+
 
     <textarea
       id="descripcion"
       placeholder="Descripción del producto"></textarea>
 
 
-    <label>Precio</label>
+    <label>
+      Precio
+    </label>
+
 
     <input
       id="precio"
@@ -132,7 +215,10 @@
       placeholder="2000">
 
 
-    <label>Categoría</label>
+    <label>
+      Categoría
+    </label>
+
 
     <select id="categoria">
 
@@ -143,7 +229,10 @@
     </select>
 
 
-    <label>Imagen</label>
+    <label>
+      Imagen
+    </label>
+
 
     <input
       id="imagen"
@@ -159,55 +248,74 @@
 
     </button>
 
+
     <div id="mensaje"></div>
 
   </div>
+
 
 
   <a class="volver" href="index.html">
     ← Volver a la tienda
   </a>
 
+
 </div>
+
 
 
 <script>
 
+
+/* =========================
+   SUPABASE
+========================= */
+
+
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
 
+
 const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
+
 
 
 /* =========================
    CARGAR CATEGORÍAS
 ========================= */
 
+
 async function cargarCategorias() {
 
   const select =
     document.getElementById("categoria");
 
+
   try {
 
-    const respuesta = await fetch(
+    const respuesta =
+      await fetch(
 
-      SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
 
-      {
-        headers: {
+        {
 
-          "apikey": SUPABASE_KEY,
+          headers: {
 
-          "Authorization":
-            "Bearer " + SUPABASE_KEY
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
 
         }
-      }
 
-    );
+      );
 
 
     if (!respuesta.ok) {
@@ -246,9 +354,13 @@ async function cargarCategorias() {
     });
 
 
-  } catch (error) {
+  }
+
+
+  catch (error) {
 
     console.error(error);
+
 
     select.innerHTML =
       '<option value="">Error al cargar categorías</option>';
@@ -258,11 +370,131 @@ async function cargarCategorias() {
 }
 
 
+
+/* =========================
+   AGREGAR CATEGORÍA
+========================= */
+
+
+async function agregarCategoria() {
+
+  const input =
+    document.getElementById("nuevaCategoria");
+
+
+  const mensaje =
+    document.getElementById("mensajeCategoria");
+
+
+  const nombre =
+    input.value.trim();
+
+
+  if (!nombre) {
+
+    mensaje.textContent =
+      "⚠️ Escribe el nombre de la categoría.";
+
+    return;
+
+  }
+
+
+  mensaje.textContent =
+    "Creando categoría...";
+
+
+  try {
+
+
+    const respuesta =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS",
+
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              Nombre:
+                nombre
+
+            })
+
+        }
+
+      );
+
+
+    if (!respuesta.ok) {
+
+      const error =
+        await respuesta.text();
+
+
+      throw new Error(error);
+
+    }
+
+
+    mensaje.textContent =
+      "✅ Categoría agregada correctamente.";
+
+
+    input.value = "";
+
+
+    /* Actualizar selector */
+
+    await cargarCategorias();
+
+
+  }
+
+
+  catch (error) {
+
+    console.error(error);
+
+
+    mensaje.textContent =
+      "❌ Error: " +
+      error.message;
+
+  }
+
+}
+
+
+
 /* =========================
    GUARDAR PRODUCTO
 ========================= */
 
+
 async function guardarProducto() {
+
 
   const nombre =
     document
@@ -300,6 +532,7 @@ async function guardarProducto() {
     document.getElementById("mensaje");
 
 
+
   if (!nombre || !precio || !categoria) {
 
     mensaje.textContent =
@@ -308,6 +541,7 @@ async function guardarProducto() {
     return;
 
   }
+
 
 
   if (!archivoImagen) {
@@ -320,8 +554,10 @@ async function guardarProducto() {
   }
 
 
+
   mensaje.textContent =
     "Guardando producto...";
+
 
 
   try {
@@ -330,6 +566,7 @@ async function guardarProducto() {
     /* =========================
        SUBIR IMAGEN
     ========================= */
+
 
     const nombreArchivo =
       Date.now() +
@@ -391,9 +628,11 @@ async function guardarProducto() {
     }
 
 
+
     /* =========================
-       URL DE LA IMAGEN
-    ========================= */
+       URL IMAGEN
+    ========================== */
+
 
     const imagen =
 
@@ -404,9 +643,11 @@ async function guardarProducto() {
       rutaImagen;
 
 
+
     /* =========================
        GUARDAR PRODUCTO
     ========================= */
+
 
     const respuesta =
       await fetch(
@@ -435,6 +676,7 @@ async function guardarProducto() {
 
           },
 
+
           body:
             JSON.stringify({
 
@@ -460,6 +702,7 @@ async function guardarProducto() {
       );
 
 
+
     if (!respuesta.ok) {
 
       const error =
@@ -471,13 +714,14 @@ async function guardarProducto() {
     }
 
 
+
     mensaje.textContent =
       "✅ Producto guardado correctamente.";
 
 
-    /* =========================
-       LIMPIAR FORMULARIO
-    ========================= */
+
+    /* Limpiar formulario */
+
 
     document
       .getElementById("nombre")
@@ -516,13 +760,17 @@ async function guardarProducto() {
 }
 
 
+
 /* =========================
    INICIAR
 ========================= */
 
+
 cargarCategorias();
 
+
 </script>
+
 
 </body>
 </html>
