@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -140,7 +141,7 @@
     <input
       id="nuevaCategoria"
       type="text"
-      placeholder="Ej: Vapers">
+      placeholder="Ej: Gomitas">
 
     <label>
       Emoji de la categoría
@@ -149,7 +150,7 @@
     <input
       id="emojiCategoria"
       type="text"
-      placeholder="Ej: 💨"
+      placeholder="Ej: 🌶️"
       maxlength="10">
 
     <button
@@ -292,18 +293,22 @@ async function cargarCategorias() {
     select.innerHTML =
       '<option value="">Selecciona una categoría</option>';
 
+
     categorias.forEach(categoria => {
 
       const opcion =
         document.createElement("option");
 
+
       opcion.value =
         categoria.Nombre;
 
+
       opcion.textContent =
-        (categoria.Emoji || "📦") +
+        (categoria["IDENTIFICACIÓN"] || "📦") +
         " " +
         categoria.Nombre;
+
 
       select.appendChild(opcion);
 
@@ -337,6 +342,7 @@ async function agregarCategoria() {
 
   const mensaje =
     document.getElementById("mensajeCategoria");
+
 
   const nombre =
     input.value.trim();
@@ -390,9 +396,11 @@ async function agregarCategoria() {
           body: JSON.stringify({
 
             Nombre: nombre,
-            Emoji: emoji
+
+            "IDENTIFICACIÓN": emoji
 
           })
+
         }
 
       );
@@ -413,6 +421,7 @@ async function agregarCategoria() {
 
 
     input.value = "";
+
     inputEmoji.value = "";
 
 
@@ -441,19 +450,36 @@ async function agregarCategoria() {
 async function guardarProducto() {
 
   const nombre =
-    document.getElementById("nombre").value.trim();
+    document
+      .getElementById("nombre")
+      .value
+      .trim();
+
 
   const descripcion =
-    document.getElementById("descripcion").value.trim();
+    document
+      .getElementById("descripcion")
+      .value
+      .trim();
+
 
   const precio =
-    document.getElementById("precio").value;
+    document
+      .getElementById("precio")
+      .value;
+
 
   const categoria =
-    document.getElementById("categoria").value;
+    document
+      .getElementById("categoria")
+      .value;
+
 
   const archivoImagen =
-    document.getElementById("imagen").files[0];
+    document
+      .getElementById("imagen")
+      .files[0];
+
 
   const mensaje =
     document.getElementById("mensaje");
@@ -485,10 +511,15 @@ async function guardarProducto() {
 
   try {
 
+    /* =========================
+       SUBIR IMAGEN
+    ========================= */
+
     const nombreArchivo =
       Date.now() +
       "_" +
       archivoImagen.name;
+
 
     const rutaImagen =
       "imagenes/" +
@@ -512,6 +543,7 @@ async function guardarProducto() {
           },
 
           body: archivoImagen
+
         }
 
       );
@@ -530,11 +562,19 @@ async function guardarProducto() {
     }
 
 
+    /* =========================
+       URL IMAGEN
+    ========================= */
+
     const imagen =
       SUPABASE_URL +
       "/storage/v1/object/public/productos/" +
       rutaImagen;
 
+
+    /* =========================
+       GUARDAR PRODUCTO
+    ========================= */
 
     const respuesta =
       await fetch(
@@ -565,6 +605,7 @@ async function guardarProducto() {
             Imagen: imagen
 
           })
+
         }
 
       );
@@ -585,8 +626,11 @@ async function guardarProducto() {
 
 
     document.getElementById("nombre").value = "";
+
     document.getElementById("descripcion").value = "";
+
     document.getElementById("precio").value = "";
+
     document.getElementById("imagen").value = "";
 
   }
@@ -615,3 +659,4 @@ cargarCategorias();
 
 </body>
 </html>
+```
