@@ -108,6 +108,16 @@
       color: #aaa;
       text-decoration: none;
     }
+
+    .vista-previa {
+      width: 100%;
+      height: 180px;
+      margin-top: 15px;
+      border-radius: 12px;
+      object-fit: cover;
+      display: none;
+      border: 1px solid #333;
+    }
   </style>
 </head>
 
@@ -134,6 +144,7 @@
       Crea una nueva categoría para tus productos.
     </p>
 
+
     <label>
       Nombre de la categoría
     </label>
@@ -141,7 +152,8 @@
     <input
       id="nuevaCategoria"
       type="text"
-      placeholder="Ej: Gomitas">
+      placeholder="Ej: Combos">
+
 
     <label>
       Emoji de la categoría
@@ -150,8 +162,26 @@
     <input
       id="emojiCategoria"
       type="text"
-      placeholder="Ej: 🌶️"
+      placeholder="Ej: 🎁"
       maxlength="10">
+
+
+    <label>
+      Imagen de la categoría
+    </label>
+
+    <input
+      id="imagenCategoria"
+      type="file"
+      accept="image/*"
+      onchange="previsualizarCategoria()">
+
+
+    <img
+      id="vistaPreviaCategoria"
+      class="vista-previa"
+      alt="Vista previa">
+
 
     <button
       type="button"
@@ -160,6 +190,7 @@
       ➕ Agregar categoría
 
     </button>
+
 
     <div id="mensajeCategoria"></div>
 
@@ -178,6 +209,7 @@
       Agrega un nuevo producto a tu tienda.
     </p>
 
+
     <label>
       Nombre del producto
     </label>
@@ -187,6 +219,7 @@
       type="text"
       placeholder="Ej: Gomitas B4X">
 
+
     <label>
       Descripción
     </label>
@@ -194,6 +227,7 @@
     <textarea
       id="descripcion"
       placeholder="Descripción del producto"></textarea>
+
 
     <label>
       Precio
@@ -203,6 +237,7 @@
       id="precio"
       type="number"
       placeholder="2000">
+
 
     <label>
       Categoría
@@ -216,6 +251,7 @@
 
     </select>
 
+
     <label>
       Imagen
     </label>
@@ -225,6 +261,7 @@
       type="file"
       accept="image/*">
 
+
     <button
       type="button"
       onclick="guardarProducto()">
@@ -232,6 +269,7 @@
       Guardar producto
 
     </button>
+
 
     <div id="mensaje"></div>
 
@@ -259,6 +297,43 @@ const SUPABASE_KEY =
 
 
 /* =========================
+   PREVISUALIZAR IMAGEN
+========================= */
+
+function previsualizarCategoria() {
+
+  const archivo =
+    document
+      .getElementById("imagenCategoria")
+      .files[0];
+
+  const vista =
+    document.getElementById(
+      "vistaPreviaCategoria"
+    );
+
+
+  if (!archivo) {
+
+    vista.style.display = "none";
+
+    return;
+
+  }
+
+
+  const url =
+    URL.createObjectURL(archivo);
+
+
+  vista.src = url;
+
+  vista.style.display = "block";
+
+}
+
+
+/* =========================
    CARGAR CATEGORÍAS
 ========================= */
 
@@ -267,58 +342,81 @@ async function cargarCategorias() {
   const select =
     document.getElementById("categoria");
 
+
   try {
 
-    const respuesta = await fetch(
+    const respuesta =
+      await fetch(
 
-      SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
 
-      {
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+        {
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY
+
+          }
+
         }
-      }
 
-    );
+      );
+
 
     if (!respuesta.ok) {
-      throw new Error(await respuesta.text());
+
+      throw new Error(
+        await respuesta.text()
+      );
+
     }
+
 
     const categorias =
       await respuesta.json();
+
 
     select.innerHTML =
       '<option value="">Selecciona una categoría</option>';
 
 
-    categorias.forEach(categoria => {
+    categorias.forEach(
+      categoria => {
 
-      const opcion =
-        document.createElement("option");
-
-
-      opcion.value =
-        categoria.Nombre;
+        const opcion =
+          document.createElement("option");
 
 
-      opcion.textContent =
-        (categoria["IDENTIFICACIÓN"] || "📦") +
-        " " +
-        categoria.Nombre;
+        opcion.value =
+          categoria.Nombre;
 
 
-      select.appendChild(opcion);
+        opcion.textContent =
+          (categoria["IDENTIFICACIÓN"] || "📦") +
+          " " +
+          categoria.Nombre;
 
-    });
+
+        select.appendChild(
+          opcion
+        );
+
+      }
+    );
+
 
   }
 
   catch (error) {
 
     console.error(error);
+
 
     select.innerHTML =
       '<option value="">Error al cargar categorías</option>';
@@ -335,17 +433,32 @@ async function cargarCategorias() {
 async function agregarCategoria() {
 
   const input =
-    document.getElementById("nuevaCategoria");
+    document.getElementById(
+      "nuevaCategoria"
+    );
+
 
   const inputEmoji =
-    document.getElementById("emojiCategoria");
+    document.getElementById(
+      "emojiCategoria"
+    );
+
+
+  const archivoImagen =
+    document.getElementById(
+      "imagenCategoria"
+    ).files[0];
+
 
   const mensaje =
-    document.getElementById("mensajeCategoria");
+    document.getElementById(
+      "mensajeCategoria"
+    );
 
 
   const nombre =
     input.value.trim();
+
 
   const emoji =
     inputEmoji.value.trim();
@@ -371,11 +484,102 @@ async function agregarCategoria() {
   }
 
 
+  if (!archivoImagen) {
+
+    mensaje.textContent =
+      "⚠️ Selecciona una imagen para la categoría.";
+
+    return;
+
+  }
+
+
   mensaje.textContent =
-    "Creando categoría...";
+    "Subiendo imagen...";
 
 
   try {
+
+    /* =========================
+       SUBIR IMAGEN
+    ========================= */
+
+    const nombreArchivo =
+      "categoria_" +
+      Date.now() +
+      "_" +
+      archivoImagen.name;
+
+
+    const rutaImagen =
+      "categorias/" +
+      nombreArchivo;
+
+
+    const subida =
+      await fetch(
+
+        SUPABASE_URL +
+        "/storage/v1/object/productos/" +
+        rutaImagen,
+
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              archivoImagen.type
+
+          },
+
+          body:
+            archivoImagen
+
+        }
+
+      );
+
+
+    if (!subida.ok) {
+
+      const error =
+        await subida.text();
+
+
+      throw new Error(
+        "No se pudo subir la imagen: " +
+        error
+      );
+
+    }
+
+
+    /* =========================
+       URL DE LA IMAGEN
+    ========================= */
+
+    const imagen =
+      SUPABASE_URL +
+      "/storage/v1/object/public/productos/" +
+      rutaImagen;
+
+
+    mensaje.textContent =
+      "Guardando categoría...";
+
+
+    /* =========================
+       GUARDAR CATEGORÍA
+    ========================= */
 
     const respuesta =
       await fetch(
@@ -384,22 +588,40 @@ async function agregarCategoria() {
         "/rest/v1/CATEGOR%C3%8DAS",
 
         {
+
           method: "POST",
 
           headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY,
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal"
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
           },
 
-          body: JSON.stringify({
 
-            Nombre: nombre,
+          body:
+            JSON.stringify({
 
-            "IDENTIFICACIÓN": emoji
+              Nombre:
+                nombre,
 
-          })
+              "IDENTIFICACIÓN":
+                emoji,
+
+              Imagen:
+                imagen
+
+            })
 
         }
 
@@ -410,6 +632,7 @@ async function agregarCategoria() {
 
       const error =
         await respuesta.text();
+
 
       throw new Error(error);
 
@@ -424,6 +647,19 @@ async function agregarCategoria() {
 
     inputEmoji.value = "";
 
+    document
+      .getElementById(
+        "imagenCategoria"
+      )
+      .value = "";
+
+
+    document
+      .getElementById(
+        "vistaPreviaCategoria"
+      )
+      .style.display = "none";
+
 
     await cargarCategorias();
 
@@ -433,6 +669,7 @@ async function agregarCategoria() {
   catch (error) {
 
     console.error(error);
+
 
     mensaje.textContent =
       "❌ Error: " +
@@ -482,7 +719,9 @@ async function guardarProducto() {
 
 
   const mensaje =
-    document.getElementById("mensaje");
+    document.getElementById(
+      "mensaje"
+    );
 
 
   if (!nombre || !precio || !categoria) {
@@ -511,10 +750,6 @@ async function guardarProducto() {
 
   try {
 
-    /* =========================
-       SUBIR IMAGEN
-    ========================= */
-
     const nombreArchivo =
       Date.now() +
       "_" +
@@ -534,15 +769,25 @@ async function guardarProducto() {
         rutaImagen,
 
         {
+
           method: "POST",
 
           headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY,
-            "Content-Type": archivoImagen.type
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              archivoImagen.type
+
           },
 
-          body: archivoImagen
+          body:
+            archivoImagen
 
         }
 
@@ -554,6 +799,7 @@ async function guardarProducto() {
       const error =
         await subida.text();
 
+
       throw new Error(
         "No se pudo subir la imagen: " +
         error
@@ -562,19 +808,11 @@ async function guardarProducto() {
     }
 
 
-    /* =========================
-       URL IMAGEN
-    ========================= */
-
     const imagen =
       SUPABASE_URL +
       "/storage/v1/object/public/productos/" +
       rutaImagen;
 
-
-    /* =========================
-       GUARDAR PRODUCTO
-    ========================= */
 
     const respuesta =
       await fetch(
@@ -583,28 +821,46 @@ async function guardarProducto() {
         "/rest/v1/PRODUCTOS",
 
         {
+
           method: "POST",
 
           headers: {
-            "apikey": SUPABASE_KEY,
-            "Authorization": "Bearer " + SUPABASE_KEY,
-            "Content-Type": "application/json",
-            "Prefer": "return=minimal"
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
           },
 
-          body: JSON.stringify({
 
-            Nombre: nombre,
+          body:
+            JSON.stringify({
 
-            Descripcion: descripcion,
+              Nombre:
+                nombre,
 
-            Precio: Number(precio),
+              Descripcion:
+                descripcion,
 
-            Categoria: categoria,
+              Precio:
+                Number(precio),
 
-            Imagen: imagen
+              Categoria:
+                categoria,
 
-          })
+              Imagen:
+                imagen
+
+            })
 
         }
 
@@ -616,6 +872,7 @@ async function guardarProducto() {
       const error =
         await respuesta.text();
 
+
       throw new Error(error);
 
     }
@@ -625,13 +882,24 @@ async function guardarProducto() {
       "✅ Producto guardado correctamente.";
 
 
-    document.getElementById("nombre").value = "";
+    document
+      .getElementById("nombre")
+      .value = "";
 
-    document.getElementById("descripcion").value = "";
 
-    document.getElementById("precio").value = "";
+    document
+      .getElementById("descripcion")
+      .value = "";
 
-    document.getElementById("imagen").value = "";
+
+    document
+      .getElementById("precio")
+      .value = "";
+
+
+    document
+      .getElementById("imagen")
+      .value = "";
 
   }
 
@@ -639,6 +907,7 @@ async function guardarProducto() {
   catch (error) {
 
     console.error(error);
+
 
     mensaje.textContent =
       "❌ Error: " +
