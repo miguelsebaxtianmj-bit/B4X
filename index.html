@@ -18,6 +18,25 @@
     content="B4X — Algo diferente está aquí."
   >
 
+  <!-- TIPOGRAFÍAS -->
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+
   <style>
 
     * {
@@ -26,16 +45,31 @@
       padding: 0;
     }
 
+
     html {
       scroll-behavior: smooth;
     }
 
+
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #080808;
-      color: #ffffff;
-      line-height: 1.6;
-      overflow-x: hidden;
+
+      font-family:
+        "DM Sans",
+        Arial,
+        sans-serif;
+
+      background:
+        #f4f2ee;
+
+      color:
+        #151515;
+
+      line-height:
+        1.6;
+
+      overflow-x:
+        hidden;
+
     }
 
 
@@ -44,75 +78,106 @@
     ========================= */
 
     header {
-      position: sticky;
-      top: 0;
-      z-index: 1000;
 
-      height: 78px;
+      position:
+        sticky;
 
-      padding: 0 7%;
+      top:
+        0;
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      z-index:
+        1000;
 
-      background: rgba(8, 8, 8, .88);
+      height:
+        78px;
 
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      padding:
+        0 6%;
 
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      background:
+        rgba(244,242,238,.88);
+
+      backdrop-filter:
+        blur(18px);
+
+      -webkit-backdrop-filter:
+        blur(18px);
+
+      border-bottom:
+        1px solid
+        rgba(0,0,0,.08);
+
     }
+
 
     .logo {
-      font-size: 28px;
-      font-weight: 900;
-      letter-spacing: 5px;
+
+      font-size:
+        25px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        5px;
+
+      color:
+        #111;
+
     }
+
 
     nav {
-      display: flex;
-      align-items: center;
-      gap: 32px;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        32px;
+
     }
+
 
     nav a {
-      position: relative;
 
-      color: #fff;
-      text-decoration: none;
+      color:
+        #222;
 
-      font-size: 13px;
-      font-weight: 600;
+      text-decoration:
+        none;
 
-      letter-spacing: 1px;
-      text-transform: uppercase;
+      font-size:
+        12px;
 
-      transition: .3s;
+      font-weight:
+        600;
+
+      letter-spacing:
+        1px;
+
+      transition:
+        .3s;
+
     }
+
 
     nav a:hover {
-      opacity: .6;
-    }
 
-    nav a::after {
-      content: "";
+      opacity:
+        .5;
 
-      position: absolute;
-
-      left: 0;
-      bottom: -7px;
-
-      width: 0;
-      height: 1px;
-
-      background: #fff;
-
-      transition: .3s;
-    }
-
-    nav a:hover::after {
-      width: 100%;
     }
 
 
@@ -121,210 +186,255 @@
     ========================= */
 
     .hero {
-      position: relative;
 
-      min-height: calc(100vh - 78px);
+      min-height:
+        calc(100vh - 78px);
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display:
+        flex;
 
-      text-align: center;
+      align-items:
+        center;
 
-      padding: 100px 20px;
+      justify-content:
+        center;
 
-      overflow: hidden;
+      text-align:
+        center;
+
+      padding:
+        80px 20px;
 
       background:
-        radial-gradient(
-          circle at 50% 45%,
-          rgba(255,255,255,.09),
-          transparent 28%
-        ),
-        radial-gradient(
-          circle at 20% 80%,
-          rgba(180,0,0,.07),
-          transparent 30%
-        ),
-        #080808;
+        #f4f2ee;
+
     }
 
-    .hero::before {
-      content: "B4X";
-
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      font-size:
-        clamp(180px, 30vw, 450px);
-
-      font-weight: 900;
-
-      letter-spacing: 20px;
-
-      color:
-        rgba(255,255,255,.025);
-
-      pointer-events: none;
-
-      white-space: nowrap;
-    }
 
     .hero-content {
-      position: relative;
 
-      z-index: 2;
+      max-width:
+        900px;
 
-      max-width: 900px;
     }
 
-    .hero-label {
-      display: inline-block;
 
-      margin-bottom: 25px;
+    .hero-small {
 
-      color: #8e8e8e;
+      display:
+        inline-block;
 
-      font-size: 12px;
+      margin-bottom:
+        25px;
 
-      letter-spacing: 5px;
+      color:
+        #777;
 
-      text-transform: uppercase;
+      font-size:
+        11px;
+
+      font-weight:
+        600;
+
+      letter-spacing:
+        4px;
+
+      text-transform:
+        uppercase;
+
     }
+
 
     .hero h1 {
-      font-size:
-        clamp(80px, 17vw, 190px);
 
-      line-height: .9;
-
-      font-weight: 900;
-
-      letter-spacing: 18px;
-
-      margin-left: 18px;
-
-      text-shadow:
-        0 0 60px rgba(255,255,255,.08);
-    }
-
-    .hero-subtitle {
-      margin-top: 28px;
-
-      color: #d2d2d2;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
 
       font-size:
-        clamp(20px, 3vw, 30px);
+        clamp(
+          90px,
+          18vw,
+          200px
+        );
 
-      font-weight: 300;
+      font-weight:
+        500;
 
-      letter-spacing: 1px;
+      line-height:
+        .85;
+
+      letter-spacing:
+        -8px;
+
+      color:
+        #111;
+
     }
 
-    .hero-description {
-      margin: 18px auto 0;
 
-      max-width: 560px;
+    .hero-frase {
 
-      color: #777;
+      margin-top:
+        35px;
 
-      font-size: 15px;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(
+          24px,
+          4vw,
+          42px
+        );
+
+      font-style:
+        italic;
+
+      color:
+        #292929;
+
     }
 
-    .boton-principal {
-      display: inline-flex;
 
-      align-items: center;
-      justify-content: center;
+    .hero-descripcion {
 
-      gap: 14px;
+      max-width:
+        500px;
 
-      margin-top: 38px;
+      margin:
+        20px auto 0;
 
-      padding: 16px 28px;
+      color:
+        #777;
 
-      background: #fff;
+      font-size:
+        14px;
 
-      color: #080808;
-
-      border-radius: 999px;
-
-      text-decoration: none;
-
-      font-size: 13px;
-
-      font-weight: 800;
-
-      letter-spacing: 1px;
-
-      transition: .35s;
     }
 
-    .boton-principal span {
-      transition: .35s;
+
+    .hero-boton {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+
+      margin-top:
+        35px;
+
+      padding:
+        13px 22px;
+
+      background:
+        #171717;
+
+      color:
+        white;
+
+      border:
+        none;
+
+      border-radius:
+        3px;
+
+      text-decoration:
+        none;
+
+      font-size:
+        11px;
+
+      font-weight:
+        600;
+
+      letter-spacing:
+        1px;
+
+      transition:
+        .3s;
+
     }
 
-    .boton-principal:hover {
-      transform: translateY(-4px);
 
-      box-shadow:
-        0 15px 40px
-        rgba(255,255,255,.12);
-    }
+    .hero-boton:hover {
 
-    .boton-principal:hover span {
-      transform: translateX(5px);
+      background:
+        #333;
+
+      transform:
+        translateY(-3px);
+
     }
 
 
     /* =========================
-       SECCIONES
+       TITULOS
     ========================= */
 
     section {
-      padding: 110px 7%;
+
+      padding:
+        100px 7%;
+
     }
 
-    .numero-seccion {
-      color: #555;
-
-      font-size: 11px;
-
-      letter-spacing: 4px;
-
-      margin-bottom: 12px;
-    }
 
     .titulo {
-      margin-bottom: 55px;
+
+      text-align:
+        center;
+
+      margin-bottom:
+        55px;
+
     }
 
-    .titulo-centro {
-      text-align: center;
-    }
 
     .titulo h2 {
+
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
       font-size:
-        clamp(38px, 6vw, 70px);
+        clamp(
+          42px,
+          6vw,
+          70px
+        );
 
-      line-height: 1;
+      font-weight:
+        500;
 
-      letter-spacing: -2px;
+      line-height:
+        1;
 
-      font-weight: 800;
+      color:
+        #161616;
+
     }
 
+
     .titulo p {
-      margin-top: 15px;
 
-      color: #777;
+      margin-top:
+        15px;
 
-      font-size: 15px;
+      color:
+        #777;
+
+      font-size:
+        14px;
+
     }
 
 
@@ -333,292 +443,360 @@
     ========================= */
 
     #categorias {
-      background: #0a0a0a;
+
+      background:
+        #ebe8e2;
+
     }
 
+
     .categorias {
-      display: grid;
+
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(280px, 1fr)
+          minmax(
+            270px,
+            1fr
+          )
         );
 
-      gap: 20px;
+      gap:
+        22px;
+
     }
+
 
     .categoria {
-      position: relative;
 
-      min-height: 430px;
+      position:
+        relative;
 
-      padding: 0;
+      height:
+        430px;
 
-      border: 1px solid
-        rgba(255,255,255,.09);
+      padding:
+        0;
 
-      border-radius: 20px;
+      border:
+        none;
 
-      overflow: hidden;
+      border-radius:
+        2px;
 
-      background: #111;
+      overflow:
+        hidden;
 
-      color: #fff;
+      background:
+        #ddd;
 
-      cursor: pointer;
+      cursor:
+        pointer;
 
-      text-align: left;
+      color:
+        white;
 
-      font-family: inherit;
+      text-align:
+        left;
+
+      font-family:
+        inherit;
 
       transition:
-        transform .5s
-        cubic-bezier(.2,.8,.2,1),
-        border-color .4s;
+        transform .45s;
+
     }
+
 
     .categoria:hover {
-      transform: translateY(-8px);
 
-      border-color:
-        rgba(255,255,255,.35);
+      transform:
+        translateY(
+          -7px
+        );
+
     }
+
 
     .categoria.activa {
-      border-color:
-        rgba(255,255,255,.75);
+
+      outline:
+        2px solid
+        #171717;
+
+      outline-offset:
+        4px;
+
     }
+
 
     .categoria-imagen {
-      position: absolute;
 
-      inset: 0;
+      position:
+        absolute;
 
-      overflow: hidden;
+      inset:
+        0;
+
     }
+
 
     .categoria-imagen img {
-      width: 100%;
-      height: 100%;
 
-      object-fit: cover;
+      width:
+        100%;
 
-      display: block;
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      display:
+        block;
 
       transition:
-        transform .8s
-        cubic-bezier(.2,.8,.2,1),
-        filter .6s;
+        transform .7s;
+
     }
+
 
     .categoria:hover
     .categoria-imagen img {
-      transform: scale(1.08);
 
-      filter:
-        brightness(.78)
-        contrast(1.05);
-    }
-
-    .categoria-sin-imagen {
-      width: 100%;
-      height: 100%;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: center;
-
-      background:
-        radial-gradient(
-          circle at center,
-          #252525,
-          #0d0d0d
+      transform:
+        scale(
+          1.06
         );
 
-      font-size: 60px;
     }
 
+
     .categoria-imagen::after {
-      content: "";
 
-      position: absolute;
+      content:
+        "";
 
-      inset: 0;
+      position:
+        absolute;
+
+      inset:
+        0;
 
       background:
         linear-gradient(
           to top,
-          rgba(0,0,0,.92) 0%,
-          rgba(0,0,0,.48) 42%,
-          rgba(0,0,0,.05) 75%
+          rgba(0,0,0,.78),
+          rgba(0,0,0,.05)
         );
+
     }
+
+
+    .categoria-sin-imagen {
+
+      width:
+        100%;
+
+      height:
+        100%;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      background:
+        #252525;
+
+      font-size:
+        55px;
+
+    }
+
 
     .categoria-contenido {
-      position: absolute;
 
-      left: 0;
-      right: 0;
-      bottom: 0;
+      position:
+        absolute;
 
-      z-index: 2;
+      left:
+        0;
 
-      padding: 30px;
+      right:
+        0;
+
+      bottom:
+        0;
+
+      z-index:
+        2;
+
+      padding:
+        30px;
+
     }
 
-    .categoria-numero {
-      display: block;
-
-      margin-bottom: 8px;
-
-      color: #aaa;
-
-      font-size: 11px;
-
-      letter-spacing: 3px;
-    }
 
     .categoria h3 {
-      font-size: 27px;
 
-      line-height: 1.1;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-size:
+        30px;
+
+      font-weight:
+        500;
+
+      line-height:
+        1.1;
+
     }
+
 
     .categoria-flecha {
-      position: absolute;
 
-      right: 28px;
-      bottom: 28px;
+      position:
+        absolute;
 
-      width: 42px;
-      height: 42px;
+      right:
+        25px;
 
-      display: flex;
+      bottom:
+        25px;
 
-      align-items: center;
-      justify-content: center;
+      width:
+        42px;
 
-      border: 1px solid
-        rgba(255,255,255,.25);
+      height:
+        42px;
 
-      border-radius: 50%;
+      border:
+        1px solid
+        rgba(255,255,255,.4);
 
-      font-size: 18px;
+      border-radius:
+        50%;
 
-      opacity: .65;
+      display:
+        flex;
 
-      transition: .35s;
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      z-index:
+        3;
+
+      transition:
+        .3s;
+
     }
+
 
     .categoria:hover
     .categoria-flecha {
-      opacity: 1;
 
-      background: #fff;
+      background:
+        white;
 
-      color: #000;
+      color:
+        black;
 
-      transform: translateX(4px);
     }
 
 
     /* =========================
-       BOTÓN TODOS
+       BOTON TODOS
     ========================= */
 
     .categoria-todos {
-      grid-column: 1 / -1;
 
-      width: fit-content;
+      grid-column:
+        1 / -1;
 
-      min-height: auto;
+      width:
+        auto;
 
-      margin: 5px auto 0;
+      height:
+        auto;
 
-      padding: 11px 22px;
+      min-height:
+        0;
 
-      display: flex;
+      margin:
+        0 auto;
 
-      align-items: center;
-      justify-content: center;
+      padding:
+        7px 14px;
 
-      background: #111;
+      border:
+        1px solid
+        #c6c2bb;
 
-      border: 1px solid
-        rgba(255,255,255,.14);
+      border-radius:
+        50px;
 
-      border-radius: 999px;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      letter-spacing: 1.5px;
-
-      text-transform: uppercase;
-
-      transition:
-        background .3s,
-        color .3s,
-        transform .3s,
-        border-color .3s;
-    }
-
-    .categoria-todos:hover {
-      background: #fff;
-
-      color: #000;
-
-      border-color: #fff;
-
-      transform: translateY(-3px);
-    }
-
-    .categoria-todos.activa {
-      background: #fff;
-
-      color: #000;
-
-      border-color: #fff;
-    }
-
-
-    /* =========================
-       SEPARADOR
-    ========================= */
-
-    .marca-separador {
-      padding: 35px 0;
-
-      overflow: hidden;
-
-      white-space: nowrap;
-
-      border-top: 1px solid
-        rgba(255,255,255,.06);
-
-      border-bottom: 1px solid
-        rgba(255,255,255,.06);
-
-      background: #080808;
-    }
-
-    .marca-separador p {
-      font-size:
-        clamp(60px, 13vw, 170px);
-
-      line-height: .8;
-
-      font-weight: 900;
-
-      letter-spacing: 15px;
+      background:
+        #e4e1db;
 
       color:
-        rgba(255,255,255,.035);
+        #777;
 
-      text-align: center;
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      letter-spacing:
+        1.5px;
+
+      text-transform:
+        uppercase;
+
+      transition:
+        .3s;
+
+    }
+
+
+    .categoria-todos:hover {
+
+      background:
+        #d7d3cc;
+
+      color:
+        #222;
+
+      transform:
+        translateY(
+          -2px
+        );
+
+    }
+
+
+    .categoria-todos.activa {
+
+      background:
+        #dcd8d1;
+
+      color:
+        #333;
+
     }
 
 
@@ -627,226 +805,327 @@
     ========================= */
 
     #productos {
-      background: #080808;
+
+      background:
+        #f4f2ee;
+
     }
 
+
     .productos {
-      display: grid;
+
+      display:
+        grid;
 
       grid-template-columns:
         repeat(
           auto-fit,
-          minmax(250px, 1fr)
+          minmax(
+            250px,
+            1fr
+          )
         );
 
-      gap: 24px;
+      gap:
+        28px;
+
     }
 
+
     .producto {
-      background: #101010;
 
-      border: 1px solid
-        rgba(255,255,255,.08);
+      background:
+        #fff;
 
-      border-radius: 18px;
+      border:
+        1px solid
+        #e2dfd9;
 
-      overflow: hidden;
+      overflow:
+        hidden;
 
       transition:
         transform .4s,
-        border-color .4s;
+        box-shadow .4s;
+
     }
+
 
     .producto:hover {
-      transform: translateY(-7px);
 
-      border-color:
-        rgba(255,255,255,.25);
-    }
-
-    .producto-imagen {
-      width: 100%;
-
-      height: 330px;
-
-      background:
-        radial-gradient(
-          circle,
-          #272727,
-          #111
+      transform:
+        translateY(
+          -6px
         );
 
-      display: flex;
+      box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.08);
 
-      align-items: center;
-      justify-content: center;
-
-      color: #555;
-
-      font-size: 12px;
-
-      overflow: hidden;
     }
 
+
+    .producto-imagen {
+
+      width:
+        100%;
+
+      height:
+        320px;
+
+      background:
+        #dedbd5;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      overflow:
+        hidden;
+
+      color:
+        #888;
+
+      font-size:
+        12px;
+
+    }
+
+
     .producto-imagen img {
-      width: 100%;
-      height: 100%;
 
-      object-fit: cover;
+      width:
+        100%;
 
-      display: block;
+      height:
+        100%;
+
+      object-fit:
+        cover;
+
+      display:
+        block;
 
       transition:
         transform .6s;
+
     }
+
 
     .producto:hover
     .producto-imagen img {
-      transform: scale(1.04);
+
+      transform:
+        scale(
+          1.04
+        );
+
     }
+
 
     .producto-info {
-      padding: 24px;
+
+      padding:
+        25px;
+
     }
+
 
     .producto h3 {
-      font-size: 20px;
 
-      margin-bottom: 7px;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-size:
+        25px;
+
+      font-weight:
+        500;
+
+      line-height:
+        1.2;
+
+      margin-bottom:
+        8px;
+
     }
+
 
     .producto-descripcion {
-      color: #777;
 
-      font-size: 13px;
+      min-height:
+        42px;
 
-      min-height: 42px;
+      color:
+        #777;
 
-      margin-bottom: 20px;
+      font-size:
+        13px;
+
+      margin-bottom:
+        20px;
+
     }
 
-    .producto-parte-inferior {
-      display: flex;
 
-      align-items: center;
-      justify-content: space-between;
+    .producto-final {
 
-      gap: 15px;
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        15px;
+
     }
+
 
     .precio {
-      font-size: 21px;
 
-      font-weight: 800;
+      font-size:
+        20px;
+
+      font-weight:
+        700;
+
+      color:
+        #171717;
+
     }
+
 
     .whatsapp {
-      display: inline-flex;
 
-      align-items: center;
-      justify-content: center;
+      padding:
+        10px 15px;
 
-      padding: 11px 15px;
+      background:
+        #171717;
 
-      background: #fff;
+      color:
+        white;
 
-      color: #000;
+      text-decoration:
+        none;
 
-      border-radius: 999px;
+      font-size:
+        10px;
 
-      text-decoration: none;
+      font-weight:
+        700;
 
-      font-size: 11px;
+      letter-spacing:
+        .8px;
 
-      font-weight: 800;
+      border-radius:
+        2px;
 
-      letter-spacing: .5px;
+      transition:
+        .3s;
 
-      transition: .3s;
-
-      white-space: nowrap;
     }
+
 
     .whatsapp:hover {
-      transform: translateY(-2px);
 
-      opacity: .85;
+      background:
+        #333;
+
     }
 
+
     .sin-productos {
-      grid-column: 1 / -1;
 
-      text-align: center;
+      grid-column:
+        1 / -1;
 
-      color: #666;
+      text-align:
+        center;
 
-      padding: 70px 20px;
+      padding:
+        60px;
 
-      border: 1px dashed #292929;
+      color:
+        #777;
 
-      border-radius: 16px;
     }
 
 
     /* =========================
-       SOBRE B4X
+       SOBRE
     ========================= */
 
-    .sobre-seccion {
-      position: relative;
+    .sobre {
 
-      overflow: hidden;
-
-      background: #0a0a0a;
-
-      text-align: center;
-    }
-
-    .sobre-seccion::before {
-      content: "B4X";
-
-      position: absolute;
-
-      left: 50%;
-      top: 50%;
-
-      transform:
-        translate(-50%, -50%);
-
-      font-size:
-        clamp(150px, 30vw, 400px);
-
-      font-weight: 900;
+      background:
+        #171717;
 
       color:
-        rgba(255,255,255,.025);
+        white;
 
-      pointer-events: none;
+      text-align:
+        center;
+
     }
 
-    .sobre {
-      position: relative;
 
-      z-index: 2;
+    .sobre-contenido {
 
-      max-width: 800px;
+      max-width:
+        750px;
 
-      margin: auto;
+      margin:
+        auto;
+
     }
+
 
     .sobre h2 {
-      font-size:
-        clamp(42px, 7vw, 75px);
 
-      margin-bottom: 30px;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(
+          45px,
+          7vw,
+          80px
+        );
+
+      font-weight:
+        500;
+
     }
 
+
     .sobre p {
-      color: #aaa;
 
-      font-size: 18px;
+      margin-top:
+        30px;
 
-      line-height: 1.9;
+      color:
+        #bbb;
+
+      font-size:
+        17px;
+
+      line-height:
+        1.9;
+
     }
 
 
@@ -855,27 +1134,43 @@
     ========================= */
 
     .contacto {
-      text-align: center;
 
-      background: #111;
+      text-align:
+        center;
 
-      border-top: 1px solid
-        rgba(255,255,255,.06);
+      background:
+        #ebe8e2;
+
     }
+
 
     .contacto-datos {
-      margin: 35px 0;
+
+      margin:
+        30px 0;
+
     }
+
 
     .contacto-datos p {
-      color: #999;
 
-      margin: 10px;
+      color:
+        #666;
+
+      margin:
+        8px;
+
+      font-size:
+        14px;
+
     }
 
-    .contacto
-    .boton-principal {
-      margin-top: 10px;
+
+    .contacto .hero-boton {
+
+      margin-top:
+        10px;
+
     }
 
 
@@ -884,105 +1179,198 @@
     ========================= */
 
     footer {
-      padding: 45px 20px;
 
-      text-align: center;
+      padding:
+        45px 20px;
 
-      border-top: 1px solid
-        rgba(255,255,255,.07);
+      text-align:
+        center;
 
-      background: #060606;
+      background:
+        #111;
+
+      color:
+        #777;
+
     }
+
 
     .footer-logo {
-      font-size: 25px;
 
-      font-weight: 900;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
 
-      letter-spacing: 5px;
+      font-size:
+        30px;
+
+      color:
+        white;
+
     }
+
 
     .footer-frase {
-      margin-top: 8px;
 
-      color: #666;
+      margin-top:
+        5px;
 
-      font-size: 13px;
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-style:
+        italic;
+
+      color:
+        #777;
+
     }
 
+
     .footer-copy {
-      margin-top: 25px;
 
-      color: #444;
+      margin-top:
+        20px;
 
-      font-size: 11px;
+      font-size:
+        11px;
+
+      color:
+        #555;
+
     }
 
 
     /* =========================
-       RESPONSIVE
+       MÓVIL
     ========================= */
 
-    @media (max-width: 800px) {
+    @media (
+      max-width: 700px
+    ) {
 
       header {
-        height: 70px;
 
-        padding: 0 20px;
+        height:
+          68px;
+
+        padding:
+          0 20px;
+
       }
+
 
       nav {
-        display: none;
+
+        display:
+          none;
+
       }
+
 
       section {
-        padding: 80px 20px;
+
+        padding:
+          75px 20px;
+
       }
+
 
       .hero {
-        min-height:
-          calc(100vh - 70px);
 
-        padding: 70px 20px;
+        min-height:
+          calc(100vh - 68px);
+
       }
+
 
       .hero h1 {
+
         font-size:
-          clamp(70px, 22vw, 130px);
+          105px;
 
-        letter-spacing: 9px;
+        letter-spacing:
+          -5px;
 
-        margin-left: 9px;
       }
 
-      .hero-subtitle {
-        font-size: 22px;
+
+      .hero-frase {
+
+        font-size:
+          27px;
+
       }
+
 
       .categorias {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .categoria {
-        min-height: 380px;
+
+        height:
+          390px;
+
       }
+
 
       .productos {
-        grid-template-columns: 1fr;
+
+        grid-template-columns:
+          1fr;
+
       }
+
 
       .producto-imagen {
-        height: 330px;
+
+        height:
+          330px;
+
       }
 
-      .producto-parte-inferior {
-        align-items: stretch;
 
-        flex-direction: column;
+      .producto-final {
+
+        flex-direction:
+          column;
+
+        align-items:
+          stretch;
+
       }
+
 
       .whatsapp {
-        width: 100%;
+
+        text-align:
+          center;
+
+      }
+
+
+      .categoria-todos {
+
+        width:
+          fit-content;
+
+        height:
+          auto;
+
+        min-height:
+          0;
+
+        padding:
+          7px 13px;
+
       }
 
     }
@@ -1005,6 +1393,7 @@
     B4X
   </div>
 
+
   <nav>
 
     <a href="#inicio">
@@ -1020,7 +1409,7 @@
     </a>
 
     <a href="#sobre">
-      B4X
+      Nosotros
     </a>
 
     <a href="#contacto">
@@ -1043,32 +1432,32 @@
 
   <div class="hero-content">
 
-    <span class="hero-label">
+    <span class="hero-small">
       B4X
     </span>
+
 
     <h1>
       B4X
     </h1>
 
-    <div class="hero-subtitle">
+
+    <div class="hero-frase">
       Algo diferente está aquí.
     </div>
 
-    <p class="hero-description">
+
+    <p class="hero-descripcion">
       Descubre nuestra selección de productos.
     </p>
 
+
     <a
-      class="boton-principal"
+      class="hero-boton"
       href="#categorias"
     >
-      EXPLORAR PRODUCTOS
-
-      <span>
-        →
-      </span>
-
+      EXPLORAR
+      <span>→</span>
     </a>
 
   </div>
@@ -1080,20 +1469,18 @@
      CATEGORÍAS
 ========================= -->
 
-<section id="categorias">
+<section
+  id="categorias"
+>
 
-  <div class="titulo titulo-centro">
-
-    <div class="numero-seccion">
-      01 / CATEGORÍAS
-    </div>
+  <div class="titulo">
 
     <h2>
       Categorías
     </h2>
 
     <p>
-      Selecciona una categoría para descubrir nuestros productos.
+      Encuentra lo que buscas.
     </p>
 
   </div>
@@ -1108,29 +1495,14 @@
 
 
 <!-- =========================
-     SEPARADOR
-========================= -->
-
-<div class="marca-separador">
-
-  <p>
-    B4X
-  </p>
-
-</div>
-
-
-<!-- =========================
      PRODUCTOS
 ========================= -->
 
-<section id="productos">
+<section
+  id="productos"
+>
 
-  <div class="titulo titulo-centro">
-
-    <div class="numero-seccion">
-      02 / PRODUCTOS
-    </div>
+  <div class="titulo">
 
     <h2>
       Nuestros productos
@@ -1152,20 +1524,17 @@
      SOBRE B4X
 ========================= -->
 
-<section
-  class="sobre-seccion"
-  id="sobre"
->
+<section class="sobre">
 
-  <div class="sobre">
-
-    <div class="numero-seccion">
-      03 / B4X
-    </div>
+  <div
+    class="sobre-contenido"
+    id="sobre"
+  >
 
     <h2>
       Sobre B4X
     </h2>
+
 
     <p>
       En B4X buscamos convertir cada compra
@@ -1188,11 +1557,7 @@
   id="contacto"
 >
 
-  <div class="titulo titulo-centro">
-
-    <div class="numero-seccion">
-      04 / CONTACTO
-    </div>
+  <div class="titulo">
 
     <h2>
       Hablemos
@@ -1223,17 +1588,12 @@
 
 
   <a
-    class="boton-principal"
+    class="hero-boton"
     href="https://wa.me/573237647194"
     target="_blank"
   >
-
     HABLAR POR WHATSAPP
-
-    <span>
-      →
-    </span>
-
+    <span>→</span>
   </a>
 
 </section>
@@ -1249,9 +1609,11 @@
     B4X
   </div>
 
+
   <div class="footer-frase">
     Algo diferente está aquí.
   </div>
+
 
   <div class="footer-copy">
     © 2026 B4X. Todos los derechos reservados.
@@ -1294,22 +1656,30 @@ async function cargarCategorias() {
 
     const respuesta =
       await fetch(
+
         SUPABASE_URL +
         "/rest/v1/CATEGOR%C3%8DAS" +
         "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
         "&order=IDENTIFICACI%C3%93N.asc",
+
         {
-          method: "GET",
+
+          method:
+            "GET",
 
           headers: {
+
             "apikey":
               SUPABASE_KEY,
 
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
+
         }
+
       );
 
 
@@ -1326,12 +1696,11 @@ async function cargarCategorias() {
       await respuesta.json();
 
 
-    contenedor.innerHTML = "";
+    contenedor.innerHTML =
+      "";
 
 
-    /* =====================
-       TODOS
-    ===================== */
+    /* BOTÓN TODOS */
 
     const botonTodos =
       document.createElement(
@@ -1348,7 +1717,7 @@ async function cargarCategorias() {
 
 
     botonTodos.innerHTML =
-      "✨ &nbsp; TODOS LOS PRODUCTOS";
+      "TODOS";
 
 
     botonTodos.onclick =
@@ -1367,12 +1736,10 @@ async function cargarCategorias() {
     );
 
 
-    /* =====================
-       CATEGORÍAS
-    ===================== */
+    /* CATEGORÍAS */
 
     categorias.forEach(
-      (categoria, indice) => {
+      categoria => {
 
         const boton =
           document.createElement(
@@ -1393,9 +1760,11 @@ async function cargarCategorias() {
           String(
             categoria.Emoji
           ).trim()
+
             ? String(
                 categoria.Emoji
               ).trim()
+
             : "📦";
 
 
@@ -1404,10 +1773,12 @@ async function cargarCategorias() {
 
 
         if (
+
           categoria.Imagen &&
           String(
             categoria.Imagen
           ).trim()
+
         ) {
 
           contenidoImagen = `
@@ -1437,15 +1808,6 @@ async function cargarCategorias() {
         }
 
 
-        const numero =
-          String(
-            indice + 1
-          ).padStart(
-            2,
-            "0"
-          );
-
-
         boton.innerHTML = `
 
           <div
@@ -1458,13 +1820,6 @@ async function cargarCategorias() {
             <div
               class="categoria-contenido"
             >
-
-              <span
-                class="categoria-numero"
-              >
-                ${numero} / B4X
-              </span>
-
 
               <h3>
                 ${emoji}
@@ -1543,21 +1898,29 @@ async function cargarProductos() {
 
     const respuesta =
       await fetch(
+
         SUPABASE_URL +
         "/rest/v1/PRODUCTOS" +
         "?select=*",
+
         {
-          method: "GET",
+
+          method:
+            "GET",
 
           headers: {
+
             "apikey":
               SUPABASE_KEY,
 
             "Authorization":
               "Bearer " +
               SUPABASE_KEY
+
           }
+
         }
+
       );
 
 
@@ -1620,8 +1983,10 @@ function mostrarProductos(
 
 
   if (
+
     !productos ||
     productos.length === 0
+
   ) {
 
     contenedor.innerHTML = `
@@ -1676,11 +2041,10 @@ function mostrarProductos(
 
               `
 
-              : `
+              :
 
-                Imagen del producto
+              "Imagen del producto"
 
-              `
           }
 
         </div>
@@ -1698,25 +2062,29 @@ function mostrarProductos(
           <p
             class="producto-descripcion"
           >
+
             ${
               producto.Descripcion ||
               ""
             }
+
           </p>
 
 
           <div
-            class="producto-parte-inferior"
+            class="producto-final"
           >
 
             <div
               class="precio"
             >
+
               $${Number(
                 producto.Precio
               ).toLocaleString(
                 "es-CO"
               )}
+
             </div>
 
 
@@ -1728,7 +2096,7 @@ function mostrarProductos(
               )}"
               target="_blank"
             >
-              PEDIR →
+              PEDIR
             </a>
 
           </div>
@@ -1799,14 +2167,16 @@ function filtrarCategoria(
 
   }
 
-
   else {
 
     const productosFiltrados =
       todosLosProductos.filter(
+
         producto =>
+
           producto.Categoria ===
           categoria
+
       );
 
 
@@ -1827,7 +2197,10 @@ function filtrarCategoria(
       "productos"
     )
     .scrollIntoView({
-      behavior: "smooth"
+
+      behavior:
+        "smooth"
+
     });
 
 }
