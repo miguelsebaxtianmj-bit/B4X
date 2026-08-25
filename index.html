@@ -2,8 +2,13 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
   <title>B4X | Gomitas Premium</title>
 
@@ -28,7 +33,7 @@
     }
 
     /* =========================
-       ENCABEZADO
+       HEADER
     ========================= */
 
     header {
@@ -36,9 +41,9 @@
       top: 0;
       z-index: 1000;
 
-      background: rgba(11, 11, 11, 0.95);
+      background: rgba(11, 11, 11, 0.96);
 
-      border-bottom: 1px solid #2a2a2a;
+      border-bottom: 1px solid #292929;
 
       padding: 18px 7%;
 
@@ -65,7 +70,7 @@
     }
 
     /* =========================
-       PORTADA
+       HERO
     ========================= */
 
     .hero {
@@ -224,8 +229,8 @@
       background:
         linear-gradient(
           to top,
-          rgba(0, 0, 0, 0.9),
-          rgba(0, 0, 0, 0.15)
+          rgba(0, 0, 0, 0.95),
+          rgba(0, 0, 0, 0.1)
         );
     }
 
@@ -306,6 +311,7 @@
 
     .producto-imagen {
       width: 100%;
+
       height: 260px;
 
       background: #202020;
@@ -338,7 +344,9 @@
 
     .producto p {
       color: #aaa;
+
       font-size: 14px;
+
       margin-bottom: 15px;
     }
 
@@ -378,7 +386,7 @@
     }
 
     /* =========================
-       SOBRE B4X
+       SOBRE
     ========================= */
 
     .sobre {
@@ -460,12 +468,14 @@
     }
 
   </style>
+
 </head>
 
 <body>
 
+
   <!-- =========================
-       ENCABEZADO
+       HEADER
   ========================= -->
 
   <header>
@@ -498,12 +508,13 @@
 
 
   <!-- =========================
-       PORTADA
+       HERO
   ========================= -->
 
   <section
     class="hero"
-    id="inicio">
+    id="inicio"
+  >
 
     <div class="hero-content">
 
@@ -523,10 +534,9 @@
       <a
         class="boton"
         href="https://wa.me/573237647194"
-        target="_blank">
-
+        target="_blank"
+      >
         Comprar por WhatsApp
-
       </a>
 
     </div>
@@ -555,9 +565,8 @@
 
     <div
       class="categorias"
-      id="listaCategorias">
-
-    </div>
+      id="listaCategorias"
+    ></div>
 
   </section>
 
@@ -586,7 +595,7 @@
 
 
   <!-- =========================
-       SOBRE NOSOTROS
+       SOBRE B4X
   ========================= -->
 
   <section>
@@ -620,7 +629,8 @@
 
   <section
     class="contacto"
-    id="contacto">
+    id="contacto"
+  >
 
     <div class="titulo">
 
@@ -649,17 +659,16 @@
     <a
       class="boton"
       href="https://wa.me/573237647194"
-      target="_blank">
-
+      target="_blank"
+    >
       Hablar por WhatsApp
-
     </a>
 
   </section>
 
 
   <!-- =========================
-       PIE
+       FOOTER
   ========================= -->
 
   <footer>
@@ -684,7 +693,7 @@ const SUPABASE_KEY =
 
 
 /* =========================
-   VARIABLES
+   PRODUCTOS
 ========================= */
 
 let todosLosProductos = [];
@@ -704,23 +713,24 @@ async function cargarCategorias() {
   try {
 
     /*
-      IMPORTANTE:
-
-      La columna de identificación
-      de CATEGORÍAS se llama:
+      La columna que antes era "id"
+      ahora se llama:
 
       IDENTIFICACIÓN
 
-      La escribimos codificada en
-      la URL porque contiene tilde.
+      y es numérica.
     */
+
+    const urlCategorias =
+      SUPABASE_URL +
+      "/rest/v1/CATEGOR%C3%8DAS" +
+      "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
+      "&order=IDENTIFICACI%C3%93N.asc";
+
 
     const respuesta =
       await fetch(
-
-        SUPABASE_URL +
-        "/rest/v1/CATEGOR%C3%8DAS?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen&order=IDENTIFICACI%C3%93N.asc",
-
+        urlCategorias,
         {
           method: "GET",
 
@@ -737,17 +747,16 @@ async function cargarCategorias() {
               "application/json"
 
           }
-
         }
-
       );
 
 
     if (!respuesta.ok) {
 
-      throw new Error(
-        await respuesta.text()
-      );
+      const error =
+        await respuesta.text();
+
+      throw new Error(error);
 
     }
 
@@ -757,7 +766,7 @@ async function cargarCategorias() {
 
 
     console.log(
-      "Categorías:",
+      "CATEGORÍAS:",
       categorias
     );
 
@@ -766,7 +775,7 @@ async function cargarCategorias() {
 
 
     /* =========================
-       TODOS LOS PRODUCTOS
+       BOTÓN TODOS
     ========================= */
 
     const botonTodos =
@@ -869,7 +878,8 @@ async function cargarCategorias() {
                   class="categoria-imagen"
                   src="${imagen}"
                   alt="${categoria.Nombre}"
-                  onerror="this.style.display='none';">
+                  onerror="this.style.display='none';"
+                >
 
                 `
 
@@ -910,13 +920,12 @@ async function cargarCategorias() {
       }
     );
 
-
   }
 
   catch (error) {
 
     console.error(
-      "ERROR CARGANDO CATEGORÍAS:",
+      "ERROR CATEGORÍAS:",
       error
     );
 
@@ -958,6 +967,7 @@ async function cargarProductos() {
         "/rest/v1/PRODUCTOS?select=*",
 
         {
+
           method: "GET",
 
           headers: {
@@ -981,9 +991,10 @@ async function cargarProductos() {
 
     if (!respuesta.ok) {
 
-      throw new Error(
-        await respuesta.text()
-      );
+      const error =
+        await respuesta.text();
+
+      throw new Error(error);
 
     }
 
@@ -1002,7 +1013,7 @@ async function cargarProductos() {
   catch (error) {
 
     console.error(
-      "ERROR CARGANDO PRODUCTOS:",
+      "ERROR PRODUCTOS:",
       error
     );
 
@@ -1076,7 +1087,8 @@ function mostrarProductos(
                 <img
                   src="${producto.Imagen}"
                   alt="${producto.Nombre}"
-                  onerror="this.style.display='none';">
+                  onerror="this.style.display='none';"
+                >
 
                 `
 
@@ -1120,7 +1132,8 @@ function mostrarProductos(
 
             )}"
 
-            target="_blank">
+            target="_blank"
+          >
 
             Pedir por WhatsApp
 
