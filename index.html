@@ -1,14 +1,11 @@
-```html
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
 
   <meta charset="UTF-8">
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <title>B4X | Gomitas Premium</title>
 
@@ -32,21 +29,13 @@
       line-height: 1.6;
     }
 
-    /* =========================
-       HEADER
-    ========================= */
-
     header {
       position: sticky;
       top: 0;
       z-index: 1000;
-
-      background: rgba(11, 11, 11, 0.96);
-
+      background: rgba(11,11,11,.96);
       border-bottom: 1px solid #292929;
-
       padding: 18px 7%;
-
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -66,22 +55,15 @@
     }
 
     nav a:hover {
-      opacity: 0.6;
+      opacity: .6;
     }
-
-    /* =========================
-       HERO
-    ========================= */
 
     .hero {
       min-height: 85vh;
-
       display: flex;
       align-items: center;
       justify-content: center;
-
       text-align: center;
-
       padding: 80px 20px;
 
       background:
@@ -117,26 +99,19 @@
 
     .boton {
       display: inline-block;
-
       margin-top: 30px;
-
       padding: 14px 28px;
-
       background: white;
       color: black;
-
       text-decoration: none;
-
       border-radius: 30px;
-
       font-weight: bold;
-
-      transition: 0.3s;
+      transition: .3s;
     }
 
     .boton:hover {
       transform: translateY(-3px);
-      opacity: 0.85;
+      opacity: .85;
     }
 
     section {
@@ -157,43 +132,32 @@
       color: #aaa;
     }
 
-    /* =========================
-       CATEGORÍAS
-    ========================= */
+    /* CATEGORÍAS */
 
     .categorias {
       display: grid;
-
-      grid-template-columns:
-        repeat(auto-fit, minmax(220px, 1fr));
-
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
     }
 
     .categoria {
-      position: relative;
-
       min-height: 220px;
-
       border: 1px solid #292929;
-
       border-radius: 18px;
-
       overflow: hidden;
-
       padding: 0;
+
+      display: flex;
+      align-items: flex-end;
 
       background: #151515;
 
+      transition: .3s;
       cursor: pointer;
 
       color: white;
-
       text-align: left;
-
       font-family: inherit;
-
-      transition: 0.3s;
     }
 
     .categoria:hover {
@@ -207,49 +171,43 @@
     }
 
     .categoria-imagen {
-      position: absolute;
-
-      inset: 0;
-
+      position: relative;
       width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      opacity: 0.55;
+      height: 220px;
+      overflow: hidden;
     }
 
-    .categoria::after {
-      content: "";
+    .categoria-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
 
-      position: absolute;
-
-      inset: 0;
-
+    .categoria-sin-imagen {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background:
-        linear-gradient(
-          to top,
-          rgba(0, 0, 0, 0.95),
-          rgba(0, 0, 0, 0.1)
-        );
+        linear-gradient(145deg, #1b1b1b, #0d0d0d);
+      color: #777;
+      font-size: 40px;
     }
 
     .categoria-contenido {
       position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      padding: 45px 22px 20px;
 
-      z-index: 2;
-
-      bottom: 25px;
-      left: 25px;
-      right: 25px;
-    }
-
-    .categoria-emoji {
-      display: block;
-
-      font-size: 35px;
-
-      margin-bottom: 5px;
+      background:
+        linear-gradient(
+          transparent,
+          rgba(0,0,0,.9)
+        );
     }
 
     .categoria h3 {
@@ -258,51 +216,30 @@
 
     .categoria-todos {
       grid-column: 1 / -1;
-
       min-height: auto;
-
-      padding: 18px;
-
-      display: flex;
-
+      padding: 15px;
       justify-content: center;
       align-items: center;
-
-      background:
-        linear-gradient(
-          145deg,
-          #1b1b1b,
-          #0d0d0d
-        );
+      text-align: center;
     }
 
-    .categoria-todos::after {
-      display: none;
-    }
-
-    /* =========================
-       PRODUCTOS
-    ========================= */
+    /* PRODUCTOS */
 
     .productos {
       display: grid;
-
-      grid-template-columns:
-        repeat(auto-fit, minmax(240px, 1fr));
-
+      grid-template-columns: repeat(
+        auto-fit,
+        minmax(240px, 1fr)
+      );
       gap: 30px;
     }
 
     .producto {
-      background: #111111;
-
+      background: #111;
       border: 1px solid #292929;
-
       border-radius: 18px;
-
       overflow: hidden;
-
-      transition: 0.3s;
+      transition: .3s;
     }
 
     .producto:hover {
@@ -311,26 +248,20 @@
 
     .producto-imagen {
       width: 100%;
-
       height: 260px;
-
       background: #202020;
-
       display: flex;
-
       align-items: center;
       justify-content: center;
-
       color: #777;
-
       font-size: 14px;
     }
 
     .producto-imagen img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
+      display: block;
     }
 
     .producto-info {
@@ -344,9 +275,7 @@
 
     .producto p {
       color: #aaa;
-
       font-size: 14px;
-
       margin-bottom: 15px;
     }
 
@@ -357,87 +286,57 @@
 
     .whatsapp {
       display: block;
-
       text-align: center;
-
       margin-top: 18px;
-
       padding: 12px;
-
       background: #25D366;
-
       color: white;
-
       text-decoration: none;
-
       border-radius: 8px;
-
       font-weight: bold;
     }
 
     .sin-productos {
       grid-column: 1 / -1;
-
       text-align: center;
-
       color: #888;
-
       padding: 40px;
     }
 
-    /* =========================
-       SOBRE
-    ========================= */
+    /* SOBRE */
 
     .sobre {
       max-width: 800px;
-
       margin: auto;
-
       text-align: center;
     }
 
     .sobre p {
       color: #bdbdbd;
-
       font-size: 17px;
     }
 
-    /* =========================
-       CONTACTO
-    ========================= */
+    /* CONTACTO */
 
     .contacto {
       text-align: center;
-
       background: #101010;
     }
 
     .contacto p {
       color: #aaa;
-
       margin: 8px;
     }
 
-    /* =========================
-       FOOTER
-    ========================= */
+    /* FOOTER */
 
     footer {
       text-align: center;
-
       padding: 30px;
-
       border-top: 1px solid #292929;
-
       color: #777;
-
       font-size: 13px;
     }
-
-    /* =========================
-       CELULAR
-    ========================= */
 
     @media (max-width: 700px) {
 
@@ -461,199 +360,55 @@
         font-size: 16px;
       }
 
-      .categorias {
-        grid-template-columns: 1fr;
-      }
-
     }
 
   </style>
 
 </head>
 
+
 <body>
 
 
-  <!-- =========================
-       HEADER
-  ========================= -->
+<header>
 
-  <header>
+  <div class="logo">
+    B4X
+  </div>
 
-    <div class="logo">
+  <nav>
+
+    <a href="#inicio">Inicio</a>
+
+    <a href="#categorias">Categorías</a>
+
+    <a href="#productos">Productos</a>
+
+    <a href="#contacto">Contacto</a>
+
+  </nav>
+
+</header>
+
+
+<section
+  class="hero"
+  id="inicio"
+>
+
+  <div class="hero-content">
+
+    <small>
+      Gomitas & Snacks Premium
+    </small>
+
+    <h1>
       B4X
-    </div>
-
-    <nav>
-
-      <a href="#inicio">
-        Inicio
-      </a>
-
-      <a href="#categorias">
-        Categorías
-      </a>
-
-      <a href="#productos">
-        Productos
-      </a>
-
-      <a href="#contacto">
-        Contacto
-      </a>
-
-    </nav>
-
-  </header>
-
-
-  <!-- =========================
-       HERO
-  ========================= -->
-
-  <section
-    class="hero"
-    id="inicio"
-  >
-
-    <div class="hero-content">
-
-      <small>
-        Gomitas & Snacks Premium
-      </small>
-
-      <h1>
-        B4X
-      </h1>
-
-      <p>
-        Una experiencia diferente en cada bocado.
-        Descubre nuestra selección de gomitas y snacks.
-      </p>
-
-      <a
-        class="boton"
-        href="https://wa.me/573237647194"
-        target="_blank"
-      >
-        Comprar por WhatsApp
-      </a>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       CATEGORÍAS
-  ========================= -->
-
-  <section id="categorias">
-
-    <div class="titulo">
-
-      <h2>
-        Categorías
-      </h2>
-
-      <p>
-        Selecciona una categoría
-        para ver sus productos.
-      </p>
-
-    </div>
-
-    <div
-      class="categorias"
-      id="listaCategorias"
-    ></div>
-
-  </section>
-
-
-  <!-- =========================
-       PRODUCTOS
-  ========================= -->
-
-  <section id="productos">
-
-    <div class="titulo">
-
-      <h2>
-        Nuestros productos
-      </h2>
-
-      <p id="textoCategoria">
-        Mostrando todos los productos.
-      </p>
-
-    </div>
-
-    <div class="productos"></div>
-
-  </section>
-
-
-  <!-- =========================
-       SOBRE B4X
-  ========================= -->
-
-  <section>
-
-    <div class="sobre">
-
-      <div class="titulo">
-
-        <h2>
-          Sobre B4X
-        </h2>
-
-      </div>
-
-      <p>
-        En B4X buscamos convertir cada compra
-        en una experiencia.
-
-        Seleccionamos nuestros productos pensando
-        en sabor, calidad y presentación.
-      </p>
-
-    </div>
-
-  </section>
-
-
-  <!-- =========================
-       CONTACTO
-  ========================= -->
-
-  <section
-    class="contacto"
-    id="contacto"
-  >
-
-    <div class="titulo">
-
-      <h2>
-        Contacto
-      </h2>
-
-      <p>
-        ¿Quieres hacer un pedido?
-      </p>
-
-    </div>
+    </h1>
 
     <p>
-      📲 WhatsApp: 323 764 7194
-    </p>
-
-    <p>
-      📍 Dirección: Próximamente
-    </p>
-
-    <p>
-      📸 Instagram: Próximamente
+      Una experiencia diferente en cada bocado.
+      Descubre nuestra selección de gomitas y snacks.
     </p>
 
     <a
@@ -661,29 +416,129 @@
       href="https://wa.me/573237647194"
       target="_blank"
     >
-      Hablar por WhatsApp
+      Comprar por WhatsApp
     </a>
 
-  </section>
+  </div>
+
+</section>
 
 
-  <!-- =========================
-       FOOTER
-  ========================= -->
+<section id="categorias">
 
-  <footer>
+  <div class="titulo">
 
-    © 2026 B4X.
-    Todos los derechos reservados.
+    <h2>
+      Categorías
+    </h2>
 
-  </footer>
+    <p>
+      Selecciona una categoría para ver sus productos.
+    </p>
+
+  </div>
+
+  <div
+    class="categorias"
+    id="listaCategorias"
+  ></div>
+
+</section>
+
+
+<section id="productos">
+
+  <div class="titulo">
+
+    <h2>
+      Nuestros productos
+    </h2>
+
+    <p id="textoCategoria">
+      Mostrando todos los productos.
+    </p>
+
+  </div>
+
+  <div class="productos"></div>
+
+</section>
+
+
+<section>
+
+  <div class="sobre">
+
+    <div class="titulo">
+
+      <h2>
+        Sobre B4X
+      </h2>
+
+    </div>
+
+    <p>
+      En B4X buscamos convertir cada compra
+      en una experiencia.
+
+      Seleccionamos nuestros productos pensando
+      en sabor, calidad y presentación.
+    </p>
+
+  </div>
+
+</section>
+
+
+<section
+  class="contacto"
+  id="contacto"
+>
+
+  <div class="titulo">
+
+    <h2>
+      Contacto
+    </h2>
+
+    <p>
+      ¿Quieres hacer un pedido?
+    </p>
+
+  </div>
+
+  <p>
+    📲 WhatsApp: 323 764 7194
+  </p>
+
+  <p>
+    📍 Dirección: Próximamente
+  </p>
+
+  <p>
+    📸 Instagram: Próximamente
+  </p>
+
+  <a
+    class="boton"
+    href="https://wa.me/573237647194"
+    target="_blank"
+  >
+    Hablar por WhatsApp
+  </a>
+
+</section>
+
+
+<footer>
+
+  © 2026 B4X.
+  Todos los derechos reservados.
+
+</footer>
 
 
 <script>
-
-/* =========================
-   SUPABASE
-========================= */
 
 const SUPABASE_URL =
 "https://ltdqlcthnfbkvpsnfgcg.supabase.co";
@@ -692,15 +547,11 @@ const SUPABASE_KEY =
 "sb_publishable_NF-03kT-227KX7a4TalkXw_0ude6870";
 
 
-/* =========================
-   PRODUCTOS
-========================= */
-
 let todosLosProductos = [];
 
 
 /* =========================
-   CARGAR CATEGORÍAS
+   CATEGORÍAS
 ========================= */
 
 async function cargarCategorias() {
@@ -712,52 +563,29 @@ async function cargarCategorias() {
 
   try {
 
-    /*
-      La columna que antes era "id"
-      ahora se llama:
-
-      IDENTIFICACIÓN
-
-      y es numérica.
-    */
-
-    const urlCategorias =
-      SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS" +
-      "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
-      "&order=IDENTIFICACI%C3%93N.asc";
-
-
     const respuesta =
       await fetch(
-        urlCategorias,
+
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS" +
+        "?select=IDENTIFICACI%C3%93N,Nombre,Emoji,Imagen" +
+        "&order=IDENTIFICACI%C3%93N.asc",
+
         {
-          method: "GET",
-
           headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
+            "apikey": SUPABASE_KEY,
             "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json"
-
+              "Bearer " + SUPABASE_KEY
           }
         }
+
       );
 
 
     if (!respuesta.ok) {
-
-      const error =
-        await respuesta.text();
-
-      throw new Error(error);
-
+      throw new Error(
+        await respuesta.text()
+      );
     }
 
 
@@ -765,36 +593,21 @@ async function cargarCategorias() {
       await respuesta.json();
 
 
-    console.log(
-      "CATEGORÍAS:",
-      categorias
-    );
-
-
     contenedor.innerHTML = "";
 
 
-    /* =========================
-       BOTÓN TODOS
-    ========================= */
+    /* TODOS */
 
     const botonTodos =
-      document.createElement(
-        "button"
-      );
+      document.createElement("button");
 
-
-    botonTodos.type =
-      "button";
-
+    botonTodos.type = "button";
 
     botonTodos.className =
       "categoria categoria-todos activa";
 
-
     botonTodos.innerHTML =
       "<h3>✨ Todos los productos</h3>";
-
 
     botonTodos.onclick =
       function() {
@@ -806,96 +619,71 @@ async function cargarCategorias() {
 
       };
 
-
     contenedor.appendChild(
       botonTodos
     );
 
 
-    /* =========================
-       CATEGORÍAS
-    ========================= */
+    /* CATEGORÍAS */
 
     categorias.forEach(
       categoria => {
 
         const boton =
-          document.createElement(
-            "button"
-          );
+          document.createElement("button");
 
+        boton.type = "button";
 
-        boton.type =
-          "button";
+        boton.className = "categoria";
 
-
-        boton.className =
-          "categoria";
-
-
-        /* =========================
-           EMOJI
-        ========================= */
 
         const emoji =
           categoria.Emoji &&
-          String(
-            categoria.Emoji
-          ).trim()
-
-            ? String(
-                categoria.Emoji
-              ).trim()
-
+          String(categoria.Emoji).trim()
+            ? String(categoria.Emoji).trim()
             : "🍬";
 
 
-        /* =========================
-           IMAGEN
-        ========================= */
+        let contenidoImagen = "";
 
-        const imagen =
+
+        if (
           categoria.Imagen &&
-          String(
-            categoria.Imagen
-          ).trim()
+          String(categoria.Imagen).trim()
+        ) {
 
-            ? String(
-                categoria.Imagen
-              ).trim()
+          contenidoImagen = `
+            <img
+              src="${categoria.Imagen}"
+              alt="${categoria.Nombre}"
+            >
+          `;
 
-            : "";
+        } else {
+
+          contenidoImagen = `
+            <div class="categoria-sin-imagen">
+              ${emoji}
+            </div>
+          `;
+
+        }
 
 
         boton.innerHTML = `
 
-          ${
-            imagen
+          <div class="categoria-imagen">
 
-              ? `
+            ${contenidoImagen}
 
-                <img
-                  class="categoria-imagen"
-                  src="${imagen}"
-                  alt="${categoria.Nombre}"
-                  onerror="this.style.display='none';"
-                >
+            <div class="categoria-contenido">
 
-                `
+              <h3>
+                ${emoji}
+                ${categoria.Nombre}
+              </h3>
 
-              : ""
-          }
-
-
-          <div class="categoria-contenido">
-
-            <span class="categoria-emoji">
-              ${emoji}
-            </span>
-
-            <h3>
-              ${categoria.Nombre}
-            </h3>
+            </div>
 
           </div>
 
@@ -925,18 +713,14 @@ async function cargarCategorias() {
   catch (error) {
 
     console.error(
-      "ERROR CATEGORÍAS:",
+      "Error cargando categorías:",
       error
     );
-
 
     contenedor.innerHTML = `
 
       <p class="sin-productos">
-
-        ❌ No se pudieron cargar
-        las categorías.
-
+        ❌ No se pudieron cargar las categorías.
       </p>
 
     `;
@@ -947,7 +731,7 @@ async function cargarCategorias() {
 
 
 /* =========================
-   CARGAR PRODUCTOS
+   PRODUCTOS
 ========================= */
 
 async function cargarProductos() {
@@ -956,7 +740,6 @@ async function cargarProductos() {
     document.querySelector(
       ".productos"
     );
-
 
   try {
 
@@ -967,35 +750,20 @@ async function cargarProductos() {
         "/rest/v1/PRODUCTOS?select=*",
 
         {
-
-          method: "GET",
-
           headers: {
-
-            "apikey":
-              SUPABASE_KEY,
-
+            "apikey": SUPABASE_KEY,
             "Authorization":
-              "Bearer " +
-              SUPABASE_KEY,
-
-            "Content-Type":
-              "application/json"
-
+              "Bearer " + SUPABASE_KEY
           }
-
         }
 
       );
 
 
     if (!respuesta.ok) {
-
-      const error =
-        await respuesta.text();
-
-      throw new Error(error);
-
+      throw new Error(
+        await respuesta.text()
+      );
     }
 
 
@@ -1009,19 +777,13 @@ async function cargarProductos() {
 
   }
 
-
   catch (error) {
 
-    console.error(
-      "ERROR PRODUCTOS:",
-      error
-    );
-
+    console.error(error);
 
     contenedor.innerHTML =
-
       "<p class='sin-productos'>" +
-      "❌ No se pudieron cargar los productos." +
+      "No se pudieron cargar los productos." +
       "</p>";
 
   }
@@ -1042,7 +804,6 @@ function mostrarProductos(
       ".productos"
     );
 
-
   contenedor.innerHTML = "";
 
 
@@ -1052,7 +813,6 @@ function mostrarProductos(
   ) {
 
     contenedor.innerHTML =
-
       "<p class='sin-productos'>" +
       "No hay productos en esta categoría." +
       "</p>";
@@ -1066,10 +826,7 @@ function mostrarProductos(
     producto => {
 
       const tarjeta =
-        document.createElement(
-          "div"
-        );
-
+        document.createElement("div");
 
       tarjeta.className =
         "producto";
@@ -1082,18 +839,16 @@ function mostrarProductos(
           ${
             producto.Imagen
 
-              ? `
+            ? `
 
-                <img
-                  src="${producto.Imagen}"
-                  alt="${producto.Nombre}"
-                  onerror="this.style.display='none';"
-                >
+              <img
+                src="${producto.Imagen}"
+                alt="${producto.Nombre}"
+              >
 
-                `
+            `
 
-              : "Imagen del producto"
-
+            : "Imagen del producto"
           }
 
         </div>
@@ -1105,38 +860,27 @@ function mostrarProductos(
             ${producto.Nombre}
           </h3>
 
-
           <p>
             ${producto.Descripcion || ""}
           </p>
-
 
           <div class="precio">
 
             $${Number(
               producto.Precio
-            ).toLocaleString(
-              "es-CO"
-            )}
+            ).toLocaleString("es-CO")}
 
           </div>
 
-
           <a
             class="whatsapp"
-
             href="https://wa.me/573237647194?text=${encodeURIComponent(
-
               "Hola, quiero pedir " +
               producto.Nombre
-
             )}"
-
             target="_blank"
           >
-
             Pedir por WhatsApp
-
           </a>
 
         </div>
@@ -1155,7 +899,7 @@ function mostrarProductos(
 
 
 /* =========================
-   FILTRAR CATEGORÍA
+   FILTRAR
 ========================= */
 
 function filtrarCategoria(
@@ -1164,16 +908,12 @@ function filtrarCategoria(
 ) {
 
   document
-    .querySelectorAll(
-      ".categoria"
-    )
+    .querySelectorAll(".categoria")
     .forEach(
       elemento => {
-
         elemento.classList.remove(
           "activa"
         );
-
       }
     );
 
@@ -1197,7 +937,6 @@ function filtrarCategoria(
       todosLosProductos
     );
 
-
     texto.textContent =
       "Mostrando todos los productos.";
 
@@ -1207,12 +946,8 @@ function filtrarCategoria(
 
     const productosFiltrados =
       todosLosProductos.filter(
-
         producto =>
-
-          producto.Categoria ===
-          categoria
-
+          producto.Categoria === categoria
       );
 
 
@@ -1229,13 +964,9 @@ function filtrarCategoria(
 
 
   document
-    .getElementById(
-      "productos"
-    )
+    .getElementById("productos")
     .scrollIntoView({
-
       behavior: "smooth"
-
     });
 
 }
@@ -1251,6 +982,7 @@ cargarProductos();
 
 </script>
 
+
 </body>
+
 </html>
-```
