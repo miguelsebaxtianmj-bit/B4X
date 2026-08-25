@@ -122,7 +122,9 @@
   </p>
 
 
-  <!-- CATEGORÍAS -->
+  <!-- =========================
+       CATEGORÍAS
+  ========================== -->
 
   <div class="panel">
 
@@ -132,22 +134,40 @@
       Crea una nueva categoría para tus productos.
     </p>
 
-    <label>Nombre de la categoría</label>
+
+    <label>
+      Nombre de la categoría
+    </label>
 
     <input
       id="nuevaCategoria"
       type="text"
-      placeholder="Ej: Vapers"
+      placeholder="Ej: Gomitas"
     >
 
-    <label>Emoji de la categoría</label>
+
+    <label>
+      Emoji de la categoría
+    </label>
 
     <input
       id="emojiCategoria"
       type="text"
-      placeholder="Ej: 💨"
+      placeholder="Ej: 🍬"
       maxlength="10"
     >
+
+
+    <label>
+      Imagen de la categoría
+    </label>
+
+    <input
+      id="imagenCategoria"
+      type="file"
+      accept="image/*"
+    >
+
 
     <button
       type="button"
@@ -156,12 +176,16 @@
       ➕ Agregar categoría
     </button>
 
+
     <div id="mensajeCategoria"></div>
 
   </div>
 
 
-  <!-- PRODUCTOS -->
+
+  <!-- =========================
+       PRODUCTOS
+  ========================== -->
 
   <div class="panel">
 
@@ -171,7 +195,10 @@
       Agrega un nuevo producto a tu tienda.
     </p>
 
-    <label>Nombre del producto</label>
+
+    <label>
+      Nombre del producto
+    </label>
 
     <input
       id="nombre"
@@ -179,14 +206,20 @@
       placeholder="Ej: Gomitas B4X"
     >
 
-    <label>Descripción</label>
+
+    <label>
+      Descripción
+    </label>
 
     <textarea
       id="descripcion"
       placeholder="Descripción del producto"
     ></textarea>
 
-    <label>Precio</label>
+
+    <label>
+      Precio
+    </label>
 
     <input
       id="precio"
@@ -194,21 +227,30 @@
       placeholder="2000"
     >
 
-    <label>Categoría</label>
+
+    <label>
+      Categoría
+    </label>
 
     <select id="categoria">
+
       <option value="">
         Cargando categorías...
       </option>
+
     </select>
 
-    <label>Imagen</label>
+
+    <label>
+      Imagen del producto
+    </label>
 
     <input
       id="imagen"
       type="file"
       accept="image/*"
     >
+
 
     <button
       type="button"
@@ -217,16 +259,21 @@
       Guardar producto
     </button>
 
+
     <div id="mensaje"></div>
 
   </div>
 
 
-  <a class="volver" href="index.html">
+  <a
+    class="volver"
+    href="index.html"
+  >
     ← Volver a la tienda
   </a>
 
 </div>
+
 
 
 <script>
@@ -254,53 +301,151 @@ async function cargarCategorias() {
   try {
 
     const respuesta = await fetch(
+
       SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=id.asc",
+      "/rest/v1/CATEGOR%C3%8DAS?select=*&order=IDENTIFICACI%C3%93N.asc",
+
       {
-        method: "GET",
         headers: {
           "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY
+          "Authorization":
+            "Bearer " + SUPABASE_KEY
         }
       }
+
     );
 
+
     if (!respuesta.ok) {
-      throw new Error(await respuesta.text());
+
+      throw new Error(
+        await respuesta.text()
+      );
+
     }
+
 
     const categorias =
       await respuesta.json();
 
+
     select.innerHTML =
       '<option value="">Selecciona una categoría</option>';
 
-    categorias.forEach(categoria => {
 
-      const opcion =
-        document.createElement("option");
+    categorias.forEach(
+      categoria => {
 
-      opcion.value =
-        categoria.Nombre;
+        const opcion =
+          document.createElement("option");
 
-      opcion.textContent =
-        (categoria.Emoji || "📦") +
-        " " +
-        categoria.Nombre;
 
-      select.appendChild(opcion);
+        opcion.value =
+          categoria.Nombre;
 
-    });
 
-  } catch (error) {
+        opcion.textContent =
+          (categoria.Emoji || "📦") +
+          " " +
+          categoria.Nombre;
+
+
+        select.appendChild(
+          opcion
+        );
+
+      }
+    );
+
+
+  }
+
+  catch (error) {
 
     console.error(error);
+
 
     select.innerHTML =
       '<option value="">Error al cargar categorías</option>';
 
   }
+
 }
+
+
+
+/* =========================
+   SUBIR IMAGEN
+========================= */
+
+async function subirImagen(
+  archivo,
+  carpeta
+) {
+
+  const nombreArchivo =
+    Date.now() +
+    "_" +
+    archivo.name;
+
+
+  const ruta =
+    carpeta +
+    "/" +
+    nombreArchivo;
+
+
+  const respuesta =
+    await fetch(
+
+      SUPABASE_URL +
+      "/storage/v1/object/productos/" +
+      ruta,
+
+      {
+        method: "POST",
+
+        headers: {
+
+          "apikey":
+            SUPABASE_KEY,
+
+          "Authorization":
+            "Bearer " +
+            SUPABASE_KEY,
+
+          "Content-Type":
+            archivo.type
+
+        },
+
+        body:
+          archivo
+
+      }
+
+    );
+
+
+  if (!respuesta.ok) {
+
+    throw new Error(
+      await respuesta.text()
+    );
+
+  }
+
+
+  return (
+
+    SUPABASE_URL +
+    "/storage/v1/object/public/productos/" +
+    ruta
+
+  );
+
+}
+
 
 
 /* =========================
@@ -310,19 +455,39 @@ async function cargarCategorias() {
 async function agregarCategoria() {
 
   const nombreInput =
-    document.getElementById("nuevaCategoria");
+    document.getElementById(
+      "nuevaCategoria"
+    );
+
 
   const emojiInput =
-    document.getElementById("emojiCategoria");
+    document.getElementById(
+      "emojiCategoria"
+    );
+
+
+  const imagenInput =
+    document.getElementById(
+      "imagenCategoria"
+    );
+
 
   const mensaje =
-    document.getElementById("mensajeCategoria");
+    document.getElementById(
+      "mensajeCategoria"
+    );
+
 
   const nombre =
     nombreInput.value.trim();
 
+
   const emoji =
     emojiInput.value.trim();
+
+
+  const archivo =
+    imagenInput.files[0];
 
 
   if (!nombre) {
@@ -331,103 +496,17 @@ async function agregarCategoria() {
       "⚠️ Escribe el nombre de la categoría.";
 
     return;
+
   }
 
 
   if (!emoji) {
 
     mensaje.textContent =
-      "⚠️ Escribe un emoji para la categoría.";
+      "⚠️ Escribe un emoji.";
 
     return;
-  }
 
-
-  mensaje.textContent =
-    "Creando categoría...";
-
-
-  try {
-
-    const respuesta = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/CATEGOR%C3%8DAS",
-      {
-        method: "POST",
-
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal"
-        },
-
-        body: JSON.stringify({
-          Nombre: nombre,
-          Emoji: emoji
-        })
-      }
-    );
-
-
-    if (!respuesta.ok) {
-
-      const error =
-        await respuesta.text();
-
-      throw new Error(error);
-    }
-
-
-    mensaje.textContent =
-      "✅ Categoría agregada correctamente.";
-
-    nombreInput.value = "";
-    emojiInput.value = "";
-
-    await cargarCategorias();
-
-  } catch (error) {
-
-    console.error(error);
-
-    mensaje.textContent =
-      "❌ Error: " + error.message;
-  }
-}
-
-
-/* =========================
-   GUARDAR PRODUCTO
-========================= */
-
-async function guardarProducto() {
-
-  const nombre =
-    document.getElementById("nombre").value.trim();
-
-  const descripcion =
-    document.getElementById("descripcion").value.trim();
-
-  const precio =
-    document.getElementById("precio").value;
-
-  const categoria =
-    document.getElementById("categoria").value;
-
-  const archivo =
-    document.getElementById("imagen").files[0];
-
-  const mensaje =
-    document.getElementById("mensaje");
-
-
-  if (!nombre || !precio || !categoria) {
-
-    mensaje.textContent =
-      "⚠️ Completa nombre, precio y categoría.";
-
-    return;
   }
 
 
@@ -437,100 +516,270 @@ async function guardarProducto() {
       "⚠️ Selecciona una imagen.";
 
     return;
+
   }
 
 
   mensaje.textContent =
-    "⏳ Guardando producto...";
+    "⏳ Subiendo imagen...";
 
 
   try {
 
-    /* SUBIR IMAGEN */
-
-    const nombreArchivo =
-      Date.now() + "_" + archivo.name;
-
-    const rutaImagen =
-      "imagenes/" + nombreArchivo;
-
-
-    const subida = await fetch(
-      SUPABASE_URL +
-      "/storage/v1/object/productos/" +
-      rutaImagen,
-      {
-        method: "POST",
-
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY,
-          "Content-Type": archivo.type
-        },
-
-        body: archivo
-      }
-    );
-
-
-    if (!subida.ok) {
-
-      const error =
-        await subida.text();
-
-      throw new Error(
-        "No se pudo subir la imagen: " +
-        error
-      );
-    }
-
-
-    /* URL DE LA IMAGEN */
+    /* =========================
+       SUBIR IMAGEN CATEGORÍA
+    ========================= */
 
     const imagen =
-      SUPABASE_URL +
-      "/storage/v1/object/public/productos/" +
-      rutaImagen;
+      await subirImagen(
+        archivo,
+        "categorias"
+      );
 
 
-    /* GUARDAR PRODUCTO */
+    mensaje.textContent =
+      "⏳ Guardando categoría...";
 
-    const respuesta = await fetch(
-      SUPABASE_URL +
-      "/rest/v1/PRODUCTOS",
-      {
-        method: "POST",
 
-        headers: {
-          "apikey": SUPABASE_KEY,
-          "Authorization": "Bearer " + SUPABASE_KEY,
-          "Content-Type": "application/json",
-          "Prefer": "return=minimal"
-        },
+    /* =========================
+       GUARDAR CATEGORÍA
+    ========================= */
 
-        body: JSON.stringify({
+    const respuesta =
+      await fetch(
 
-          Nombre: nombre,
+        SUPABASE_URL +
+        "/rest/v1/CATEGOR%C3%8DAS",
 
-          Descripcion: descripcion,
+        {
 
-          Precio: Number(precio),
+          method: "POST",
 
-          Categoria: categoria,
+          headers: {
 
-          Imagen: imagen
+            "apikey":
+              SUPABASE_KEY,
 
-        })
-      }
-    );
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              Nombre:
+                nombre,
+
+              Emoji:
+                emoji,
+
+              Imagen:
+                imagen
+
+            })
+
+        }
+
+      );
 
 
     if (!respuesta.ok) {
 
-      const error =
-        await respuesta.text();
+      throw new Error(
+        await respuesta.text()
+      );
 
-      throw new Error(error);
+    }
+
+
+    mensaje.textContent =
+      "✅ Categoría agregada correctamente.";
+
+
+    nombreInput.value = "";
+    emojiInput.value = "";
+    imagenInput.value = "";
+
+
+    await cargarCategorias();
+
+
+  }
+
+  catch (error) {
+
+    console.error(error);
+
+
+    mensaje.textContent =
+      "❌ Error: " +
+      error.message;
+
+  }
+
+}
+
+
+
+/* =========================
+   GUARDAR PRODUCTO
+========================= */
+
+async function guardarProducto() {
+
+  const nombre =
+    document
+      .getElementById("nombre")
+      .value
+      .trim();
+
+
+  const descripcion =
+    document
+      .getElementById("descripcion")
+      .value
+      .trim();
+
+
+  const precio =
+    document
+      .getElementById("precio")
+      .value;
+
+
+  const categoria =
+    document
+      .getElementById("categoria")
+      .value;
+
+
+  const archivo =
+    document
+      .getElementById("imagen")
+      .files[0];
+
+
+  const mensaje =
+    document.getElementById(
+      "mensaje"
+    );
+
+
+  if (
+    !nombre ||
+    !precio ||
+    !categoria
+  ) {
+
+    mensaje.textContent =
+      "⚠️ Completa nombre, precio y categoría.";
+
+    return;
+
+  }
+
+
+  if (!archivo) {
+
+    mensaje.textContent =
+      "⚠️ Selecciona una imagen.";
+
+    return;
+
+  }
+
+
+  mensaje.textContent =
+    "⏳ Subiendo imagen...";
+
+
+  try {
+
+    /* =========================
+       SUBIR IMAGEN PRODUCTO
+    ========================= */
+
+    const imagen =
+      await subirImagen(
+        archivo,
+        "imagenes"
+      );
+
+
+    mensaje.textContent =
+      "⏳ Guardando producto...";
+
+
+    /* =========================
+       GUARDAR PRODUCTO
+    ========================= */
+
+    const respuesta =
+      await fetch(
+
+        SUPABASE_URL +
+        "/rest/v1/PRODUCTOS",
+
+        {
+
+          method: "POST",
+
+          headers: {
+
+            "apikey":
+              SUPABASE_KEY,
+
+            "Authorization":
+              "Bearer " +
+              SUPABASE_KEY,
+
+            "Content-Type":
+              "application/json",
+
+            "Prefer":
+              "return=minimal"
+
+          },
+
+          body:
+            JSON.stringify({
+
+              Nombre:
+                nombre,
+
+              Descripcion:
+                descripcion,
+
+              Precio:
+                Number(precio),
+
+              Categoria:
+                categoria,
+
+              Imagen:
+                imagen
+
+            })
+
+        }
+
+      );
+
+
+    if (!respuesta.ok) {
+
+      throw new Error(
+        await respuesta.text()
+      );
+
     }
 
 
@@ -538,25 +787,41 @@ async function guardarProducto() {
       "✅ Producto guardado correctamente.";
 
 
-    /* LIMPIAR */
-
-    document.getElementById("nombre").value = "";
-
-    document.getElementById("descripcion").value = "";
-
-    document.getElementById("precio").value = "";
-
-    document.getElementById("imagen").value = "";
+    document.getElementById(
+      "nombre"
+    ).value = "";
 
 
-  } catch (error) {
+    document.getElementById(
+      "descripcion"
+    ).value = "";
+
+
+    document.getElementById(
+      "precio"
+    ).value = "";
+
+
+    document.getElementById(
+      "imagen"
+    ).value = "";
+
+  }
+
+
+  catch (error) {
 
     console.error(error);
 
+
     mensaje.textContent =
-      "❌ Error: " + error.message;
+      "❌ Error: " +
+      error.message;
+
   }
+
 }
+
 
 
 /* =========================
