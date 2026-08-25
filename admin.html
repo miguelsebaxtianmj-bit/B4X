@@ -181,6 +181,8 @@ const archivoImagen =
 
   mensaje.textContent =
     "Guardando producto...";
+
+  try {
 if (!archivoImagen) {
   mensaje.textContent =
     "⚠️ Selecciona una imagen.";
@@ -224,7 +226,6 @@ const imagen =
   "/storage/v1/object/public/productos/" +
   rutaImagen;
 
-  try {
 
     const respuesta = await fetch(
       SUPABASE_URL + "/rest/v1/PRODUCTOS",
